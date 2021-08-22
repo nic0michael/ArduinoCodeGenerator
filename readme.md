@@ -24,13 +24,13 @@ It will also be **Dockerized** so it can run on a **Portainer docker server** or
 
 The project will support any **MCU that can be programmed by the Arduino IDE** (this includes ESP32 and Raspberry Pi Pico)  
   
-The way this **generated software is written although initially C and C++** is the language that code will be generated it is possible to generate **Python code in the future**   
+**The generated software is initially written in C and C++** it will be possible to generate **Python code in the future**   
   
 ## 3. You will be allowed to contribute your project code
 All people will be invited to contribute Arduino code for Arduino projects. When you contribute Arduino code and someone uses your code in the code generated there will be a comment with your name, your Blog URL and your Youtube page which you can send the user of your code giving you more traffic   
-With Google dictating who and how many visitor hit your Blog and Youtube page **this will be a new avenue to get traffic on your blog and youtube page.**  
+With Google dictating who and how many visitor hit your Blog and Youtube page **this will be a new avenue to get traffic on your Blog and Youtube VLOG page.**  
 
-A SQL script will be provided to get started quickly
+A SQL script will be provided to get started quickly.
 
 ## 4. Free Open Source FOS with the License based on GPL Version 3
 
