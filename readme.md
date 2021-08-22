@@ -16,7 +16,7 @@ A newby or person with less experience in developing code for the Arduino projec
 It should also become so useful for the seasoned Arduino project maker saving time building a project by reusing existing code and saving time debugging to get it working 
 
 
-## 1. How this project will be deployed
+## 2. How this project will be deployed
 This project is written to build a WAR file this can be deployed on a web server  
 Or as a standalone Java Microservice Application  
   
@@ -26,9 +26,9 @@ The project will support and MCU that can be programmed by the Arduino IDE this 
   
 The way this software is written although initially C and C++ is the language that code will be generated it is possible to generate Python code on the future   
   
-## 2. You will be allowed to contribute your project code
+## 3. You will be allowed to contribute your project code
 All people will be invited to contribute Arduino code for Arduino projects. When you contribute Arduino code and someone uses your code in the code generated there will be a comment with your name, your Blog URL and your Youtube page which you can send the user of your code giving you more traffic   
-With Google dictating who and how many visitor hit your Blog and Youtube page thi will be a new avenue to get traffic on your page  
+With Google dictating who and how many visitor hit your Blog and Youtube page **this will be a new avenue to get traffic on your blog and youtube page.**  
 
 A SQL script will be provided to get started quickly
 
