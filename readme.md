@@ -22,9 +22,9 @@ Or as a standalone Java Microservice Application
   
 It will also be **Dockerized** so it can run on a **Portainer docker server** or even a **Raspberry Pi Docker docker** swarm or even a **Docker cluster**
 
-The project will support and MCU that can be programmed by the Arduino IDE this includes ESP32 and Raspberry Pi Pico  
+The project will support any **MCU that can be programmed by the Arduino IDE** (this includes ESP32 and Raspberry Pi Pico)  
   
-The way this software is written although initially C and C++ is the language that code will be generated it is possible to generate Python code on the future   
+The way this **generated software is written although initially C and C++** is the language that code will be generated it is possible to generate **Python code in the future**   
   
 ## 3. You will be allowed to contribute your project code
 All people will be invited to contribute Arduino code for Arduino projects. When you contribute Arduino code and someone uses your code in the code generated there will be a comment with your name, your Blog URL and your Youtube page which you can send the user of your code giving you more traffic   
