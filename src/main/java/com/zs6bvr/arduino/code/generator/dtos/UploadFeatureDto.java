@@ -4,38 +4,29 @@ import javax.persistence.Column;
 
 public class UploadFeatureDto {
 
-	private String projectGUID;
-	
-	private String computerLanguage;
-	
-	private String microController;
-	
-	private String mcuPinsUsed;
-	
-	private String contributorsName;
-	
-	private String contributorsBlogPage;
-	
+	private String projectGUID;	
+	private String computerLanguage;	
+	private String microController;	
+	private String mcuPinsUsed;	
+	private String contributorsName;	
+	private String contributorsBlogPage;	
 	private String contributorsYoutubePage;
-
-	private String featureName;
-	
-	private String description;
-	
-	private String prerequisites;
-	
+	private String featureName;	
+	private String description;	
+	private String prerequisites;	
 	private String featureDecleration;
-
 	private String featureAssignment;
-
 	private String featurecode;
+	private String featureStatus;
 
 	public UploadFeatureDto() {}
+
+
 
 	public UploadFeatureDto(String projectGUID, String computerLanguage, String microController, String mcuPinsUsed,
 			String contributorsName, String contributorsBlogPage, String contributorsYoutubePage, String featureName,
 			String description, String prerequisites, String featureDecleration, String featureAssignment,
-			String featurecode) {
+			String featurecode, String featureStatus) {
 		super();
 		this.projectGUID = projectGUID;
 		this.computerLanguage = computerLanguage;
@@ -50,7 +41,10 @@ public class UploadFeatureDto {
 		this.featureDecleration = featureDecleration;
 		this.featureAssignment = featureAssignment;
 		this.featurecode = featurecode;
+		this.featureStatus = featureStatus;
 	}
+
+
 
 	public String getProjectGUID() {
 		return projectGUID;
@@ -156,6 +150,16 @@ public class UploadFeatureDto {
 		this.featurecode = featurecode;
 	}
 
+	public void setFeatureStatus(String featureStatus) {
+		this.featureStatus=featureStatus;		
+	}
+
+	public String getFeatureStatus( ) {
+		return featureStatus;		
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "UploadFeatureDto [projectGUID=" + projectGUID + ", computerLanguage=" + computerLanguage
@@ -163,8 +167,10 @@ public class UploadFeatureDto {
 				+ contributorsName + ", contributorsBlogPage=" + contributorsBlogPage + ", contributorsYoutubePage="
 				+ contributorsYoutubePage + ", featureName=" + featureName + ", description=" + description
 				+ ", prerequisites=" + prerequisites + ", featureDecleration=" + featureDecleration
-				+ ", featureAssignment=" + featureAssignment + ", featurecode=" + featurecode + "]";
+				+ ", featureAssignment=" + featureAssignment + ", featurecode=" + featurecode + ", featureStatus="
+				+ featureStatus + "]";
 	}
+
 
 	
 }

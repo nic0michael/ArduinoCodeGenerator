@@ -5,13 +5,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class BuildProjectRequest {
 
 
-	String projectName;
-	String description="This project was not given a decscription";
-	String firstModule;
-	String secondModule;
-	String ThirdModule;
-	String forthModule;
-	String fifthModule;
+	private String projectName;
+	private String description="This project was not given a decscription";
+	private String firstModule;
+	private String secondModule;
+	private String ThirdModule;
+	private String forthModule;
+	private String fifthModule;
+	private String guid;
+	
 	public String getProjectName() {
 		return projectName;
 	}
@@ -54,12 +56,22 @@ public class BuildProjectRequest {
 	public void setFifthModule(String fifthModule) {
 		this.fifthModule = fifthModule;
 	}
+	
+	
+	public String getGuid() {
+		return guid;
+	}
+	public void setGuid(String guid) {
+		this.guid = guid;
+	}
+	
 	@Override
 	public String toString() {
 		return "BuildProjectRequest [projectName=" + projectName + ", description=" + description + ", firstModule="
 				+ firstModule + ", secondModule=" + secondModule + ", ThirdModule=" + ThirdModule + ", forthModule="
-				+ forthModule + ", fifthModule=" + fifthModule + "]";
+				+ forthModule + ", fifthModule=" + fifthModule + ", guid=" + guid + "]";
 	}
+
 
 	
 

@@ -29,8 +29,8 @@ public class GeneratorController {
 	@PostMapping(value = "/project", 
 			produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE }, 
 			consumes = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
-	public String getProjectIssuesList(@RequestBody BuildProjectRequest request) {
-		return processor.doBuildProject(request);
+	public String getBuiltProject(@RequestBody BuildProjectRequest request) {
+		return processor.getBuiltProject(request);
 	}
 	
 

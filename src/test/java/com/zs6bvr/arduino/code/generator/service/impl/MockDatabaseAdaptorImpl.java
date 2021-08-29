@@ -1,5 +1,7 @@
 package com.zs6bvr.arduino.code.generator.service.impl;
 
+import com.zs6bvr.arduino.code.generator.dtos.BuildProjectRequest;
+import com.zs6bvr.arduino.code.generator.dtos.BuildProjectResponse;
 import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureRequest;
 import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureResponse;
 import com.zs6bvr.arduino.code.generator.entities.ProjectFeature;
@@ -7,6 +9,8 @@ import com.zs6bvr.arduino.code.generator.enums.TestType;
 import com.zs6bvr.arduino.code.generator.exceptions.FailedToReadFromDatabaseException;
 import com.zs6bvr.arduino.code.generator.exceptions.FailedToWriteToatabaseException;
 import com.zs6bvr.arduino.code.generator.service.DatabaseAdaptor;
+import com.zs6bvr.arduino.code.generator.utils.RequestResponseUtils;
+
 
 public class MockDatabaseAdaptorImpl implements DatabaseAdaptor{
 	
@@ -23,14 +27,77 @@ public class MockDatabaseAdaptorImpl implements DatabaseAdaptor{
 
 	@Override
 	public UploadFeatureResponse persistFeatureRecord(UploadFeatureRequest request) throws FailedToWriteToatabaseException {
-		// TODO Auto-generated method stub
-		return null;
+
+		UploadFeatureResponse response=null;
+		String operationType = testType.name();
+
+		switch (operationType) {
+		case "PASSING_TEST":
+			response=RequestResponseUtils.makeSuccessUploadFeatureResponse(); 
+			break;
+			
+		case "FAILING_TEST":
+			response=RequestResponseUtils.makeDatabaseFailedUploadFeatureResponse(); 
+			break;
+
+		case "THROWS_EXCEPTION":
+			throw new FailedToWriteToatabaseException();
+
+		default:
+			response=RequestResponseUtils.makeDatabaseFailedUploadFeatureResponse(); 
+		}
+
+		return response;
 	}
 
 	@Override
 	public ProjectFeature findByProjectFeatureId(Long projectFeatureId) throws FailedToReadFromDatabaseException {
-		// TODO Auto-generated method stub
-		return null;
+
+		ProjectFeature projectFeature=null;
+		String operationType = testType.name();
+
+		switch (operationType) {
+		case "PASSING_TEST":
+			projectFeature=RequestResponseUtils.makeSuccessProjectFeature(); 
+			break;
+			
+		case "FAILING_TEST":
+			projectFeature=RequestResponseUtils.makeFailedProjectFeature(); 
+			break;
+
+		case "THROWS_EXCEPTION":
+			throw new FailedToReadFromDatabaseException();
+
+		default:
+			projectFeature=RequestResponseUtils.makeFailedProjectFeature(); 
+		}
+
+		return projectFeature;
+	}
+
+	@Override
+	public BuildProjectResponse getBuiltProject(BuildProjectRequest request) throws FailedToReadFromDatabaseException {
+		BuildProjectResponse response=null;
+		
+		String operationType = testType.name();
+
+		switch (operationType) {
+		case "PASSING_TEST":
+			response=RequestResponseUtils.makeSuccessBuildProjectResponse(); 
+			break;
+			
+		case "FAILING_TEST":
+			response=RequestResponseUtils.makeDatabaseFailedBuildProjectResponse(); 
+			break;
+
+		case "THROWS_EXCEPTION":
+			throw new FailedToReadFromDatabaseException();
+
+		default:
+			response=RequestResponseUtils.makeDatabaseFailedBuildProjectResponse(); 
+		}
+
+		return response;
 	}
 
 }

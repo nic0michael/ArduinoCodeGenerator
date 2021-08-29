@@ -24,14 +24,15 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @SpringBootTest
 public class BusinessLogicProcessorTest { 
 
-	@DisplayName("Positive Test BusinessLogicProcessorTest")
+
+	@DisplayName("Positive Test BusinessLogicProcessorTest1")
 	@Test
 	void positiveTestValidateBuildProjectRequest() {
 		String expectedResponseStatusCode = ResponseStatusCodes.OK.getResponseStatusCode();
 		String expectedResponseStatusMessage = ResponseStatusMessages.OK.getResponseStatusMessage();
 		RequestValidator validator = new RequestValidator();
 		CodeMakerService service=new CodeMakerServiceImpl();
-		DatabaseAdaptor database =new MockDatabaseAdaptorImpl(TestType.PASSING);		
+		DatabaseAdaptor database =new MockDatabaseAdaptorImpl(TestType.PASSING_TEST);		
 		BusinessLogicProcessor processor=new BusinessLogicProcessor(validator, service,database);
 		
 		BuildProjectRequest request = makeBuildProjectRequest();
@@ -43,14 +44,14 @@ public class BusinessLogicProcessorTest {
 		assertEquals(responseStatusCode, expectedResponseStatusCode);
 	}
 	
-	@DisplayName("Negative Test BusinessLogicProcessorTest")
+	@DisplayName("Negative Test BusinessLogicProcessorTest2")
 	@Test
 	void negativeTestValidateBuildProjectRequest() {
 		String expectedResponseStatusCode = ResponseStatusCodes.MISSING_PROJECT_NAME.getResponseStatusCode();
 		String expectedResponseStatusMessage = ResponseStatusMessages.MISSING_PROJECT_NAME.getResponseStatusMessage();
 		RequestValidator validator = new RequestValidator();
 		CodeMakerService service=new CodeMakerServiceImpl();
-		DatabaseAdaptor database =new MockDatabaseAdaptorImpl(TestType.PASSING);		
+		DatabaseAdaptor database =new MockDatabaseAdaptorImpl(TestType.PASSING_TEST);		
 		BusinessLogicProcessor processor=new BusinessLogicProcessor(validator, service,database);
 		
 		BuildProjectRequest request = makeBadBuildProjectRequest();
@@ -62,37 +63,39 @@ public class BusinessLogicProcessorTest {
 		assertEquals(responseStatusCode, expectedResponseStatusCode);
 	}
 
-	@DisplayName("Negative Test BusinessLogicProcessorTest")
+	@DisplayName("Negative Test BusinessLogicProcessorTest3")
 	@Test
 	void negativeTestDoBuildProject() {
 		String expectedResponseStatusMessage = ResponseStatusMessages.MISSING_PROJECT_NAME.getResponseStatusMessage();
 		RequestValidator validator = new RequestValidator();
 		CodeMakerService service=new CodeMakerServiceImpl();
-		DatabaseAdaptor database =new MockDatabaseAdaptorImpl(TestType.PASSING);		
+		DatabaseAdaptor database =new MockDatabaseAdaptorImpl(TestType.PASSING_TEST);		
 		BusinessLogicProcessor processor=new BusinessLogicProcessor(validator, service,database);
 		
 		BuildProjectRequest request = makeBadBuildProjectRequest();
-		String result = processor.doBuildProject(request);
+		String result = processor.getBuiltProject(request);
 		assertNotNull(result);
 		assertEquals(result, expectedResponseStatusMessage);
 	}
 	
 
-	@DisplayName("Positive Test BusinessLogicProcessorTest")
+	@DisplayName("Positive Test BusinessLogicProcessorTest4")
 	@Test
 	void positiveTestDoBuildProject() {
-		String expectedResponseStatusCode = ResponseStatusCodes.OK.getResponseStatusCode();
-		String expectedResponseStatusMessage = ResponseStatusMessages.OK.getResponseStatusMessage();
+		int expectedResultLength=527;
 		RequestValidator validator = new RequestValidator();
 		CodeMakerService service=new CodeMakerServiceImpl();
-		DatabaseAdaptor database =new MockDatabaseAdaptorImpl(TestType.PASSING);		
+		DatabaseAdaptor database =new MockDatabaseAdaptorImpl(TestType.PASSING_TEST);		
 		BusinessLogicProcessor processor=new BusinessLogicProcessor(validator, service,database);
 		
 		BuildProjectRequest request = makeBuildProjectRequest();
-		String result = processor.doBuildProject(request);
+		String result = processor.getBuiltProject(request);
 		assertNotNull(result);
-//		assertEquals(result, expectedResponseStatusMessage);
+		int resultLength=result.length();
+		System.out.println("resultLength : "+resultLength);
+		assertEquals(resultLength, expectedResultLength);
 	}
+
 
 	private BuildProjectRequest makeBadBuildProjectRequest() {
 		BuildProjectRequest request = makeBuildProjectRequest();
@@ -106,5 +109,4 @@ public class BusinessLogicProcessorTest {
 		request.setFirstModule("FirstModule");
 		return request;
 	}
-
 }

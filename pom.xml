@@ -18,7 +18,16 @@
 	</parent>
 
 	<properties>
-		<java.version>11</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<serenity.maven.version>2.0.0</serenity.maven.version>
+		<serenity.version>1.9.3</serenity.version>
+		<sonar.exclusions>
+			file:**/rabbitmq/poc/controllers/**,
+			file:**/rabbitmq/poc/dtos/**,
+			file:**/rabbitmq/poc/exceptions/**
+		</sonar.exclusions>
 	</properties>
 	<dependencies>
 

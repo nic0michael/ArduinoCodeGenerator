@@ -32,7 +32,7 @@ public class CodeMakerServiceImplTest {
 		String expectedResponseStatusMessage = ResponseStatusMessages.OK.getResponseStatusMessage();
 		RequestValidator validator = new RequestValidator();
 		CodeMakerService service=new CodeMakerServiceImpl();
-		DatabaseAdaptor database =new MockDatabaseAdaptorImpl(TestType.PASSING);		
+		DatabaseAdaptor database =new MockDatabaseAdaptorImpl(TestType.PASSING_TEST);		
 		BusinessLogicProcessor processor=new BusinessLogicProcessor(validator, service,database);
 		
 		BuildProjectRequest request = makeBuildProjectRequest();

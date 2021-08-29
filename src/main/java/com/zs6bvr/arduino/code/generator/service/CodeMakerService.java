@@ -1,9 +1,9 @@
 package com.zs6bvr.arduino.code.generator.service;
 
-import com.zs6bvr.arduino.code.generator.dtos.BuildProjectRequest;
+import com.zs6bvr.arduino.code.generator.dtos.BuildProjectResponse;
 
 public interface CodeMakerService {
 
-	String doBuildProject(BuildProjectRequest request);
+	String doBuildProject(BuildProjectResponse response);
 
 }

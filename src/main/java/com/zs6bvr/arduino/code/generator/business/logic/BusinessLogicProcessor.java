@@ -12,6 +12,7 @@ import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureRequest;
 import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureResponse;
 import com.zs6bvr.arduino.code.generator.enums.ResponseStatusCodes;
 import com.zs6bvr.arduino.code.generator.enums.ResponseStatusMessages;
+import com.zs6bvr.arduino.code.generator.exceptions.FailedToReadFromDatabaseException;
 import com.zs6bvr.arduino.code.generator.exceptions.FailedToWriteToatabaseException;
 import com.zs6bvr.arduino.code.generator.service.CodeMakerService;
 import com.zs6bvr.arduino.code.generator.service.DatabaseAdaptor;
@@ -36,25 +37,39 @@ public class BusinessLogicProcessor {
 	public BusinessLogicProcessor(RequestValidator validator, CodeMakerService service, DatabaseAdaptor database) {
 		this.service = service;
 		this.validator = validator;
+		this.database=database;
 	}
 
-	public String processUploadData(String fileText, String persistProjectData) {
-		return null;
-	}
+	public String getBuiltProject(BuildProjectRequest request) {
+		String result=null;
 
-	public String doBuildProject(BuildProjectRequest request) {
-		String result = null;
 		BuildProjectResponse response = validateRequest(request);
 		if (!ResponseStatusCodes.OK.getResponseStatusCode().equalsIgnoreCase(response.getResponseStatusCode())) {
 			log.error("BusinessLogicProcessor | doBuildProject | Validation failed");
 			return response.getResponseStatusMessage();
 		}
-
-		result = service.doBuildProject(request);
+		
+		try {
+			response =database.getBuiltProject(request);
+			response.setBuildProjectRequest(request);
+		} catch (FailedToReadFromDatabaseException e) {
+			e.printStackTrace();
+			return ResponseStatusMessages.DATABASE_FAILURE.getResponseStatusMessage();
+		}
+		result =doBuildProject(response);
+		return result;
+	}
+	
+	public String doBuildProject(BuildProjectResponse response) {
+		String result = service.doBuildProject(response);
 		log.debug("BusinessLogicProcessor | doBuildProject | result : " + result);
 		return result;
 	}
-
+	
+	public String processUploadData(String fileText, String persistProjectData) {
+		return null;
+	}
+		
 	public UploadFeatureResponse persistFeatureRecord(UploadFeatureRequest request) {
 		UploadFeatureResponse response;
 
@@ -75,5 +90,6 @@ public class BusinessLogicProcessor {
 	public BuildProjectResponse validateRequest(BuildProjectRequest request) {
 		return validator.validateBuildProjectRequest(request);
 	}
+
 
 }
