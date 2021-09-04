@@ -100,4 +100,79 @@ public class MockDatabaseAdaptorImpl implements DatabaseAdaptor{
 		return response;
 	}
 
+	@Override
+	public UploadFeatureResponse getAllFeatures() {
+
+		UploadFeatureResponse response=null;
+		String operationType = testType.name();
+
+		switch (operationType) {
+		case "PASSING_TEST":
+			response=RequestResponseUtils.makeSuccessUploadFeatureResponse(); 
+			break;
+			
+		case "FAILING_TEST":
+			response=RequestResponseUtils.makeDatabaseFailedUploadFeatureResponse(); 
+			break;
+
+		case "THROWS_EXCEPTION":
+			response=RequestResponseUtils.makeDatabaseFailedUploadFeatureResponse(); 
+
+		default:
+			response=RequestResponseUtils.makeDatabaseFailedUploadFeatureResponse(); 
+		}
+
+		return response;
+	}
+
+	@Override
+	public UploadFeatureResponse getFeature(Long id) {
+
+		UploadFeatureResponse response=null;
+		String operationType = testType.name();
+
+		switch (operationType) {
+		case "PASSING_TEST":
+			response=RequestResponseUtils.makeSuccessUploadFeatureResponse(); 
+			break;
+			
+		case "FAILING_TEST":
+			response=RequestResponseUtils.makeDatabaseFailedUploadFeatureResponse(); 
+			break;
+
+		case "THROWS_EXCEPTION":
+			response=RequestResponseUtils.makeDatabaseFailedUploadFeatureResponse(); 
+
+		default:
+			response=RequestResponseUtils.makeDatabaseFailedUploadFeatureResponse(); 
+		}
+
+		return response;
+	}
+
+	@Override
+	public UploadFeatureResponse updateFeature(Long id, UploadFeatureRequest request) {
+
+		UploadFeatureResponse response=null;
+		String operationType = testType.name();
+
+		switch (operationType) {
+		case "PASSING_TEST":
+			response=RequestResponseUtils.makeSuccessUploadFeatureResponse(); 
+			break;
+			
+		case "FAILING_TEST":
+			response=RequestResponseUtils.makeDatabaseFailedUploadFeatureResponse(); 
+			break;
+
+		case "THROWS_EXCEPTION":
+			response=RequestResponseUtils.makeDatabaseFailedUploadFeatureResponse(); 
+
+		default:
+			response=RequestResponseUtils.makeDatabaseFailedUploadFeatureResponse(); 
+		}
+
+		return response;
+	}
+
 }

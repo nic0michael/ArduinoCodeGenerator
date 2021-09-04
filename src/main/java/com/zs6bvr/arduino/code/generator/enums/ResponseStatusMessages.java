@@ -8,7 +8,8 @@ public enum ResponseStatusMessages {
 	DATABASE_FAILURE("Failure : Failed to write to the Database"),
 	MISSING_PROJECT_NAME("The Request is invalid : The project name is missing is missing"),
 	MISSING_FIRST_MODULE("The Request is invalid : The first module is missing"),
-	SYSTEM_FAILURE("Failure : a System failure occured");
+	SYSTEM_FAILURE("Failure : a System failure occured"), 
+	RESPONSE_NOT_SET_FAILURE("Expected response is null");
 	
 	
 	

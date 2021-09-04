@@ -8,7 +8,8 @@ public enum ResponseStatusCodes {
 	DATABASE_FAILURE("403"),
 	MISSING_PROJECT_NAME("404"),
 	MISSING_FIRST_MODULE("405"),
-	SYSTEM_FAILURE("411");
+	SYSTEM_FAILURE("406"), 
+	RESPONSE_NOT_SET_FAILURE("407");
 	
 	String responseStatusCode;
 	

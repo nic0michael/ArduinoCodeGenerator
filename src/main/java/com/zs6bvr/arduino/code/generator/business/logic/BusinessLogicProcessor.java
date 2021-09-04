@@ -1,5 +1,8 @@
 package com.zs6bvr.arduino.code.generator.business.logic;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +11,9 @@ import org.springframework.stereotype.Component;
 import com.zs6bvr.arduino.code.generator.controllers.GeneratorController;
 import com.zs6bvr.arduino.code.generator.dtos.BuildProjectRequest;
 import com.zs6bvr.arduino.code.generator.dtos.BuildProjectResponse;
+import com.zs6bvr.arduino.code.generator.dtos.FeatureDescriptionDTO;
+import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureDescritionsResponse;
+import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureDto;
 import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureRequest;
 import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureResponse;
 import com.zs6bvr.arduino.code.generator.enums.ResponseStatusCodes;
@@ -40,7 +46,7 @@ public class BusinessLogicProcessor {
 		this.database=database;
 	}
 
-	public String getBuiltProject(BuildProjectRequest request) {
+	public String generateProject(BuildProjectRequest request) {
 		String result=null;
 
 		BuildProjectResponse response = validateRequest(request);
@@ -70,7 +76,7 @@ public class BusinessLogicProcessor {
 		return null;
 	}
 		
-	public UploadFeatureResponse persistFeatureRecord(UploadFeatureRequest request) {
+	public UploadFeatureResponse saveFeature(UploadFeatureRequest request) {
 		UploadFeatureResponse response;
 
 		try {
@@ -87,8 +93,49 @@ public class BusinessLogicProcessor {
 		return response;
 	}
 
+
+	public UploadFeatureDescritionsResponse getDescriptionsOfAllFeatures() {
+		UploadFeatureDescritionsResponse response=new UploadFeatureDescritionsResponse();
+		UploadFeatureResponse uploadFeatureResponse=getAllFeatures();
+		if(uploadFeatureResponse==null) {
+			response.setResponseStatusCode(ResponseStatusCodes.RESPONSE_NOT_SET_FAILURE.getResponseStatusCode());
+			response.setResponseStatusMessage(ResponseStatusMessages.RESPONSE_NOT_SET_FAILURE.getResponseStatusMessage());
+			
+		} else {
+			response.setResponseStatusCode(ResponseStatusCodes.OK.getResponseStatusCode());
+			response.setResponseStatusMessage(ResponseStatusMessages.OK.getResponseStatusMessage());
+			List<FeatureDescriptionDTO> featureDescriptions=new ArrayList<FeatureDescriptionDTO>();
+			List<UploadFeatureDto> uploadFeatureDtos = uploadFeatureResponse.getUploadFeatureDtos();
+			FeatureDescriptionDTO featureDescriptionDTO=null;
+			
+			for (UploadFeatureDto uploadFeatureDto : uploadFeatureDtos) {
+				if(uploadFeatureDto!=null) {
+					featureDescriptionDTO=new FeatureDescriptionDTO();
+					featureDescriptionDTO.setFeatureDescriptionDTO(uploadFeatureDto);
+					featureDescriptions.add(featureDescriptionDTO);
+				}
+			}
+			
+			response.setFeatureDescriptions(featureDescriptions);
+		}
+			return response;
+
+	}
+
 	public BuildProjectResponse validateRequest(BuildProjectRequest request) {
 		return validator.validateBuildProjectRequest(request);
+	}
+
+	public UploadFeatureResponse getAllFeatures() {
+		return database.getAllFeatures();
+	}
+
+	public UploadFeatureResponse getFeature(Long id) {
+		return database.getFeature(id);
+	}
+
+	public UploadFeatureResponse updateFeature(Long id, UploadFeatureRequest request) {
+		return database.updateFeature(id, request);
 	}
 
 

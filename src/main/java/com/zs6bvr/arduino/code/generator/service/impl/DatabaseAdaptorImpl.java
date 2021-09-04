@@ -32,4 +32,19 @@ public class DatabaseAdaptorImpl implements DatabaseAdaptor{
 		return null;
 	}
 
+	@Override
+	public UploadFeatureResponse getAllFeatures() {
+		return null;
+	}
+
+	@Override
+	public UploadFeatureResponse getFeature(Long id) {
+		return null;
+	}
+
+	@Override
+	public UploadFeatureResponse updateFeature(Long id, UploadFeatureRequest request) {
+		return null;
+	}
+
 }

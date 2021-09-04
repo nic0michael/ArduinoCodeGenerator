@@ -73,7 +73,7 @@ public class BusinessLogicProcessorTest {
 		BusinessLogicProcessor processor=new BusinessLogicProcessor(validator, service,database);
 		
 		BuildProjectRequest request = makeBadBuildProjectRequest();
-		String result = processor.getBuiltProject(request);
+		String result = processor.generateProject(request);
 		assertNotNull(result);
 		assertEquals(result, expectedResponseStatusMessage);
 	}
@@ -89,7 +89,7 @@ public class BusinessLogicProcessorTest {
 		BusinessLogicProcessor processor=new BusinessLogicProcessor(validator, service,database);
 		
 		BuildProjectRequest request = makeBuildProjectRequest();
-		String result = processor.getBuiltProject(request);
+		String result = processor.generateProject(request);
 		assertNotNull(result);
 		int resultLength=result.length();
 		System.out.println("resultLength : "+resultLength);
