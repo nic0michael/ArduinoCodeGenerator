@@ -19,6 +19,8 @@ public class UploadFeatureRequest {
 	private String contributorsBlogPage;
 	
 	private String contributorsYoutubePage;	
+	
+	private String featureStatus;
 
 	private String featureName;
 	
@@ -35,9 +37,9 @@ public class UploadFeatureRequest {
 	public UploadFeatureRequest() {}
 
 	public UploadFeatureRequest(String projectGUID, String computerLanguage, String microController, String mcuPinsUsed,
-			String contributorsName, String contributorsBlogPage, String contributorsYoutubePage, String featureName,
-			String description, String prerequisites, String featureDecleration, String featureAssignment,
-			String featurecode) {
+			String contributorsName, String contributorsBlogPage, String contributorsYoutubePage, String featureStatus,
+			String featureName, String description, String prerequisites, String featureDecleration,
+			String featureAssignment, String featurecode) {
 		super();
 		this.projectGUID = projectGUID;
 		this.computerLanguage = computerLanguage;
@@ -46,6 +48,7 @@ public class UploadFeatureRequest {
 		this.contributorsName = contributorsName;
 		this.contributorsBlogPage = contributorsBlogPage;
 		this.contributorsYoutubePage = contributorsYoutubePage;
+		this.featureStatus = featureStatus;
 		this.featureName = featureName;
 		this.description = description;
 		this.prerequisites = prerequisites;
@@ -110,6 +113,14 @@ public class UploadFeatureRequest {
 		this.contributorsYoutubePage = contributorsYoutubePage;
 	}
 
+	public String getFeatureStatus() {
+		return featureStatus;
+	}
+
+	public void setFeatureStatus(String featureStatus) {
+		this.featureStatus = featureStatus;
+	}
+
 	public String getFeatureName() {
 		return featureName;
 	}
@@ -163,10 +174,13 @@ public class UploadFeatureRequest {
 		return "UploadFeatureRequest [projectGUID=" + projectGUID + ", computerLanguage=" + computerLanguage
 				+ ", microController=" + microController + ", mcuPinsUsed=" + mcuPinsUsed + ", contributorsName="
 				+ contributorsName + ", contributorsBlogPage=" + contributorsBlogPage + ", contributorsYoutubePage="
-				+ contributorsYoutubePage + ", featureName=" + featureName + ", description=" + description
-				+ ", prerequisites=" + prerequisites + ", featureDecleration=" + featureDecleration
-				+ ", featureAssignment=" + featureAssignment + ", featurecode=" + featurecode + "]";
+				+ contributorsYoutubePage + ", featureStatus=" + featureStatus + ", featureName=" + featureName
+				+ ", description=" + description + ", prerequisites=" + prerequisites + ", featureDecleration="
+				+ featureDecleration + ", featureAssignment=" + featureAssignment + ", featurecode=" + featurecode
+				+ "]";
 	}
+
+	
 
 	
 }

@@ -62,14 +62,14 @@ public class MockDatabaseAdaptorImpl implements DatabaseAdaptor{
 			break;
 			
 		case "FAILING_TEST":
-			projectFeature=RequestResponseUtils.makeFailedProjectFeature(); 
+			projectFeature=null; 
 			break;
 
 		case "THROWS_EXCEPTION":
 			throw new FailedToReadFromDatabaseException();
 
 		default:
-			projectFeature=RequestResponseUtils.makeFailedProjectFeature(); 
+			projectFeature=null; 
 		}
 
 		return projectFeature;

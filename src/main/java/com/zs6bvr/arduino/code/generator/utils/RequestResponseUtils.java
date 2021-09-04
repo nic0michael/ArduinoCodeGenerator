@@ -3,8 +3,10 @@ package com.zs6bvr.arduino.code.generator.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.zs6bvr.arduino.code.generator.dtos.BuildProjectRequest;
 import com.zs6bvr.arduino.code.generator.dtos.BuildProjectResponse;
 import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureDto;
+import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureRequest;
 import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureResponse;
 import com.zs6bvr.arduino.code.generator.entities.ProjectFeature;
 import com.zs6bvr.arduino.code.generator.enums.ResponseStatusCodes;
@@ -17,14 +19,19 @@ public class RequestResponseUtils {
 		String expectedResponseStatusCode = ResponseStatusCodes.OK.getResponseStatusCode();
 		String expectedResponseStatusMessage = ResponseStatusMessages.OK.getResponseStatusMessage();
 		response.setResponseStatusCode(expectedResponseStatusCode);
-		response.setResponseStatusMessage(expectedResponseStatusMessage);		
+		response.setResponseStatusMessage(expectedResponseStatusMessage);
+		ProjectFeature projectFeature=makeSuccessProjectFeature();
+		UploadFeatureDto uploadFeatureDto=makeUploadFeatureDto(projectFeature);
+		List<UploadFeatureDto> uploadFeatureDtos=new ArrayList<UploadFeatureDto>();
+		uploadFeatureDtos.add(uploadFeatureDto);
+		response.setUploadFeatureDtos(uploadFeatureDtos);
 		return response;
 	}
 
 	public static UploadFeatureResponse makeDatabaseFailedUploadFeatureResponse() {
 		UploadFeatureResponse response=new UploadFeatureResponse();
-		String expectedResponseStatusCode = ResponseStatusCodes.SYSTEM_FAILURE.getResponseStatusCode();
-		String expectedResponseStatusMessage = ResponseStatusMessages.SYSTEM_FAILURE.getResponseStatusMessage();
+		String expectedResponseStatusCode = ResponseStatusCodes.DATABASE_FAILURE.getResponseStatusCode();
+		String expectedResponseStatusMessage = ResponseStatusMessages.DATABASE_FAILURE.getResponseStatusMessage();
 		response.setResponseStatusCode(expectedResponseStatusCode);
 		response.setResponseStatusMessage(expectedResponseStatusMessage);		
 		return response;
@@ -99,11 +106,38 @@ public class RequestResponseUtils {
 		uploadFeatureDto.setContributorsYoutubePage(projectFeature.getContributorsYoutubePage());
 		return uploadFeatureDto;
 	}
-	
-	public static ProjectFeature makeFailedProjectFeature() {
-		ProjectFeature projectFeature=new ProjectFeature();
-		projectFeature.setFeatureStatus("FAILED");
-		return projectFeature;
+
+	public static UploadFeatureRequest makeUploadFeatureRequest() {
+		// TODO Auto-generated method stub
+		return null;
 	}
+	
+
+
+	public static  BuildProjectRequest makeBadBuildProjectRequest() {
+		BuildProjectRequest request = makeBuildProjectRequest();
+		request.setProjectName(null);
+		return request;
+	}
+
+	public static  BuildProjectRequest makeBuildProjectRequest() {
+		BuildProjectRequest request = new BuildProjectRequest();
+		request.setProjectName("ProjectName");
+		request.setFirstModule("FirstModule");
+		return request;
+	}
+
+	public static List<UploadFeatureDto> makeUploadFeatureDtos(List<ProjectFeature> projectFeatures) {
+		List<UploadFeatureDto> uploadFeatureDtos =new ArrayList<UploadFeatureDto>();
+		for (ProjectFeature projectFeature : projectFeatures) {
+			if(projectFeature!=null) {
+				UploadFeatureDto uploadFeatureDto=makeUploadFeatureDto(projectFeature);
+				uploadFeatureDtos.add(uploadFeatureDto);
+			}
+		}
+		
+		return uploadFeatureDtos;
+	}
+
 
 }

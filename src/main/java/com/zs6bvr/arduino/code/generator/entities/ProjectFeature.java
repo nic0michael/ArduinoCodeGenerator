@@ -16,6 +16,8 @@ import javax.persistence.*;
 import org.hibernate.annotations.BatchSize;
 import org.springframework.data.annotation.CreatedDate;
 
+import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureRequest;
+
 
 @Entity
 @Table(name = "feature")
@@ -102,6 +104,8 @@ public class ProjectFeature {
 		this.contributorsName = contributorsName;
 		this.contributorsBlogPage = contributorsBlogPage;
 		this.contributorsYoutubePage = contributorsYoutubePage;
+
+		dateCreated=new Date();
 	}
 
 
@@ -295,6 +299,27 @@ public class ProjectFeature {
 				+ ", computerLanguage=" + computerLanguage + ", microController=" + microController + ", mcuPinsUsed="
 				+ mcuPinsUsed + ", contributorsName=" + contributorsName + ", contributorsBlogPage="
 				+ contributorsBlogPage + ", contributorsYoutubePage=" + contributorsYoutubePage + "]";
+	}
+
+
+
+	public void setUploadFeatureRequest(UploadFeatureRequest request) {
+
+		this.projectGUID = request.getProjectGUID();
+		this.featureName = request.getFeatureName();
+		this.featureStatus = request.getFeatureStatus();
+		this.featureDecleration = request.getFeatureDecleration();
+		this.featureAssignment = request.getFeatureAssignment();
+		this.featurecode = request.getFeaturecode();
+		this.description = request.getDescription();
+		this.prerequisites = request.getPrerequisites();
+		this.computerLanguage = request.getComputerLanguage();
+		this.microController = request.getMicroController();
+		this.mcuPinsUsed = request.getMcuPinsUsed();
+		this.contributorsName = request.getContributorsName();
+		this.contributorsBlogPage = request.getContributorsBlogPage();
+		this.contributorsYoutubePage = request.getContributorsYoutubePage();
+		
 	}
 
 

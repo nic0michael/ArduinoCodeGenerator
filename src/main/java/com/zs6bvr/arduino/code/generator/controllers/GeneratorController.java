@@ -21,7 +21,7 @@ import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureResponse;
 
 
 @RestController
-@RequestMapping("arduino")
+@RequestMapping("codegenerator")
 public class GeneratorController {
 	private static final Logger log = LoggerFactory.getLogger(GeneratorController.class);
 	
@@ -50,13 +50,13 @@ public class GeneratorController {
 	}
 	
 
-	@GetMapping(value = "/feature}", 
+	@GetMapping(value = "/features}", 
 			produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
 	public UploadFeatureResponse getAllFeatures() {
 		return processor.getAllFeatures();
 	}
 
-	@GetMapping(value = "/feature/{id}", 
+	@GetMapping(value = "/features/{id}", 
 			produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
 	public UploadFeatureResponse getFeature(@PathVariable( "id" ) Long id) {
 		return processor.getFeature(id);
