@@ -10,11 +10,13 @@ POST
 http://localhost:8070/arduino/generate 
 
 ### Headers
+```
 Accept  :  application/json
 Content-Type  :  application/json
+```
 
 ### Body
-
+```
 {
 "projectName":"Dummy Project",
 "description":"This is a dummy project",
@@ -24,7 +26,7 @@ Content-Type  :  application/json
 "forthModule":"N/A",
 "fifthModule":"N/A"
 }
-  
+```  
 _____________________________________________________________________________________
 
 ## Test 2 Get ALL Descriptions Test
@@ -37,8 +39,10 @@ POST
 http://localhost:8070/arduino/descriptions
 
 ### Headers
+```
 Accept  :  application/json
 Content-Type  :  application/json
+```
 
 ### Body
 
@@ -55,11 +59,13 @@ POST
 http://localhost:8070/arduino/create 
 
 ### Headers
+```
 Accept  :  application/json
 Content-Type  :  application/json
+```
 
 ### Body
-
+```
 {
 "projectGUID":"bjjj",	
 "computerLanguage":"CPP",	
@@ -76,7 +82,7 @@ Content-Type  :  application/json
 "featureAssignment":"LHFHFGHFGHFGHFG",
 "featurecode":"SDSDSFDSFDSFSDF"
 }
-  
+```  
 _____________________________________________________________________________________
 
 ## Test 4 get all Features Test
@@ -89,8 +95,10 @@ POST
 http://localhost:8070/arduino/features
 
 ### Headers
+```
 Accept  :  application/json
 Content-Type  :  application/json
+```
 
 ### Body
 
@@ -107,8 +115,10 @@ POST
 http://localhost:8070/arduino/features/1
 
 ### Headers
+```
 Accept  :  application/json
 Content-Type  :  application/json
+```
 
 ### Body
 
@@ -125,11 +135,13 @@ POST
 http://localhost:8070/arduino/update/1
 
 ### Headers
+```
 Accept  :  application/json
 Content-Type  :  application/json
+```
 
 ### Body
-
+```
 {
 "projectGUID":"bjjj",	
 "computerLanguage":"CPP",	
@@ -146,6 +158,6 @@ Content-Type  :  application/json
 "featureAssignment":"LHFHFGHFGHFGHFG",
 "featurecode":"SDSDSFDSFDSFSDF"
 }
-  
+```  
 _____________________________________________________________________________________
 
