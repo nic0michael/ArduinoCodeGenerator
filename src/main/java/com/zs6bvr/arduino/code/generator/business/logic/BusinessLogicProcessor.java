@@ -47,9 +47,9 @@ public class BusinessLogicProcessor {
 	}
 
 	public String generateProject(BuildProjectRequest request) {
-		String result=null;
-
+		String result="No Data Received from database";
 		BuildProjectResponse response = validateRequest(request);
+		
 		if (!ResponseStatusCodes.OK.getResponseStatusCode().equalsIgnoreCase(response.getResponseStatusCode())) {
 			log.error("BusinessLogicProcessor | doBuildProject | Validation failed");
 			return response.getResponseStatusMessage();
@@ -57,12 +57,16 @@ public class BusinessLogicProcessor {
 		
 		try {
 			response =database.getBuiltProject(request);
-			response.setBuildProjectRequest(request);
+			if(response!=null) {
+				response.setBuildProjectRequest(request);
+			}
 		} catch (FailedToReadFromDatabaseException e) {
 			e.printStackTrace();
 			return ResponseStatusMessages.DATABASE_FAILURE.getResponseStatusMessage();
 		}
-		result =doBuildProject(response);
+		if(response!=null) {
+			result =doBuildProject(response);
+		}
 		return result;
 	}
 	
@@ -81,8 +85,14 @@ public class BusinessLogicProcessor {
 
 		try {
 			response = database.persistFeatureRecord(request);
-			log.debug("BusinessLogicProcessor | persistFeatureRecord | response : "
-					+ response.getResponseStatusMessage());
+			if(response!=null) {
+				log.debug("BusinessLogicProcessor | persistFeatureRecord | response : "	+ response.getResponseStatusMessage());
+			} else {
+				log.debug("BusinessLogicProcessor | persistFeatureRecord | response is empty");
+				response = new UploadFeatureResponse();
+				response.setResponseStatusCode(ResponseStatusCodes.DATABASE_FAILURE.getResponseStatusCode());
+				response.setResponseStatusMessage(ResponseStatusMessages.DATABASE_FAILURE.getResponseStatusMessage());
+			}
 
 		} catch (FailedToWriteToatabaseException e) {
 			response = new UploadFeatureResponse();

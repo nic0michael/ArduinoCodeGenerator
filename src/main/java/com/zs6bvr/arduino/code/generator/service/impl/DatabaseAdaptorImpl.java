@@ -119,13 +119,21 @@ public class DatabaseAdaptorImpl implements DatabaseAdaptor{
 		UploadFeatureResponse response=new UploadFeatureResponse();
 		try {
 			ProjectFeature projectFeature = repository.findByProjectFeatureId(id);
-			projectFeature.setUploadFeatureRequest(request);
-			repository.save(projectFeature);
+			if(projectFeature!=null) {
+				projectFeature.setUploadFeatureRequest(request);
+				repository.save(projectFeature);
+	
+				String expectedResponseStatusCode = ResponseStatusCodes.OK.getResponseStatusCode();
+				String expectedResponseStatusMessage = ResponseStatusMessages.OK.getResponseStatusMessage();
+				response.setResponseStatusCode(expectedResponseStatusCode);
+				response.setResponseStatusMessage(expectedResponseStatusMessage);
+			} else {
 
-			String expectedResponseStatusCode = ResponseStatusCodes.OK.getResponseStatusCode();
-			String expectedResponseStatusMessage = ResponseStatusMessages.OK.getResponseStatusMessage();
-			response.setResponseStatusCode(expectedResponseStatusCode);
-			response.setResponseStatusMessage(expectedResponseStatusMessage);
+				String expectedResponseStatusCode = ResponseStatusCodes.DATABASE_FAILURE.getResponseStatusCode();
+				String expectedResponseStatusMessage = ResponseStatusMessages.DATABASE_FAILURE.getResponseStatusMessage();
+				response.setResponseStatusCode(expectedResponseStatusCode);
+				response.setResponseStatusMessage(expectedResponseStatusMessage);
+			}
 			
 		} catch (Exception e) {
 			log.error("UploadFeatureResponse | persistFeatureRecord | failed to retrieve from database",e);

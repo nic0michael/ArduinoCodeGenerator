@@ -21,7 +21,7 @@ import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureResponse;
 
 
 @RestController
-@RequestMapping("codegenerator")
+@RequestMapping("/arduino")
 public class GeneratorController {
 	private static final Logger log = LoggerFactory.getLogger(GeneratorController.class);
 	
@@ -33,40 +33,46 @@ public class GeneratorController {
 			produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE }, 
 			consumes = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
 	public String getBuiltProject(@RequestBody BuildProjectRequest request) {
+		log.info("GeneratorController | getBuiltProject | called");
 		return processor.generateProject(request);
 	}
 	
-	@GetMapping(value = "/descriptions}", 
+	@GetMapping(value = "/descriptions", 
 			produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
 	public UploadFeatureDescritionsResponse getDescriptionsOfAllFeatures() {
+		log.info("GeneratorController | getDescriptionsOfAllFeatures | called");
 		return processor.getDescriptionsOfAllFeatures();
 	}
 	
-	@PostMapping(value = "/feature", 
+	@PostMapping(value = "/create", 
 			produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE }, 
 			consumes = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
 	public UploadFeatureResponse persistFeature(@RequestBody UploadFeatureRequest request) {
+		log.info("GeneratorController | persistFeature | called");
 		return processor.saveFeature(request);
 	}
 	
 
-	@GetMapping(value = "/features}", 
+	@GetMapping(value = "/features", 
 			produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
 	public UploadFeatureResponse getAllFeatures() {
+		log.info("GeneratorController | getAllFeatures | called");
 		return processor.getAllFeatures();
 	}
 
 	@GetMapping(value = "/features/{id}", 
 			produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
 	public UploadFeatureResponse getFeature(@PathVariable( "id" ) Long id) {
+		log.info("GeneratorController | getFeature | called");
 		return processor.getFeature(id);
 	}
 	
 
-	@PutMapping(value = "/feature/{id}", 
+	@PutMapping(value = "/update/{id}", 
 			produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE }, 
 			consumes = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
 	public UploadFeatureResponse updateFeature(@PathVariable( "id" ) Long id, @RequestBody UploadFeatureRequest request) {
+		log.info("GeneratorController | updateFeature | called");
 		return processor.updateFeature(id,request);
 	}
 }

@@ -1,7 +1,7 @@
 package com.zs6bvr.arduino.code.generator.enums;
 
 public enum ResponseStatusMessages {
-	OK("OK : Message delivered to RabbitMQ"),
+	OK("OK : Code Generator operation succeeded "),
 	BAD_REQUEST("The Request is NULL"),
 	MQ_FAILURE("Failure : Failed to deliver Message to RabbitMQ"),
 	JSON_FAILURE("Failure : Failed to conert DTO to a JSON String"),
