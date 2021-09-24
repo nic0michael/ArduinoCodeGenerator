@@ -1,0 +1,204 @@
+{
+	"info": {
+		"_postman_id": "f4f8c14e-c4d0-422c-be1a-0ef7d3257e5b",
+		"name": "ArduinoGenerator",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET /descriptions",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL}}/descriptions",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"descriptions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /features",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL}}/features",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"features"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\t\t\n\t\"featureName\":\"dummy{{dummyNumber}}_featureName\",\t\n\t\"projectGUID\":\"dummy{{dummyNumber}}_projectGUID\",\n\t\"description\":\"dummy{{dummyNumber}}_description\",\n\t\"featureStatus\":\"dummy{{dummyNumber}}_featureStatus\",\t\n\t\"prerequisites\":\"dummy{{dummyNumber}}_prerequisites\",\t\n\t\"featureDecleration\":\"dummy{{dummyNumber}}_featureDecleration\",\n\t\"featureAssignment\":\"dummy{{dummyNumber}}_featureAssignment\",\n\t\"featurecode\":\"dummy{{dummyNumber}}_featurecode\",\t\n\t\"computerLanguage\":\"dummy{{dummyNumber}}_computerLanguage\",\t\n\t\"microController\":\"dummy{{dummyNumber}}_microController\",\t\n\t\"mcuPinsUsed\":\"dummy{{dummyNumber}}_mcuPinsUsed\",\t\n\t\"contributorsName\":\"dummy{{dummyNumber}}_contributorsName\",\t\n\t\"contributorsBlogPage\":\"dummy{{dummyNumber}}_contributorsBlogPage\",\t\n\t\"contributorsYoutubePage\":\"dummy{{dummyNumber}}_contributorsYoutubePage\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/create",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /generate",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"projectName\":\"dummy_projectName\",\n\"description\":\"dummy_description\",\n\"firstModule\":\"dummy_firstModule\",\n\"secondModule\":\"dummy_secondModule\",\n\"ThirdModule\":\"dummy_ThirdModule\",\n\"forthModule\":\"dummy_forthModule\",\n\"fifthModule\":\"dummy_fifthModule\",\n\"guid\":\"dummy_guid\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/generate",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"generate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\t\t\n\t\"featureName\":\"{{dummyMessage}}_featureName\",\t\n\t\"projectGUID\":\"{{dummyMessage}}_projectGUID\",\n\t\"description\":\"{{dummyMessage}}_description\",\n\t\"featureStatus\":\"{{dummyMessage}}_featureStatus\",\t\n\t\"prerequisites\":\"{{dummyMessage}}_prerequisites\",\t\n\t\"featureDecleration\":\"{{dummyMessage}}_featureDecleration\",\n\t\"featureAssignment\":\"{{dummyMessage}}_featureAssignment\",\n\t\"featurecode\":\"{{dummyMessage}}_featurecode\",\t\n\t\"computerLanguage\":\"{{dummyMessage}}_computerLanguage\",\t\n\t\"microController\":\"{{dummyMessage}}_microController\",\t\n\t\"mcuPinsUsed\":\"{{dummyMessage}}_mcuPinsUsed\",\t\n\t\"contributorsName\":\"{{dummyMessage}}_contributorsName\",\t\n\t\"contributorsBlogPage\":\"{{dummyMessage}}_contributorsBlogPage\",\t\n\t\"contributorsYoutubePage\":\"{{dummyMessage}}_contributorsYoutubePage\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/update/{{recordNumber}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"update",
+						"{{recordNumber}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "http://localhost:8080/arduino/v1"
+		},
+		{
+			"key": "recordNumber",
+			"value": "1"
+		},
+		{
+			"key": "dummyNumber",
+			"value": "2"
+		},
+		{
+			"key": "dummyMessage",
+			"value": "changed2"
+		}
+	]
+}
