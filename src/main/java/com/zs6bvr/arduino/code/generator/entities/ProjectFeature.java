@@ -13,6 +13,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.*;
 
+
+
 import org.hibernate.annotations.BatchSize;
 import org.springframework.data.annotation.CreatedDate;
 
@@ -32,13 +34,14 @@ public class ProjectFeature {
 	@CreatedDate
 	private Date dateCreated;
 	
-	@Column(name="project_guid")
+	@Column(name="project_guid", nullable = false, updatable = true)
 	private String projectGUID;	
 	
-	@Column(name="feature_name", unique = true, nullable = false, updatable = false, insertable = false, length=128)
+
+	@Column(name="feature_name", nullable = false, updatable = true)
 	private String featureName;
 	
-	@Column(name="feature_status")
+	@Column(name="feature_status", nullable = false, updatable = true)
 	private String featureStatus;
 	
 	@Column(name="feature_decleration", nullable = false, updatable = true, length=2048)

@@ -61,7 +61,7 @@ public class BusinessLogicProcessor {
 				response.setBuildProjectRequest(request);
 			}
 		} catch (FailedToReadFromDatabaseException e) {
-			e.printStackTrace();
+			log.error("BusinessLogicProcessor | generateProject failed ",e);
 			return ResponseStatusMessages.DATABASE_FAILURE.getResponseStatusMessage();
 		}
 		if(response!=null) {
@@ -84,7 +84,7 @@ public class BusinessLogicProcessor {
 		UploadFeatureResponse response;
 
 		try {
-			response = database.persistFeatureRecord(request);
+			response = database.insertFeatureRecord(request);
 			if(response!=null) {
 				log.debug("BusinessLogicProcessor | persistFeatureRecord | response : "	+ response.getResponseStatusMessage());
 			} else {

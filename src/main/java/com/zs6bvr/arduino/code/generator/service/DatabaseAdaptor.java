@@ -10,7 +10,7 @@ import com.zs6bvr.arduino.code.generator.exceptions.FailedToWriteToatabaseExcept
 
 public interface DatabaseAdaptor {
 
-	UploadFeatureResponse persistFeatureRecord(UploadFeatureRequest request) throws FailedToWriteToatabaseException;
+	UploadFeatureResponse insertFeatureRecord(UploadFeatureRequest request) throws FailedToWriteToatabaseException;
 	ProjectFeature findByProjectFeatureId(Long projectFeatureId) throws FailedToReadFromDatabaseException;
 	BuildProjectResponse getBuiltProject(BuildProjectRequest request) throws FailedToReadFromDatabaseException;
 	UploadFeatureResponse getAllFeatures();

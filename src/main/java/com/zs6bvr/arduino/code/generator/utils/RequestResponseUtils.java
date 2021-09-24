@@ -2,6 +2,12 @@ package com.zs6bvr.arduino.code.generator.utils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.Date;
 
 import com.zs6bvr.arduino.code.generator.dtos.BuildProjectRequest;
 import com.zs6bvr.arduino.code.generator.dtos.BuildProjectResponse;
@@ -13,6 +19,7 @@ import com.zs6bvr.arduino.code.generator.enums.ResponseStatusCodes;
 import com.zs6bvr.arduino.code.generator.enums.ResponseStatusMessages;
 
 public class RequestResponseUtils {
+	private static final Logger log = LoggerFactory.getLogger(RequestResponseUtils.class);
 
 	public static UploadFeatureResponse makeSuccessUploadFeatureResponse() {
 		UploadFeatureResponse response=new UploadFeatureResponse();
@@ -63,6 +70,67 @@ public class RequestResponseUtils {
 		response.setResponseStatusMessage(expectedResponseStatusMessage);	
 		
 		return response;
+	}
+
+
+	public static UploadFeatureResponse makeFailedToPersistResponse() {
+		UploadFeatureResponse response =new UploadFeatureResponse();
+		String expectedResponseStatusCode = ResponseStatusCodes.DATABASE_FAILURE.getResponseStatusCode();
+		String expectedResponseStatusMessage = ResponseStatusMessages.DATABASE_FAILURE.getResponseStatusMessage();
+		response.setResponseStatusCode(expectedResponseStatusCode);
+		response.setResponseStatusMessage(expectedResponseStatusMessage);		
+		return response;
+	}
+
+	public static UploadFeatureResponse makeSucceededToPersistResponse() {
+		UploadFeatureResponse response =new UploadFeatureResponse();
+		String expectedResponseStatusCode = ResponseStatusCodes.OK.getResponseStatusCode();
+		String expectedResponseStatusMessage = ResponseStatusMessages.OK.getResponseStatusMessage();
+		response.setResponseStatusCode(expectedResponseStatusCode);
+		response.setResponseStatusMessage(expectedResponseStatusMessage);		
+		return response;
+	}
+	
+
+
+	public static UploadFeatureResponse makeSucceededToPersistResponse(ProjectFeature resultantFeature) {
+		UploadFeatureResponse response =new UploadFeatureResponse();
+		String expectedResponseStatusCode = ResponseStatusCodes.OK.getResponseStatusCode();
+		String expectedResponseStatusMessage = ResponseStatusMessages.OK.getResponseStatusMessage();
+		response.setResponseStatusCode(expectedResponseStatusCode);
+		response.setResponseStatusMessage(expectedResponseStatusMessage);			
+		
+		UploadFeatureDto uploadFeatureDto=makeUploadFeatureDto(resultantFeature);
+		List<UploadFeatureDto> uploadFeatureDtos=new ArrayList<UploadFeatureDto>();
+		uploadFeatureDtos.add(uploadFeatureDto);
+		response.setUploadFeatureDtos(uploadFeatureDtos);
+
+		return response;
+	}
+	
+
+
+	public static ProjectFeature makeProjectFeature(UploadFeatureRequest request) {
+		ProjectFeature projectFeature=new ProjectFeature();
+		String guid= UUID.randomUUID().toString();  		
+	
+		projectFeature.setProjectGUID(guid);	
+		projectFeature.setFeatureName(request.getFeatureName());
+		projectFeature.setFeatureStatus(request.getFeatureStatus());
+		projectFeature.setFeatureDecleration(request.getFeatureDecleration());
+		projectFeature.setFeatureAssignment(request.getFeatureAssignment());
+		projectFeature.setFeaturecode(request.getFeaturecode());
+		projectFeature.setDescription(request.getDescription());
+		projectFeature.setPrerequisites(request.getPrerequisites());
+		projectFeature.setComputerLanguage(request.getComputerLanguage());
+		projectFeature.setMicroController(request.getMicroController());
+		projectFeature.setMcuPinsUsed(request.getMcuPinsUsed());
+		projectFeature.setContributorsName(request.getContributorsName());
+		projectFeature.setContributorsBlogPage(request.getContributorsBlogPage());
+		projectFeature.setContributorsYoutubePage(request.getContributorsYoutubePage());
+		log.info("RequestResponseUtils | makeProjectFeature | projectFeature : "+projectFeature);
+		
+		return projectFeature;
 	}
 
 	public static ProjectFeature makeSuccessProjectFeature() {
@@ -138,6 +206,7 @@ public class RequestResponseUtils {
 		
 		return uploadFeatureDtos;
 	}
+
 
 
 }

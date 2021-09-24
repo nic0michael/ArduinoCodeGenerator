@@ -21,7 +21,7 @@ import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureResponse;
 
 
 @RestController
-@RequestMapping("/arduino")
+@RequestMapping("/arduino/v1")
 public class GeneratorController {
 	private static final Logger log = LoggerFactory.getLogger(GeneratorController.class);
 	
@@ -30,18 +30,10 @@ public class GeneratorController {
 	
 
 	@PostMapping(value = "/generate", 
-			produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE }, 
 			consumes = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
 	public String getBuiltProject(@RequestBody BuildProjectRequest request) {
 		log.info("GeneratorController | getBuiltProject | called");
 		return processor.generateProject(request);
-	}
-	
-	@GetMapping(value = "/descriptions", 
-			produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
-	public UploadFeatureDescritionsResponse getDescriptionsOfAllFeatures() {
-		log.info("GeneratorController | getDescriptionsOfAllFeatures | called");
-		return processor.getDescriptionsOfAllFeatures();
 	}
 	
 	@PostMapping(value = "/create", 
@@ -51,22 +43,6 @@ public class GeneratorController {
 		log.info("GeneratorController | persistFeature | called");
 		return processor.saveFeature(request);
 	}
-	
-
-	@GetMapping(value = "/features", 
-			produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
-	public UploadFeatureResponse getAllFeatures() {
-		log.info("GeneratorController | getAllFeatures | called");
-		return processor.getAllFeatures();
-	}
-
-	@GetMapping(value = "/features/{id}", 
-			produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
-	public UploadFeatureResponse getFeature(@PathVariable( "id" ) Long id) {
-		log.info("GeneratorController | getFeature | called");
-		return processor.getFeature(id);
-	}
-	
 
 	@PutMapping(value = "/update/{id}", 
 			produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE }, 
@@ -75,4 +51,27 @@ public class GeneratorController {
 		log.info("GeneratorController | updateFeature | called");
 		return processor.updateFeature(id,request);
 	}
+	
+	@GetMapping(value = "/descriptions", 
+			produces = {MediaType.APPLICATION_JSON_VALUE })
+	public UploadFeatureDescritionsResponse getDescriptionsOfAllFeatures() {
+		log.info("GeneratorController | getDescriptionsOfAllFeatures | called");
+		return processor.getDescriptionsOfAllFeatures();
+	}
+
+	@GetMapping(value = "/features", 
+			produces = { MediaType.APPLICATION_JSON_VALUE })
+	public UploadFeatureResponse getAllFeatures() {
+		log.info("GeneratorController | getAllFeatures | called");
+		return processor.getAllFeatures();
+	}
+
+	@GetMapping(value = "/features/{id}", 
+			produces = { MediaType.APPLICATION_JSON_VALUE })
+	public UploadFeatureResponse getFeature(@PathVariable( "id" ) Long id) {
+		log.info("GeneratorController | getFeature | called");
+		return processor.getFeature(id);
+	}
+	
+
 }

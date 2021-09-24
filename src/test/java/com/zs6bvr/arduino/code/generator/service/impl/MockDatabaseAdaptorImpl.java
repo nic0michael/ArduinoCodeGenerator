@@ -26,7 +26,7 @@ public class MockDatabaseAdaptorImpl implements DatabaseAdaptor{
 
 
 	@Override
-	public UploadFeatureResponse persistFeatureRecord(UploadFeatureRequest request) throws FailedToWriteToatabaseException {
+	public UploadFeatureResponse insertFeatureRecord(UploadFeatureRequest request) throws FailedToWriteToatabaseException {
 
 		UploadFeatureResponse response=null;
 		String operationType = testType.name();

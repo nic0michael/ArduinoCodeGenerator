@@ -37,9 +37,10 @@ public class DatabaseAdaptorImpl implements DatabaseAdaptor{
 
 		try {
 			projectFeature = repository.findByProjectFeatureId(projectFeatureId);
+			log.info("DatabaseAdaptorImpl | findByProjectFeatureId | called the database");
 			
 		}catch(Exception e) {
-			log.error("UploadFeatureResponse | persistFeatureRecord | failed to retrieve from database",e);
+			log.error("DatabaseAdaptorImpl | findByProjectFeatureId | failed to retrieve from database",e);
 			throw new FailedToReadFromDatabaseException(e);
 		}
 
@@ -48,8 +49,28 @@ public class DatabaseAdaptorImpl implements DatabaseAdaptor{
 	
 
 	@Override
-	public UploadFeatureResponse persistFeatureRecord(UploadFeatureRequest request) throws FailedToWriteToatabaseException {
-		return null;
+	public UploadFeatureResponse insertFeatureRecord(UploadFeatureRequest request) throws FailedToWriteToatabaseException {
+		ProjectFeature projectFeature =null;
+		ProjectFeature resultantFeature = null;
+		UploadFeatureResponse response=null;
+
+		log.info("DatabaseAdaptorImpl | insertFeatureRecord | request : "+request);
+		
+		try {
+			projectFeature = RequestResponseUtils.makeProjectFeature(request);
+			resultantFeature = repository.saveAndFlush(projectFeature);
+			log.info("DatabaseAdaptorImpl | insertFeatureRecord | called the database");
+			
+			if(resultantFeature!=null) {
+				response=RequestResponseUtils.makeSucceededToPersistResponse(resultantFeature);
+			} else {
+				response=RequestResponseUtils.makeSucceededToPersistResponse();
+			}
+		}catch(Exception e) {
+			response=RequestResponseUtils.makeFailedToPersistResponse();
+			log.error("DatabaseAdaptorImpl | insertFeatureRecord | failed to retrieve from database",e);
+		}
+		return response;
 	}
 
 	@Override
@@ -73,10 +94,15 @@ public class DatabaseAdaptorImpl implements DatabaseAdaptor{
 			
 			if(projectFeatures!=null) {
 				List<UploadFeatureDto> uploadFeatureDtos=RequestResponseUtils.makeUploadFeatureDtos(projectFeatures) ;
-				response.setUploadFeatureDtos(uploadFeatureDtos);
+				if(uploadFeatureDtos!=null) {
+					log.info("DatabaseAdaptorImpl | getAllFeatures | received "+uploadFeatureDtos.size()+"resords from database");
+					response.setUploadFeatureDtos(uploadFeatureDtos);
+				} else {
+					log.info("DatabaseAdaptorImpl | getAllFeatures | uploadFeatureDtos is null");
+				}
 			}
 		}catch(Exception e) {
-			log.error("UploadFeatureResponse | persistFeatureRecord | failed to retrieve from database",e);
+			log.error("DatabaseAdaptorImpl | getAllFeatures | failed to retrieve from database",e);
 
 			String expectedResponseStatusCode = ResponseStatusCodes.DATABASE_FAILURE.getResponseStatusCode();
 			String expectedResponseStatusMessage = ResponseStatusMessages.DATABASE_FAILURE.getResponseStatusMessage();
@@ -118,8 +144,19 @@ public class DatabaseAdaptorImpl implements DatabaseAdaptor{
 	public UploadFeatureResponse updateFeature(Long id, UploadFeatureRequest request) {
 		UploadFeatureResponse response=new UploadFeatureResponse();
 		try {
+			log.info("DatabaseAdaptorImpl | updateFeature | id : "+id +" request : "+request); 
+			if(id==null || request==null ) {
+				log.info("DatabaseAdaptorImpl | updateFeature | id or request is null"); 
+				String expectedResponseStatusCode = ResponseStatusCodes.BAD_REQUEST.getResponseStatusCode();
+				String expectedResponseStatusMessage = ResponseStatusMessages.BAD_REQUEST.getResponseStatusMessage();
+				response.setResponseStatusCode(expectedResponseStatusCode);
+				response.setResponseStatusMessage(expectedResponseStatusMessage);
+				return response;
+			}
+			log.info("DatabaseAdaptorImpl | updateFeature | finding feature id : "+id);
 			ProjectFeature projectFeature = repository.findByProjectFeatureId(id);
 			if(projectFeature!=null) {
+				log.info("DatabaseAdaptorImpl | updateFeature | found, updating, and saving feature : "+projectFeature);
 				projectFeature.setUploadFeatureRequest(request);
 				repository.save(projectFeature);
 	
