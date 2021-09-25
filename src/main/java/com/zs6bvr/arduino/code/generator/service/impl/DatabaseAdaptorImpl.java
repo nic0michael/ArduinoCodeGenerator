@@ -75,6 +75,7 @@ public class DatabaseAdaptorImpl implements DatabaseAdaptor{
 
 	@Override
 	public BuildProjectResponse getBuiltProject(BuildProjectRequest request) throws FailedToReadFromDatabaseException {
+		log.info("DatabaseAdaptorImpl | getBuiltProject | request : "+request);
 		
 		return null;
 	}
@@ -158,12 +159,8 @@ public class DatabaseAdaptorImpl implements DatabaseAdaptor{
 			if(projectFeature!=null) {
 				log.info("DatabaseAdaptorImpl | updateFeature | found, updating, and saving feature : "+projectFeature);
 				projectFeature.setUploadFeatureRequest(request);
-				repository.save(projectFeature);
-	
-				String expectedResponseStatusCode = ResponseStatusCodes.OK.getResponseStatusCode();
-				String expectedResponseStatusMessage = ResponseStatusMessages.OK.getResponseStatusMessage();
-				response.setResponseStatusCode(expectedResponseStatusCode);
-				response.setResponseStatusMessage(expectedResponseStatusMessage);
+				repository.save(projectFeature);				
+				response=RequestResponseUtils.makeSucceededToPersistResponse(projectFeature);
 			} else {
 
 				String expectedResponseStatusCode = ResponseStatusCodes.DATABASE_FAILURE.getResponseStatusCode();

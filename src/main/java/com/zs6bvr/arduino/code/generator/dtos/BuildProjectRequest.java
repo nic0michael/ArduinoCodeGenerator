@@ -7,6 +7,16 @@ public class BuildProjectRequest {
 
 	private String projectName;
 	private String description="This project was not given a decscription";
+	
+	private String featureName;	
+	private String prerequisites;
+	private String featureDecleration;
+	private String computerLanguage;	
+	private String microController;	
+	private String contributorsName;
+	private String contributorsBlogPage;
+	private String contributorsYoutubePage;
+	
 	private String firstModule;
 	private String secondModule;
 	private String ThirdModule;
