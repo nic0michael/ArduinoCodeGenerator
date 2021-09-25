@@ -140,6 +140,10 @@ public class BusinessLogicProcessor {
 		return database.getAllFeatures();
 	}
 
+	public UploadFeatureResponse getFeature(String projectGUID) {
+		return database.getFeature(projectGUID);
+	}
+
 	public UploadFeatureResponse getFeature(Long id) {
 		return database.getFeature(id);
 	}

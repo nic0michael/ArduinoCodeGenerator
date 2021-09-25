@@ -308,7 +308,6 @@ public class ProjectFeature {
 
 	public void setUploadFeatureRequest(UploadFeatureRequest request) {
 
-		this.projectGUID = request.getProjectGUID();
 		this.featureName = request.getFeatureName();
 		this.featureStatus = request.getFeatureStatus();
 		this.featureDecleration = request.getFeatureDecleration();

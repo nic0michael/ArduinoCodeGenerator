@@ -14,6 +14,7 @@ public interface DatabaseAdaptor {
 	ProjectFeature findByProjectFeatureId(Long projectFeatureId) throws FailedToReadFromDatabaseException;
 	BuildProjectResponse getBuiltProject(BuildProjectRequest request) throws FailedToReadFromDatabaseException;
 	UploadFeatureResponse getAllFeatures();
+	UploadFeatureResponse getFeature(String projectGUID);
 	UploadFeatureResponse getFeature(Long id);
 	UploadFeatureResponse updateFeature(Long id, UploadFeatureRequest request);
 

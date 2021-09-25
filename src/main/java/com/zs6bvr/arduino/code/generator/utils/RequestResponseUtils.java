@@ -112,8 +112,7 @@ public class RequestResponseUtils {
 
 	public static ProjectFeature makeProjectFeature(UploadFeatureRequest request) {
 		ProjectFeature projectFeature=new ProjectFeature();
-		String guid= UUID.randomUUID().toString();  		
-	
+		String guid= UUID.randomUUID().toString(); 
 		projectFeature.setProjectGUID(guid);	
 		projectFeature.setFeatureName(request.getFeatureName());
 		projectFeature.setFeatureStatus(request.getFeatureStatus());

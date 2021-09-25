@@ -186,6 +186,7 @@ public class BusinessLogicProcessorTest {
 		DatabaseAdaptor database =new MockDatabaseAdaptorImpl(TestType.FAILING_TEST);		
 		BusinessLogicProcessor processor=new BusinessLogicProcessor(validator, service,database);
 
+
 		Long id=1L;
 		UploadFeatureResponse response = processor.getFeature(id);
 		assertNotNull(response);

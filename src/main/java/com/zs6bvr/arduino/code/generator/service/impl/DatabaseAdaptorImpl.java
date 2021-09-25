@@ -2,6 +2,7 @@ package com.zs6bvr.arduino.code.generator.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,8 +59,10 @@ public class DatabaseAdaptorImpl implements DatabaseAdaptor{
 		
 		try {
 			projectFeature = RequestResponseUtils.makeProjectFeature(request);
+			String guid= UUID.randomUUID().toString(); 
+			projectFeature.setProjectGUID(guid);	
 			resultantFeature = repository.saveAndFlush(projectFeature);
-			log.info("DatabaseAdaptorImpl | insertFeatureRecord | called the database");
+			log.info("DatabaseAdaptorImpl | insertFeatureRecord | called the database | guid : "+guid);
 			
 			if(resultantFeature!=null) {
 				response=RequestResponseUtils.makeSucceededToPersistResponse(resultantFeature);
@@ -115,12 +118,12 @@ public class DatabaseAdaptorImpl implements DatabaseAdaptor{
 	}
 
 	@Override
-	public UploadFeatureResponse getFeature(Long id) {
+	public UploadFeatureResponse getFeature(String projectGUID) {
 		UploadFeatureResponse response=new UploadFeatureResponse();
 		List<ProjectFeature> projectFeatures = new ArrayList<ProjectFeature>();
 		
 		try {
-			ProjectFeature projectFeature=findByProjectFeatureId(id);
+			ProjectFeature projectFeature= repository.findByProjectGUID(projectGUID);
 			projectFeatures.add(projectFeature);
 			List<UploadFeatureDto> uploadFeatureDtos=RequestResponseUtils.makeUploadFeatureDtos(projectFeatures) ;
 			response.setUploadFeatureDtos(uploadFeatureDtos);
@@ -130,7 +133,35 @@ public class DatabaseAdaptorImpl implements DatabaseAdaptor{
 			response.setResponseStatusCode(expectedResponseStatusCode);
 			response.setResponseStatusMessage(expectedResponseStatusMessage);
 			
-		} catch (FailedToReadFromDatabaseException e) {
+		} catch (Exception e) {
+			log.error("UploadFeatureResponse | persistFeatureRecord | failed to retrieve from database",e);
+
+			String expectedResponseStatusCode = ResponseStatusCodes.DATABASE_FAILURE.getResponseStatusCode();
+			String expectedResponseStatusMessage = ResponseStatusMessages.DATABASE_FAILURE.getResponseStatusMessage();
+			response.setResponseStatusCode(expectedResponseStatusCode);
+			response.setResponseStatusMessage(expectedResponseStatusMessage);
+		}
+		return response;
+	}
+
+
+	@Override
+	public UploadFeatureResponse getFeature(Long Id) {
+		UploadFeatureResponse response=new UploadFeatureResponse();
+		List<ProjectFeature> projectFeatures = new ArrayList<ProjectFeature>();
+		
+		try {
+			ProjectFeature projectFeature= repository.findByProjectFeatureId(Id);
+			projectFeatures.add(projectFeature);
+			List<UploadFeatureDto> uploadFeatureDtos=RequestResponseUtils.makeUploadFeatureDtos(projectFeatures) ;
+			response.setUploadFeatureDtos(uploadFeatureDtos);
+
+			String expectedResponseStatusCode = ResponseStatusCodes.OK.getResponseStatusCode();
+			String expectedResponseStatusMessage = ResponseStatusMessages.OK.getResponseStatusMessage();
+			response.setResponseStatusCode(expectedResponseStatusCode);
+			response.setResponseStatusMessage(expectedResponseStatusMessage);
+			
+		} catch (Exception e) {
 			log.error("UploadFeatureResponse | persistFeatureRecord | failed to retrieve from database",e);
 
 			String expectedResponseStatusCode = ResponseStatusCodes.DATABASE_FAILURE.getResponseStatusCode();

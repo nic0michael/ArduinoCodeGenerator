@@ -72,6 +72,13 @@ public class GeneratorController {
 		log.info("GeneratorController | getFeature | called");
 		return processor.getFeature(id);
 	}
+
+	@GetMapping(value = "/feature/{projectGUID}", 
+			produces = { MediaType.APPLICATION_JSON_VALUE })
+	public UploadFeatureResponse getFeatureForProjectGuid(@PathVariable( "projectGUID" ) String projectGUID) {
+		log.info("GeneratorController | getFeature | called");
+		return processor.getFeature(projectGUID);
+	}
 	
 
 }

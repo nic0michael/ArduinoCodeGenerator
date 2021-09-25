@@ -62,6 +62,64 @@
 			"response": []
 		},
 		{
+			"name": "GET /feature for Guid",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL}}/feature/{{projectGUID}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"feature",
+						"{{projectGUID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /features for id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL}}/features/{{recordNumber}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"features",
+						"{{recordNumber}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "POST /create",
 			"request": {
 				"method": "POST",
@@ -105,7 +163,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\"projectName\":\"dummy_projectName\",\n\"description\":\"dummy_description\",\n\"firstModule\":\"dummy_firstModule\",\n\"secondModule\":\"dummy_secondModule\",\n\"ThirdModule\":\"dummy_ThirdModule\",\n\"forthModule\":\"dummy_forthModule\",\n\"fifthModule\":\"dummy_fifthModule\",\n\"guid\":\"dummy_guid\"\n}",
+					"raw": "{\n\"projectName\":\"dummy_projectName\",\n\"description\":\"dummy_description\",\n\"featureName\":\"featureName\",\t\n\"prerequisites\":\"prerequisites\",\n\"featureDecleration\":\"featureDecleration\",\n\"computerLanguage\":\"computerLanguage\",\t\n\"microController\":\"microController\",\t\n\"contributorsName\":\"contributorsName\",\t\n\"contributorsBlogPage\":\"{contributorsBlogPage\",\t\n\"contributorsYoutubePage\":\"contributorsYoutubePage\",\n\"firstModule\":\"dummy_firstModule\",\n\"secondModule\":\"dummy_secondModule\",\n\"ThirdModule\":\"dummy_ThirdModule\",\n\"forthModule\":\"dummy_forthModule\",\n\"fifthModule\":\"dummy_fifthModule\",\n\"guid\":\"dummy_guid\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -142,7 +200,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\t\t\n\t\"featureName\":\"{{dummyMessage}}_featureName\",\t\n\t\"projectGUID\":\"{{dummyMessage}}_projectGUID\",\n\t\"description\":\"{{dummyMessage}}_description\",\n\t\"featureStatus\":\"{{dummyMessage}}_featureStatus\",\t\n\t\"prerequisites\":\"{{dummyMessage}}_prerequisites\",\t\n\t\"featureDecleration\":\"{{dummyMessage}}_featureDecleration\",\n\t\"featureAssignment\":\"{{dummyMessage}}_featureAssignment\",\n\t\"featurecode\":\"{{dummyMessage}}_featurecode\",\t\n\t\"computerLanguage\":\"{{dummyMessage}}_computerLanguage\",\t\n\t\"microController\":\"{{dummyMessage}}_microController\",\t\n\t\"mcuPinsUsed\":\"{{dummyMessage}}_mcuPinsUsed\",\t\n\t\"contributorsName\":\"{{dummyMessage}}_contributorsName\",\t\n\t\"contributorsBlogPage\":\"{{dummyMessage}}_contributorsBlogPage\",\t\n\t\"contributorsYoutubePage\":\"{{dummyMessage}}_contributorsYoutubePage\"\n}",
+					"raw": "{\t\t\n\t\"featureName\":\"{{dummyMessage}}_featureName\",\n\t\"description\":\"{{dummyMessage}}_description\",\n\t\"featureStatus\":\"{{dummyMessage}}_featureStatus\",\t\n\t\"prerequisites\":\"{{dummyMessage}}_prerequisites\",\t\n\t\"featureDecleration\":\"{{dummyMessage}}_featureDecleration\",\n\t\"featureAssignment\":\"{{dummyMessage}}_featureAssignment\",\n\t\"featurecode\":\"{{dummyMessage}}_featurecode\",\t\n\t\"computerLanguage\":\"{{dummyMessage}}_computerLanguage\",\t\n\t\"microController\":\"{{dummyMessage}}_microController\",\t\n\t\"mcuPinsUsed\":\"{{dummyMessage}}_mcuPinsUsed\",\t\n\t\"contributorsName\":\"{{dummyMessage}}_contributorsName\",\t\n\t\"contributorsBlogPage\":\"{{dummyMessage}}_contributorsBlogPage\",\t\n\t\"contributorsYoutubePage\":\"{{dummyMessage}}_contributorsYoutubePage\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -194,11 +252,15 @@
 		},
 		{
 			"key": "dummyNumber",
-			"value": "2"
+			"value": "0"
 		},
 		{
 			"key": "dummyMessage",
-			"value": "changed2"
+			"value": "changed0"
+		},
+		{
+			"key": "projectGUID",
+			"value": "3300c181-7135-4801-ae8b-c3710a3570d6"
 		}
 	]
 }
