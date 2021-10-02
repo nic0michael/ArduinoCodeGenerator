@@ -79,8 +79,40 @@ public class DatabaseAdaptorImpl implements DatabaseAdaptor{
 	@Override
 	public BuildProjectResponse getBuiltProject(BuildProjectRequest request) throws FailedToReadFromDatabaseException {
 		log.info("DatabaseAdaptorImpl | getBuiltProject | request : "+request);
+		BuildProjectResponse response=new BuildProjectResponse();
+		List<UploadFeatureDto> projectFeatures=new ArrayList<>();
+		List<ProjectFeature> foundFeatures= repository.findAll(); 
 		
-		return null;
+		try {
+		for (ProjectFeature projectFeature : foundFeatures) {
+			UploadFeatureDto dto=new UploadFeatureDto(projectFeature);
+			if(request.getFirstModule().equalsIgnoreCase(projectFeature.getProjectGUID())) {
+				projectFeatures.add(dto);
+				
+			} else if(request.getSecondModule().equalsIgnoreCase(projectFeature.getProjectGUID())) {
+				projectFeatures.add(dto);
+				
+			}  else if(request.getThirdModule().equalsIgnoreCase(projectFeature.getProjectGUID())) {
+				projectFeatures.add(dto);
+				
+			}  else if(request.getForthModule().equalsIgnoreCase(projectFeature.getProjectGUID())) {
+				projectFeatures.add(dto);
+				
+			}   else if(request.getFifthModule().equalsIgnoreCase(projectFeature.getProjectGUID())) {
+				projectFeatures.add(dto);
+			} 
+		}
+		response.setFeatures(projectFeatures);
+		response.setResponseStatusCode(ResponseStatusCodes.OK.getResponseStatusCode());
+		response.setResponseStatusMessage(ResponseStatusMessages.OK.getResponseStatusMessage());
+		
+		}catch(Exception e) {
+
+			response.setResponseStatusCode(ResponseStatusCodes.DATABASE_FAILURE.getResponseStatusCode());
+			response.setResponseStatusMessage(ResponseStatusMessages.DATABASE_FAILURE.getResponseStatusMessage());
+		}
+		
+		return response;
 	}
 
 	@Override

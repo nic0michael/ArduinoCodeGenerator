@@ -2,6 +2,8 @@ package com.zs6bvr.arduino.code.generator.dtos;
 
 import javax.persistence.Column;
 
+import com.zs6bvr.arduino.code.generator.entities.ProjectFeature;
+
 public class UploadFeatureDto {
 
 	private String projectGUID;	
@@ -42,6 +44,27 @@ public class UploadFeatureDto {
 		this.featureAssignment = featureAssignment;
 		this.featurecode = featurecode;
 		this.featureStatus = featureStatus;
+	}
+
+
+
+	public UploadFeatureDto(ProjectFeature projectFeature) {
+		if(projectFeature!=null) {
+			projectGUID = projectFeature.getProjectGUID();
+			computerLanguage = projectFeature.getComputerLanguage();
+			microController = projectFeature.getMicroController();
+			mcuPinsUsed = projectFeature.getMcuPinsUsed();
+			contributorsName = projectFeature.getContributorsName();
+			contributorsBlogPage = projectFeature.getContributorsBlogPage();
+			contributorsYoutubePage = projectFeature.getContributorsYoutubePage();
+			featureName = projectFeature.getFeatureName();
+			description = projectFeature.getDescription();
+			prerequisites = projectFeature.getPrerequisites();
+			featureDecleration = projectFeature.getFeatureDecleration();
+			featureAssignment = projectFeature.getFeatureAssignment();
+			featurecode = projectFeature.getFeaturecode();
+			featureStatus = projectFeature.getFeatureStatus();
+		}
 	}
 
 
