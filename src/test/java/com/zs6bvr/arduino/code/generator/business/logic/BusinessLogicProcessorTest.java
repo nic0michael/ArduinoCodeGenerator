@@ -99,6 +99,7 @@ public class BusinessLogicProcessorTest {
 		String result = processor.generateProject(request);
 		assertNotNull(result);
 		int resultLength=result.length();
+		System.out.println("result : "+result);
 		System.out.println("resultLength : "+resultLength);
 		assertEquals(resultLength, expectedResultLength);
 	}

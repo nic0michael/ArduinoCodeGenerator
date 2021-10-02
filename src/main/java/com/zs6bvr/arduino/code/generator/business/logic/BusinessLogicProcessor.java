@@ -65,15 +65,50 @@ public class BusinessLogicProcessor {
 			return ResponseStatusMessages.DATABASE_FAILURE.getResponseStatusMessage();
 		}
 		if(response!=null) {
-			result =doBuildProject(response);
+			result =doBuildProjectCode(response);
 		}
 		return result;
 	}
 	
-	public String doBuildProject(BuildProjectResponse response) {
-		String result = service.doBuildProject(response);
-		log.debug("BusinessLogicProcessor | doBuildProject | result : " + result);
-		return result;
+
+	public BuildProjectResponse getExportedProject(BuildProjectRequest request) {
+
+		BuildProjectResponse response = validateRequest(request);
+		
+		if (!ResponseStatusCodes.OK.getResponseStatusCode().equalsIgnoreCase(response.getResponseStatusCode())) {
+			log.error("BusinessLogicProcessor | doBuildProject | Validation failed");
+			return response;
+		}
+		
+		try {
+			response =database.getBuiltProject(request);
+			if(response!=null) {
+				response.setBuildProjectRequest(request);
+			}
+		} catch (FailedToReadFromDatabaseException e) {
+			log.error("BusinessLogicProcessor | generateProject failed ",e);
+			response.setResponseStatusMessage(ResponseStatusMessages.DATABASE_FAILURE.getResponseStatusMessage());
+			response.setResponseStatusCode(ResponseStatusCodes.DATABASE_FAILURE.getResponseStatusCode());
+			return response;
+		}
+		response =doBuildProjectResponse(response);
+		response.setGeneratedCode("Please note exporting a project does not generate the code");
+		return response;
+	}
+
+	public String doBuildProjectCode(BuildProjectResponse response) {
+		String generatedCode = null;
+		BuildProjectResponse generatedResponse=doBuildProjectResponse(response);
+		generatedCode=generatedResponse.getGeneratedCode();
+		log.debug("BusinessLogicProcessor | doBuildProjectCode | generatedCode : " + generatedCode);
+		return generatedCode;
+	}
+
+	
+	public BuildProjectResponse doBuildProjectResponse(BuildProjectResponse response) {
+		BuildProjectResponse generatedResponse=service.doBuildProject(response);
+		log.debug("BusinessLogicProcessor | doBuildProjectResponse | generatedResponse : " + generatedResponse);		
+		return generatedResponse;
 	}
 	
 	public String processUploadData(String fileText, String persistProjectData) {
@@ -151,6 +186,7 @@ public class BusinessLogicProcessor {
 	public UploadFeatureResponse updateFeature(Long id, UploadFeatureRequest request) {
 		return database.updateFeature(id, request);
 	}
+
 
 
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.zs6bvr.arduino.code.generator.business.logic.BusinessLogicProcessor;
 import com.zs6bvr.arduino.code.generator.dtos.BuildProjectRequest;
+import com.zs6bvr.arduino.code.generator.dtos.BuildProjectResponse;
 import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureDescritionsResponse;
 import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureRequest;
 import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureResponse;
@@ -34,6 +35,16 @@ public class GeneratorController {
 	public String getBuiltProject(@RequestBody BuildProjectRequest request) {
 		log.info("GeneratorController | getBuiltProject | called");
 		return processor.generateProject(request);
+	}
+	
+
+	@PostMapping(value = "/export", 
+			consumes = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
+	public BuildProjectResponse getExportedProject(@RequestBody BuildProjectRequest request) {
+		log.info("GeneratorController | getBuiltProject | called");
+		BuildProjectResponse response = processor.getExportedProject(request);
+		log.info("GeneratorController | getBuiltProject | response : "+response);
+		return response;
 	}
 	
 	@PostMapping(value = "/create", 

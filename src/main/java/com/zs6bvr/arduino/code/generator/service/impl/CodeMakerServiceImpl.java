@@ -11,6 +11,8 @@ import com.zs6bvr.arduino.code.generator.dtos.BuildProjectRequest;
 import com.zs6bvr.arduino.code.generator.dtos.BuildProjectResponse;
 import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureDto;
 import com.zs6bvr.arduino.code.generator.entities.ProjectFeature;
+import com.zs6bvr.arduino.code.generator.enums.ResponseStatusCodes;
+import com.zs6bvr.arduino.code.generator.enums.ResponseStatusMessages;
 import com.zs6bvr.arduino.code.generator.exceptions.FailedToReadFromDatabaseException;
 import com.zs6bvr.arduino.code.generator.service.CodeMakerService;
 import com.zs6bvr.arduino.code.generator.service.DatabaseAdaptor;
@@ -26,7 +28,7 @@ public class CodeMakerServiceImpl implements CodeMakerService{
 
 
 	@Override
-	public String doBuildProject(BuildProjectResponse response) {
+	public BuildProjectResponse doBuildProject(BuildProjectResponse response) {
 
 
 		StringBuilder finalCode=new StringBuilder();
@@ -45,7 +47,9 @@ public class CodeMakerServiceImpl implements CodeMakerService{
 		
 		List<UploadFeatureDto> features = response.getFeatures();
 		if(features==null || features.size()<1) {
-			return "No feastures were found for "+response.getProjectName();
+			response.setGeneratedCode(ResponseStatusCodes.SYSTEM_FAILURE.getResponseStatusCode());
+			response.setResponseStatusMessage("No feastures were found for "+response.getProjectName());
+			return response;
 		}
 		for (UploadFeatureDto uploadFeatureDto : features) {
 			if(features!=null) {
@@ -117,8 +121,11 @@ public class CodeMakerServiceImpl implements CodeMakerService{
 		finalCode.append(featurecode);
 		finalCode.append(featureStatus);
 		System.out.println(finalCode);
+		response.setGeneratedCode(finalCode.toString());
+		response.setResponseStatusCode(ResponseStatusCodes.OK.getResponseStatusCode());
+		response.setResponseStatusMessage(ResponseStatusMessages.OK.getResponseStatusMessage());
 		
-		return finalCode.toString();
+		return response;
 	}
 
 	

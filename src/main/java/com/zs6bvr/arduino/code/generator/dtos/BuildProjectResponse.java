@@ -13,6 +13,7 @@ public class BuildProjectResponse {
 	private String description;
 	private List<UploadFeatureDto> features;
 	private String generatedProjectCode;
+	private String generatedCode;
 	
 
 	public void setBuildProjectRequest(BuildProjectRequest request) {
@@ -20,6 +21,20 @@ public class BuildProjectResponse {
 		description=request.getDescription();		
 	}
 	
+	
+	
+	public String getGeneratedCode() {
+		return generatedCode;
+	}
+
+
+
+	public void setGeneratedCode(String generatedCode) {
+		this.generatedCode = generatedCode;
+	}
+
+
+
 	public String getResponseStatusCode() {
 		return responseStatusCode;
 	}
@@ -56,13 +71,18 @@ public class BuildProjectResponse {
 	public void setGeneratedProjectCode(String generatedProjectCode) {
 		this.generatedProjectCode = generatedProjectCode;
 	}
-	
+
+
+
 	@Override
 	public String toString() {
 		return "BuildProjectResponse [responseStatusCode=" + responseStatusCode + ", responseStatusMessage="
 				+ responseStatusMessage + ", projectName=" + projectName + ", description=" + description
-				+ ", features=" + features + ", generatedProjectCode=" + generatedProjectCode + "]";
+				+ ", features=" + features + ", generatedProjectCode=" + generatedProjectCode + ", generatedCode="
+				+ generatedCode + "]";
 	}
+	
+
 	
 	
 	
