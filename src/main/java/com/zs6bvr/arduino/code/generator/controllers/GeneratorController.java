@@ -30,20 +30,20 @@ public class GeneratorController {
 	BusinessLogicProcessor processor;
 	
 
-	@PostMapping(value = "/generate", 
+	@PostMapping(value = "/generatecode", 
 			consumes = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
-	public String getBuiltProject(@RequestBody BuildProjectRequest request) {
-		log.info("GeneratorController | getBuiltProject | called");
-		return processor.generateProject(request);
+	public String generateProjectCode(@RequestBody BuildProjectRequest request) {
+		log.info("GeneratorController | generateProjectCode | called");
+		return processor.generateProjectCode(request);
 	}
 	
 
 	@PostMapping(value = "/export", 
 			consumes = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
 	public BuildProjectResponse getExportedProject(@RequestBody BuildProjectRequest request) {
-		log.info("GeneratorController | getBuiltProject | called");
+		log.info("GeneratorController | getExportedProject | called");
 		BuildProjectResponse response = processor.getExportedProject(request);
-		log.info("GeneratorController | getBuiltProject | response : "+response);
+		log.info("GeneratorController | getExportedProject | response : "+response);
 		return response;
 	}
 	

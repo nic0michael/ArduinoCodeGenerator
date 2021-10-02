@@ -80,7 +80,7 @@ public class BusinessLogicProcessorTest {
 		BusinessLogicProcessor processor=new BusinessLogicProcessor(validator, service,database);
 		
 		BuildProjectRequest request = RequestResponseUtils.makeBadBuildProjectRequest();
-		String result = processor.generateProject(request);
+		String result = processor.generateProjectCode(request);
 		assertNotNull(result);
 		assertEquals(result, expectedResponseStatusMessage);
 	}
@@ -88,7 +88,7 @@ public class BusinessLogicProcessorTest {
 
 	@DisplayName("Positive Test BusinessLogicProcessorTest4")
 	@Test
-	void positiveTestDoBuildProject() {
+	void positiveTestDoBuildProject() { // failing
 		int expectedResultLength=527;
 		RequestValidator validator = new RequestValidator();
 		CodeMakerService service=new CodeMakerServiceImpl();
@@ -96,7 +96,7 @@ public class BusinessLogicProcessorTest {
 		BusinessLogicProcessor processor=new BusinessLogicProcessor(validator, service,database);
 		
 		BuildProjectRequest request = RequestResponseUtils.makeBuildProjectRequest();
-		String result = processor.generateProject(request);
+		String result = processor.generateProjectCode(request);
 		assertNotNull(result);
 		int resultLength=result.length();
 		System.out.println("result : "+result);

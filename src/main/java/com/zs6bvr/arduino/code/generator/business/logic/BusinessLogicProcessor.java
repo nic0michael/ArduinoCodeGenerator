@@ -46,32 +46,31 @@ public class BusinessLogicProcessor {
 		this.database=database;
 	}
 
-	public String generateProject(BuildProjectRequest request) {
-		String result="No Data Received from database";
-		BuildProjectResponse response = validateRequest(request);
-		
-		if (!ResponseStatusCodes.OK.getResponseStatusCode().equalsIgnoreCase(response.getResponseStatusCode())) {
-			log.error("BusinessLogicProcessor | doBuildProject | Validation failed");
-			return response.getResponseStatusMessage();
-		}
-		
-		try {
-			response =database.getBuiltProject(request);
-			if(response!=null) {
-				response.setBuildProjectRequest(request);
-			}
-		} catch (FailedToReadFromDatabaseException e) {
-			log.error("BusinessLogicProcessor | generateProject failed ",e);
-			return ResponseStatusMessages.DATABASE_FAILURE.getResponseStatusMessage();
-		}
+	public String generateProjectCode(BuildProjectRequest request) {
+		log.debug("BusinessLogicProcessor | generateProjectCode | request : " + request);
+		String generatedProjectCode="No Data Received from database";
+		BuildProjectResponse response = doBuildProjectResponse(request);
 		if(response!=null) {
-			result =doBuildProjectCode(response);
+			log.info("BusinessLogicProcessor | generateProjectCode | response : "+response);
+			if(ResponseStatusCodes.OK.getResponseStatusCode().equalsIgnoreCase(response.getResponseStatusCode())){
+				generatedProjectCode =response.getGeneratedCode();
+			} else {
+				generatedProjectCode=response.getResponseStatusMessage();
+			}
 		}
-		return result;
+		return generatedProjectCode;
 	}
 	
 
 	public BuildProjectResponse getExportedProject(BuildProjectRequest request) {
+		log.debug("BusinessLogicProcessor | getExportedProject | request : " + request);
+		BuildProjectResponse response = doBuildProjectResponse(request);
+		response.setGeneratedCode("Please note exporting a project does not generate the code");
+		return response;
+	}
+
+	
+	private BuildProjectResponse doBuildProjectResponse(BuildProjectRequest request) {
 
 		BuildProjectResponse response = validateRequest(request);
 		
@@ -91,24 +90,10 @@ public class BusinessLogicProcessor {
 			response.setResponseStatusCode(ResponseStatusCodes.DATABASE_FAILURE.getResponseStatusCode());
 			return response;
 		}
-		response =doBuildProjectResponse(response);
-		response.setGeneratedCode("Please note exporting a project does not generate the code");
+		
+		response=service.doBuildProject(response);
+		log.debug("BusinessLogicProcessor | doBuildProjectResponse | generatedResponse : " + response);		
 		return response;
-	}
-
-	public String doBuildProjectCode(BuildProjectResponse response) {
-		String generatedCode = null;
-		BuildProjectResponse generatedResponse=doBuildProjectResponse(response);
-		generatedCode=generatedResponse.getGeneratedCode();
-		log.debug("BusinessLogicProcessor | doBuildProjectCode | generatedCode : " + generatedCode);
-		return generatedCode;
-	}
-
-	
-	public BuildProjectResponse doBuildProjectResponse(BuildProjectResponse response) {
-		BuildProjectResponse generatedResponse=service.doBuildProject(response);
-		log.debug("BusinessLogicProcessor | doBuildProjectResponse | generatedResponse : " + generatedResponse);		
-		return generatedResponse;
 	}
 	
 	public String processUploadData(String fileText, String persistProjectData) {
