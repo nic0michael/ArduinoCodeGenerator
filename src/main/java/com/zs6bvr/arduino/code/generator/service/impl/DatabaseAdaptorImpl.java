@@ -59,10 +59,8 @@ public class DatabaseAdaptorImpl implements DatabaseAdaptor{
 		
 		try {
 			projectFeature = RequestResponseUtils.makeProjectFeature(request);
-			String guid= UUID.randomUUID().toString(); 
-			projectFeature.setProjectGUID(guid);	
 			resultantFeature = repository.saveAndFlush(projectFeature);
-			log.info("DatabaseAdaptorImpl | insertFeatureRecord | called the database | guid : "+guid);
+			log.info("DatabaseAdaptorImpl | insertFeatureRecord | called the database");
 			
 			if(resultantFeature!=null) {
 				response=RequestResponseUtils.makeSucceededToPersistResponse(resultantFeature);

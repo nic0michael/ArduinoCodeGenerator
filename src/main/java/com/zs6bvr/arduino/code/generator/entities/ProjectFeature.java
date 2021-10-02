@@ -2,6 +2,7 @@ package com.zs6bvr.arduino.code.generator.entities;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -84,6 +85,7 @@ public class ProjectFeature {
 	
 	public ProjectFeature() {
 		dateCreated=new Date();
+		projectGUID= UUID.randomUUID().toString(); 
 	}
 
 
@@ -109,6 +111,7 @@ public class ProjectFeature {
 		this.contributorsYoutubePage = contributorsYoutubePage;
 
 		dateCreated=new Date();
+		projectGUID= UUID.randomUUID().toString(); 
 	}
 
 
@@ -116,13 +119,6 @@ public class ProjectFeature {
 	public String getProjectGUID() {
 		return projectGUID;
 	}
-
-
-
-	public void setProjectGUID(String projectGUID) {
-		this.projectGUID = projectGUID;
-	}
-
 
 
 	public String getFeatureName() {

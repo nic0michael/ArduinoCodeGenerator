@@ -112,8 +112,6 @@ public class RequestResponseUtils {
 
 	public static ProjectFeature makeProjectFeature(UploadFeatureRequest request) {
 		ProjectFeature projectFeature=new ProjectFeature();
-		String guid= UUID.randomUUID().toString(); 
-		projectFeature.setProjectGUID(guid);	
 		projectFeature.setFeatureName(request.getFeatureName());
 		projectFeature.setFeatureStatus(request.getFeatureStatus());
 		projectFeature.setFeatureDecleration(request.getFeatureDecleration());
@@ -134,8 +132,6 @@ public class RequestResponseUtils {
 
 	public static ProjectFeature makeSuccessProjectFeature() {
 		ProjectFeature projectFeature=new ProjectFeature();
-		
-		projectFeature.setProjectGUID("DummyprojectGUID");
 		projectFeature.setDescription("Dummydescription");
 		projectFeature.setPrerequisites("Dummyprerequisites");
 		projectFeature.setFeatureName("DummyfeatureName");
