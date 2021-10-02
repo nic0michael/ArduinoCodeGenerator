@@ -84,7 +84,12 @@ public class DatabaseAdaptorImpl implements DatabaseAdaptor{
 		try {
 		for (ProjectFeature projectFeature : foundFeatures) {
 			UploadFeatureDto dto=new UploadFeatureDto(projectFeature);
-			if(request.getFirstModule().equalsIgnoreCase(projectFeature.getProjectGUID())) {
+			if(projectFeature==null) {
+				log.info(" feature is NULL");
+			} else if(projectFeature.getProjectGUID()==null) {
+				log.info(" feature Id : "+projectFeature.getProjectFeatureId()+ " ProjectGUID : is NULL");
+				
+			} else if(request.getFirstModule().equalsIgnoreCase(projectFeature.getProjectGUID())) {
 				projectFeatures.add(dto);
 				
 			} else if(request.getSecondModule().equalsIgnoreCase(projectFeature.getProjectGUID())) {
