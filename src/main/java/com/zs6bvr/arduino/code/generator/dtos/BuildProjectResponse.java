@@ -13,6 +13,7 @@ public class BuildProjectResponse {
 	private String description;
 	private List<UploadFeatureDto> features;
 	private String generatedCode;
+	private UploadFeatureDto jsonProjectExport;
 	
 
 	public void setBuildProjectRequest(BuildProjectRequest request) {
@@ -22,6 +23,18 @@ public class BuildProjectResponse {
 	
 	
 	
+	public UploadFeatureDto getJsonProjectExport() {
+		return jsonProjectExport;
+	}
+
+
+
+	public void setJsonProjectExport(UploadFeatureDto jsonProjectExport) {
+		this.jsonProjectExport = jsonProjectExport;
+	}
+
+
+
 	public String getGeneratedCode() {
 		return generatedCode;
 	}
@@ -64,16 +77,19 @@ public class BuildProjectResponse {
 	public void setFeatures(List<UploadFeatureDto> features) {
 		this.features = features;
 	}
-	
+
 
 
 	@Override
 	public String toString() {
 		return "BuildProjectResponse [responseStatusCode=" + responseStatusCode + ", responseStatusMessage="
 				+ responseStatusMessage + ", projectName=" + projectName + ", description=" + description
-				+ ", features=" + features + ", generatedCode="
-				+ generatedCode + "]";
+				+ ", features=" + features + ", generatedCode=" + generatedCode + "]";
 	}
+	
+
+
+
 	
 
 	

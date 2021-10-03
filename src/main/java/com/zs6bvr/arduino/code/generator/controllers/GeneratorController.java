@@ -16,6 +16,7 @@ import com.zs6bvr.arduino.code.generator.business.logic.BusinessLogicProcessor;
 import com.zs6bvr.arduino.code.generator.dtos.BuildProjectRequest;
 import com.zs6bvr.arduino.code.generator.dtos.BuildProjectResponse;
 import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureDescritionsResponse;
+import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureDto;
 import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureRequest;
 import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureResponse;
 
@@ -39,12 +40,14 @@ public class GeneratorController {
 	
 
 	@PostMapping(value = "/export", 
+			produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE }, 
 			consumes = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
-	public BuildProjectResponse getExportedProject(@RequestBody BuildProjectRequest request) {
+	public UploadFeatureDto getExportedProject(@RequestBody BuildProjectRequest request) {
 		log.info("GeneratorController | getExportedProject | called");
 		BuildProjectResponse response = processor.getExportedProject(request);
 		log.info("GeneratorController | getExportedProject | response : "+response);
-		return response;
+		UploadFeatureDto json = response.getJsonProjectExport();
+		return json;
 	}
 	
 	@PostMapping(value = "/create", 
