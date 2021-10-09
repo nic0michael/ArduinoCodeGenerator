@@ -89,19 +89,25 @@ public class DatabaseAdaptorImpl implements DatabaseAdaptor{
 			} else if(projectFeature.getProjectGUID()==null) {
 				log.info(" feature Id : "+projectFeature.getProjectFeatureId()+ " ProjectGUID : is NULL");
 				
-			} else if(request.getFirstModule().equalsIgnoreCase(projectFeature.getProjectGUID())) {
+			} else if( projectFeature.getProjectGUID().equalsIgnoreCase(request.getFirstModule())) {
+				log.info("DatabaseAdaptorImpl | getBuiltProject | found guid "+projectFeature.getProjectGUID());
 				projectFeatures.add(dto);
 				
-			} else if(request.getSecondModule().equalsIgnoreCase(projectFeature.getProjectGUID())) {
+			} else if( projectFeature.getProjectGUID().equalsIgnoreCase(request.getSecondModule())) {
+				log.info("DatabaseAdaptorImpl | getBuiltProject | found guid "+projectFeature.getProjectGUID());
 				projectFeatures.add(dto);
 				
-			}  else if(request.getThirdModule().equalsIgnoreCase(projectFeature.getProjectGUID())) {
+			} else if( projectFeature.getProjectGUID().equalsIgnoreCase(request.getThirdModule())) {
+				log.info("DatabaseAdaptorImpl | getBuiltProject | found guid "+projectFeature.getProjectGUID());
 				projectFeatures.add(dto);
 				
-			}  else if(request.getForthModule().equalsIgnoreCase(projectFeature.getProjectGUID())) {
+			} else if( projectFeature.getProjectGUID().equalsIgnoreCase(request.getForthModule())) {
+				log.info("DatabaseAdaptorImpl | getBuiltProject | found guid "+projectFeature.getProjectGUID());
 				projectFeatures.add(dto);
+
 				
-			}   else if(request.getFifthModule().equalsIgnoreCase(projectFeature.getProjectGUID())) {
+			} else if( projectFeature.getProjectGUID().equalsIgnoreCase(request.getFifthModule())) {
+				log.info("DatabaseAdaptorImpl | getBuiltProject | found guid "+projectFeature.getProjectGUID());
 				projectFeatures.add(dto);
 			} 
 		}

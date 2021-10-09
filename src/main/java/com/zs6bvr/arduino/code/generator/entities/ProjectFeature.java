@@ -44,9 +44,12 @@ public class ProjectFeature {
 	
 	@Column(name="feature_status", nullable = false, updatable = true)
 	private String featureStatus;
+
+	@Column(name="project_type", nullable = false, updatable = true)
+	private String projectType;
 	
 	@Column(name="feature_decleration", nullable = false, updatable = true, length=2048)
-	private String featureDecleration;
+	private String featureClassImports;
 	
 	@Column(name="feature_assignment", nullable = false, updatable = true, length=2048)
 	private String featureAssignment;
@@ -90,15 +93,15 @@ public class ProjectFeature {
 
 
 
-	public ProjectFeature(String projectGUID, String featureName, String featureStatus, String featureDecleration,
+	public ProjectFeature(String projectGUID, String featureName, String featureStatus, String featureClassImports,
 			String featureAssignment, String featurecode, String description, String prerequisites,
 			String computerLanguage, String microController, String mcuPinsUsed, String contributorsName,
-			String contributorsBlogPage, String contributorsYoutubePage) {
+			String contributorsBlogPage, String contributorsYoutubePage,String projectType) {
 		super();
 		this.projectGUID = projectGUID;
 		this.featureName = featureName;
 		this.featureStatus = featureStatus;
-		this.featureDecleration = featureDecleration;
+		this.featureClassImports = featureClassImports;
 		this.featureAssignment = featureAssignment;
 		this.featurecode = featurecode;
 		this.description = description;
@@ -109,6 +112,7 @@ public class ProjectFeature {
 		this.contributorsName = contributorsName;
 		this.contributorsBlogPage = contributorsBlogPage;
 		this.contributorsYoutubePage = contributorsYoutubePage;
+		this.projectType=projectType;
 
 		dateCreated=new Date();
 		projectGUID= UUID.randomUUID().toString(); 
@@ -116,9 +120,43 @@ public class ProjectFeature {
 
 
 
+
+
+
+	public String getProjectType() {
+		return projectType;
+	}
+
+
+
+	public void setProjectType(String projectType) {
+		this.projectType = projectType;
+	}
+
+
+
+	public Date getDateCreated() {
+		return dateCreated;
+	}
+
+
+
+	public void setDateCreated(Date dateCreated) {
+		this.dateCreated = dateCreated;
+	}
+
+
+
 	public String getProjectGUID() {
 		return projectGUID;
 	}
+
+
+
+	public void setProjectGUID(String projectGUID) {
+		this.projectGUID = projectGUID;
+	}
+
 
 
 	public String getFeatureName() {
@@ -145,14 +183,14 @@ public class ProjectFeature {
 
 
 
-	public String getFeatureDecleration() {
-		return featureDecleration;
+	public String getFeatureClassImports() {
+		return featureClassImports;
 	}
 
 
 
-	public void setFeatureDecleration(String featureDecleration) {
-		this.featureDecleration = featureDecleration;
+	public void setFeatureClassImports(String featureClassImports) {
+		this.featureClassImports = featureClassImports;
 	}
 
 
@@ -283,30 +321,11 @@ public class ProjectFeature {
 
 
 
-	public Date getDateCreated() {
-		return dateCreated;
-	}
-
-
-
-	@Override
-	public String toString() {
-		return "ProjectFeature [projectFeatureId=" + projectFeatureId + ", dateCreated=" + dateCreated
-				+ ", projectGUID=" + projectGUID + ", featureName=" + featureName + ", featureStatus=" + featureStatus
-				+ ", featureDecleration=" + featureDecleration + ", featureAssignment=" + featureAssignment
-				+ ", featurecode=" + featurecode + ", description=" + description + ", prerequisites=" + prerequisites
-				+ ", computerLanguage=" + computerLanguage + ", microController=" + microController + ", mcuPinsUsed="
-				+ mcuPinsUsed + ", contributorsName=" + contributorsName + ", contributorsBlogPage="
-				+ contributorsBlogPage + ", contributorsYoutubePage=" + contributorsYoutubePage + "]";
-	}
-
-
-
 	public void setUploadFeatureRequest(UploadFeatureRequest request) {
 
 		this.featureName = request.getFeatureName();
 		this.featureStatus = request.getFeatureStatus();
-		this.featureDecleration = request.getFeatureDecleration();
+		this.featureClassImports = request.getFeatureClassImports();
 		this.featureAssignment = request.getFeatureAssignment();
 		this.featurecode = request.getFeaturecode();
 		this.description = request.getDescription();
@@ -319,6 +338,23 @@ public class ProjectFeature {
 		this.contributorsYoutubePage = request.getContributorsYoutubePage();
 		
 	}
+
+
+
+	@Override
+	public String toString() {
+		return "ProjectFeature [projectFeatureId=" + projectFeatureId + ", dateCreated=" + dateCreated
+				+ ", projectGUID=" + projectGUID + ", featureName=" + featureName + ", featureStatus=" + featureStatus
+				+ ", projectType=" + projectType + ", featureClassImports=" + featureClassImports
+				+ ", featureAssignment=" + featureAssignment + ", featurecode=" + featurecode + ", description="
+				+ description + ", prerequisites=" + prerequisites + ", computerLanguage=" + computerLanguage
+				+ ", microController=" + microController + ", mcuPinsUsed=" + mcuPinsUsed + ", contributorsName="
+				+ contributorsName + ", contributorsBlogPage=" + contributorsBlogPage + ", contributorsYoutubePage="
+				+ contributorsYoutubePage + "]";
+	}
+
+
+
 
 
 	

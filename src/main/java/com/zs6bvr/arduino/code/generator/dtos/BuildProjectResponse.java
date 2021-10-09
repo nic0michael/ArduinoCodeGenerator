@@ -14,7 +14,20 @@ public class BuildProjectResponse {
 	private List<UploadFeatureDto> features;
 	private String generatedCode;
 	private UploadFeatureDto jsonProjectExport;
+	private String projectType;
 	
+
+	public String getProjectType() {
+		return projectType;
+	}
+
+
+
+	public void setProjectType(String projectType) {
+		this.projectType = projectType;
+	}
+
+
 
 	public void setBuildProjectRequest(BuildProjectRequest request) {
 		projectName=request.getProjectName();
@@ -84,8 +97,13 @@ public class BuildProjectResponse {
 	public String toString() {
 		return "BuildProjectResponse [responseStatusCode=" + responseStatusCode + ", responseStatusMessage="
 				+ responseStatusMessage + ", projectName=" + projectName + ", description=" + description
-				+ ", features=" + features + ", generatedCode=" + generatedCode + "]";
+				+ ", features=" + features + ", generatedCode=" + generatedCode + ", jsonProjectExport="
+				+ jsonProjectExport + ", projectType=" + projectType + "]";
 	}
+
+
+
+
 	
 
 

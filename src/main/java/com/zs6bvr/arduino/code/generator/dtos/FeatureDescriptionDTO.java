@@ -8,11 +8,12 @@ public class FeatureDescriptionDTO {
 	private String featureStatus;
 	private String computerLanguage;	
 	private String microController;	
+	private String projectType;
 
 	public FeatureDescriptionDTO() {}
 
 	public FeatureDescriptionDTO(String projectGUID, String featureName, String description, String featureStatus,
-			String computerLanguage, String microController) {
+			String computerLanguage, String microController, String projectType) {
 		super();
 		this.projectGUID = projectGUID;
 		this.featureName = featureName;
@@ -20,6 +21,17 @@ public class FeatureDescriptionDTO {
 		this.featureStatus = featureStatus;
 		this.computerLanguage = computerLanguage;
 		this.microController = microController;
+		this.projectType=projectType;
+	}
+
+	
+	
+	public String getProjectType() {
+		return projectType;
+	}
+
+	public void setProjectType(String projectType) {
+		this.projectType = projectType;
 	}
 
 	public String getProjectGUID() {
@@ -78,14 +90,17 @@ public class FeatureDescriptionDTO {
 		this.featureStatus = dto.getFeatureStatus();
 		this.computerLanguage = dto.getComputerLanguage();
 		this.microController = dto.getMicroController();
+		this.projectType=dto.getProjectType();
 	}
 
 	@Override
 	public String toString() {
 		return "FeatureDescriptionDTO [projectGUID=" + projectGUID + ", featureName=" + featureName + ", description="
 				+ description + ", featureStatus=" + featureStatus + ", computerLanguage=" + computerLanguage
-				+ ", microController=" + microController + "]";
+				+ ", microController=" + microController + ", projectType=" + projectType + "]";
 	}
+
+
 	
 
 

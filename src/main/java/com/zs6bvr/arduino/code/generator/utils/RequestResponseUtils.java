@@ -114,7 +114,7 @@ public class RequestResponseUtils {
 		ProjectFeature projectFeature=new ProjectFeature();
 		projectFeature.setFeatureName(request.getFeatureName());
 		projectFeature.setFeatureStatus(request.getFeatureStatus());
-		projectFeature.setFeatureDecleration(request.getFeatureDecleration());
+		projectFeature.setFeatureClassImports(request.getFeatureClassImports());
 		projectFeature.setFeatureAssignment(request.getFeatureAssignment());
 		projectFeature.setFeaturecode(request.getFeaturecode());
 		projectFeature.setDescription(request.getDescription());
@@ -125,6 +125,7 @@ public class RequestResponseUtils {
 		projectFeature.setContributorsName(request.getContributorsName());
 		projectFeature.setContributorsBlogPage(request.getContributorsBlogPage());
 		projectFeature.setContributorsYoutubePage(request.getContributorsYoutubePage());
+		projectFeature.setProjectType(request.getProjectType());
 		log.info("RequestResponseUtils | makeProjectFeature | projectFeature : "+projectFeature);
 		
 		return projectFeature;
@@ -136,7 +137,7 @@ public class RequestResponseUtils {
 		projectFeature.setPrerequisites("Dummyprerequisites");
 		projectFeature.setFeatureName("DummyfeatureName");
 		projectFeature.setFeatureStatus("SUCCESS");
-		projectFeature.setFeatureDecleration("DummyfeatureDecleration");
+		projectFeature.setFeatureClassImports("DummyfeaturClassImports");
 		projectFeature.setFeatureAssignment("DummyfeatureAssignment");
 		projectFeature.setFeaturecode("Dummyfeaturecode");
 		projectFeature.setComputerLanguage("DummycomputerLanguage");
@@ -145,6 +146,7 @@ public class RequestResponseUtils {
 		projectFeature.setContributorsName("DummycontributorsName");
 		projectFeature.setContributorsBlogPage("DummycontributorsBlogPage");
 		projectFeature.setContributorsYoutubePage("DummycontributorsYoutubePage");
+		projectFeature.setProjectType("DummyProjectType");
 		
 		return projectFeature;
 	}
@@ -158,7 +160,7 @@ public class RequestResponseUtils {
 		uploadFeatureDto.setPrerequisites(projectFeature.getPrerequisites());
 		uploadFeatureDto.setFeatureName(projectFeature.getFeatureName());
 		uploadFeatureDto.setFeatureStatus(projectFeature.getFeatureStatus());
-		uploadFeatureDto.setFeatureDecleration(projectFeature.getFeatureDecleration());
+		uploadFeatureDto.setFeatureClassImports(projectFeature.getFeatureClassImports());
 		uploadFeatureDto.setFeatureAssignment(projectFeature.getFeatureAssignment());
 		uploadFeatureDto.setFeaturecode(projectFeature.getFeaturecode());
 		uploadFeatureDto.setComputerLanguage(projectFeature.getComputerLanguage());
@@ -167,6 +169,7 @@ public class RequestResponseUtils {
 		uploadFeatureDto.setContributorsName(projectFeature.getContributorsName());
 		uploadFeatureDto.setContributorsBlogPage(projectFeature.getContributorsBlogPage());
 		uploadFeatureDto.setContributorsYoutubePage(projectFeature.getContributorsYoutubePage());
+		uploadFeatureDto.setProjectType(projectFeature.getProjectType());
 		return uploadFeatureDto;
 	}
 

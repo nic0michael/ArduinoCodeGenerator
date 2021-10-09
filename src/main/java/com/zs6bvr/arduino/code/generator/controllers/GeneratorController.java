@@ -1,5 +1,7 @@
 package com.zs6bvr.arduino.code.generator.controllers;
 
+import java.util.UUID;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +31,14 @@ public class GeneratorController {
 	
 	@Autowired
 	BusinessLogicProcessor processor;
-	
+	String GUID= UUID.randomUUID().toString(); 
+
+	@PostMapping(value = "/generateuserguid")
+	public String generateUserGuid() {
+		String userGuid= UUID.randomUUID().toString(); 
+		log.info("GeneratorController | generateUserGuid | userGuid : "+userGuid);
+		return userGuid;
+	}
 
 	@PostMapping(value = "/generatecode", 
 			consumes = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })

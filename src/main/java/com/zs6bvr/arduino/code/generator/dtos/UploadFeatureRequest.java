@@ -28,18 +28,20 @@ public class UploadFeatureRequest {
 	
 	private String prerequisites;
 	
-	private String featureDecleration;
+	private String featureClassImports;
 
 	private String featureAssignment;
 
 	private String featurecode;
+	
+	private String projectType;
 
 	public UploadFeatureRequest() {}
 
 	public UploadFeatureRequest(String projectGUID, String computerLanguage, String microController, String mcuPinsUsed,
 			String contributorsName, String contributorsBlogPage, String contributorsYoutubePage, String featureStatus,
-			String featureName, String description, String prerequisites, String featureDecleration,
-			String featureAssignment, String featurecode) {
+			String featureName, String description, String prerequisites, String featureClassImports,
+			String featureAssignment, String featurecode, String projectType) {
 		super();
 		this.projectGUID = projectGUID;
 		this.computerLanguage = computerLanguage;
@@ -52,9 +54,10 @@ public class UploadFeatureRequest {
 		this.featureName = featureName;
 		this.description = description;
 		this.prerequisites = prerequisites;
-		this.featureDecleration = featureDecleration;
+		this.featureClassImports = featureClassImports;
 		this.featureAssignment = featureAssignment;
 		this.featurecode = featurecode;
+		this.projectType = projectType;
 	}
 
 	public String getProjectGUID() {
@@ -145,12 +148,12 @@ public class UploadFeatureRequest {
 		this.prerequisites = prerequisites;
 	}
 
-	public String getFeatureDecleration() {
-		return featureDecleration;
+	public String getFeatureClassImports() {
+		return featureClassImports;
 	}
 
-	public void setFeatureDecleration(String featureDecleration) {
-		this.featureDecleration = featureDecleration;
+	public void setFeatureClassImports(String featureClassImports) {
+		this.featureClassImports = featureClassImports;
 	}
 
 	public String getFeatureAssignment() {
@@ -169,18 +172,25 @@ public class UploadFeatureRequest {
 		this.featurecode = featurecode;
 	}
 
+	public String getProjectType() {
+		return projectType;
+	}
+
+	public void setProjectType(String projectType) {
+		this.projectType = projectType;
+	}
+
 	@Override
 	public String toString() {
 		return "UploadFeatureRequest [projectGUID=" + projectGUID + ", computerLanguage=" + computerLanguage
 				+ ", microController=" + microController + ", mcuPinsUsed=" + mcuPinsUsed + ", contributorsName="
 				+ contributorsName + ", contributorsBlogPage=" + contributorsBlogPage + ", contributorsYoutubePage="
 				+ contributorsYoutubePage + ", featureStatus=" + featureStatus + ", featureName=" + featureName
-				+ ", description=" + description + ", prerequisites=" + prerequisites + ", featureDecleration="
-				+ featureDecleration + ", featureAssignment=" + featureAssignment + ", featurecode=" + featurecode
-				+ "]";
+				+ ", description=" + description + ", prerequisites=" + prerequisites + ", featureClassImports="
+				+ featureClassImports + ", featureAssignment=" + featureAssignment + ", featurecode=" + featurecode
+				+ ", projectType=" + projectType + "]";
 	}
 
-	
 
 	
 }
