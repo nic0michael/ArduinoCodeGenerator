@@ -1,0 +1,320 @@
+{
+	"info": {
+		"_postman_id": "f4f8c14e-c4d0-422c-be1a-0ef7d3257e5b",
+		"name": "ArduinoGenerator",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET /descriptions",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL}}/descriptions",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"descriptions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /features",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL}}/features",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"features"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /feature for Guid",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL}}/feature/{{projectGUID}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"feature",
+						"{{projectGUID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /features for id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL}}/features/{{recordNumber}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"features",
+						"{{recordNumber}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\t\t\n\t\"featureName\":\"BLINK\",\n\t\"featureStatus\":\"working\",\t\n\t\"microController\":\"Arduino UNO\",\t\n\t\"description\":\"Turns an LED on for one second, then off for one second, repeatedly.\",\t\t\n    \"projectType\":\"ARDUINO_CPP\",\t\n\t\"computerLanguage\":\"C++\",\n\t\"prerequisites\":\"None\",\t\n\t\"featureClassImports\":\"// not needed\",\n\t\"mcuPinsUsed\":\"13\",\t\n\t\"featureAssignment\":\"pinMode(LED_BUILTIN, OUTPUT);\",\n\t\"featurecode\":\"/* Arduino's code */ digitalWrite(LED_BUILTIN, HIGH); delay(1000); digitalWrite(LED_BUILTIN, LOW);  delay(1000);\",\n\t\"contributorsName\":\"Colby Newman\",\t\n\t\"contributorsBlogPage\":\"https://www.arduino.cc/en/Main/Products\",\t\n\t\"contributorsYoutubePage\":\"Not available\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/create",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /generate",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"projectName\":\"dummy_projectName\",\n\"description\":\"dummy_description\",\n\"featureName\":\"featureName\",\t\n\"prerequisites\":\"prerequisites\",\n\"computerLanguage\":\"computerLanguage\",\t\n\"microController\":\"microController\",\t\n\"contributorsName\":\"contributorsName\",\t\n\"contributorsBlogPage\":\"{contributorsBlogPage\",\t\n\"contributorsYoutubePage\":\"contributorsYoutubePage\",\n\"firstModule\":\"{{projectGUID}}\",\n\"secondModule\":\"\",\n\"ThirdModule\":\"\",\n\"forthModule\":\"\",\n\"fifthModule\":\"\",\n\"guid\":\"dummy_guid\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/generatecode",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"generatecode"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"featureStatus\":\"{{dummyMessage}}_recordNumber_{{recordNumber}}_featureStatus\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/update/{{recordNumber}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"update",
+						"{{recordNumber}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/export",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"projectName\":\"dummy_projectName\",\n\"description\":\"dummy_description\",\n\"featureName\":\"featureName\",\t\n\"prerequisites\":\"prerequisites\",\n\"featureDecleration\":\"featureDecleration\",\n\"computerLanguage\":\"computerLanguage\",\t\n\"microController\":\"microController\",\t\n\"contributorsName\":\"contributorsName\",\t\n\"contributorsBlogPage\":\"{contributorsBlogPage\",\t\n\"contributorsYoutubePage\":\"contributorsYoutubePage\",\n\"firstModule\":\"3300c181-7135-4801-ae8b-c3710a3570d6\",\n\"secondModule\":\"dummy_secondModule\",\n\"ThirdModule\":\"\",\n\"forthModule\":\"\",\n\"fifthModule\":\"\",\n\"guid\":\"dummy_guid\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/export",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"export"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /generateuserguid",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/generateuserguid",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"generateuserguid"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "http://localhost:8080/arduino/v1"
+		},
+		{
+			"key": "recordNumber",
+			"value": "1"
+		},
+		{
+			"key": "dummyNumber",
+			"value": "1"
+		},
+		{
+			"key": "dummyMessage",
+			"value": "modified"
+		},
+		{
+			"key": "projectGUID",
+			"value": "da91050e-7cdf-481a-a11e-d76e3ed8d3b6"
+		}
+	]
+}
