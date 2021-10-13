@@ -26,6 +26,8 @@ public class UploadFeatureRequest {
 	
 	private String description;
 	
+	private String category;
+	
 	private String prerequisites;
 	
 	private String featureClassImports;
