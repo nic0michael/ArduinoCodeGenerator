@@ -10,7 +10,8 @@ public class BuildProjectResponse {
 	private String responseStatusCode;
 	private String responseStatusMessage;
 	private String projectName;
-	private String description;
+	private String description;		
+	private String category;
 	private List<UploadFeatureDto> features;
 	private String generatedCode;
 	private UploadFeatureDto jsonProjectExport;
