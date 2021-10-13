@@ -61,6 +61,8 @@ public class ProjectFeature {
 	@Column(name="description", nullable = false, updatable = true, length=2048)
 	private String description;
 
+	@Column(name="description", nullable = false, updatable = true)	
+	private String category;
 	
 	@Column(name="prerequisites", nullable = false, updatable = true, length=2048)
 	private String prerequisites;
