@@ -14,7 +14,8 @@ public class UploadFeatureDto {
 	private String contributorsBlogPage;	
 	private String contributorsYoutubePage;
 	private String featureName;	
-	private String description;	
+	private String description;		
+	private String category;
 	private String prerequisites;	
 	private String featureClassImports;
 	private String featureAssignment;
