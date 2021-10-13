@@ -9,6 +9,7 @@ public class BuildProjectRequest {
 	private String description="This project was not given a decscription";
 	
 	private String featureName;	
+	private String category;
 	private String prerequisites;
 	private String featureDecleration;
 	private String computerLanguage;	
