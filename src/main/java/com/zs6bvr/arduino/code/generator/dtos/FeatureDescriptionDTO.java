@@ -5,6 +5,7 @@ public class FeatureDescriptionDTO {
 	private String projectGUID;	
 	private String featureName;	
 	private String description;	
+	private String category;	
 	private String featureStatus;
 	private String computerLanguage;	
 	private String microController;	
