@@ -111,6 +111,7 @@ public class FeatureDescriptionDTO {
 		this.projectGUID = dto.getProjectGUID();
 		this.featureName = dto.getFeatureName();
 		this.description = dto.getDescription();
+		this.category=dto.getCategory();
 		this.featureStatus = dto.getFeatureStatus();
 		this.computerLanguage = dto.getComputerLanguage();
 		this.microController = dto.getMicroController();

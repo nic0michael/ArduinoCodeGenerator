@@ -112,6 +112,7 @@ public class RequestResponseUtils {
 
 	public static ProjectFeature makeProjectFeature(UploadFeatureRequest request) {
 		ProjectFeature projectFeature=new ProjectFeature();
+		projectFeature.setCategory(request.getCategory());
 		projectFeature.setFeatureName(request.getFeatureName());
 		projectFeature.setFeatureStatus(request.getFeatureStatus());
 		projectFeature.setFeatureClassImports(request.getFeatureClassImports());
@@ -155,6 +156,7 @@ public class RequestResponseUtils {
 	private static UploadFeatureDto makeUploadFeatureDto(ProjectFeature projectFeature) {
 		UploadFeatureDto uploadFeatureDto=new UploadFeatureDto();
 
+		uploadFeatureDto.setCategory(projectFeature.getCategory());
 		uploadFeatureDto.setProjectGUID(projectFeature.getProjectGUID());
 		uploadFeatureDto.setDescription(projectFeature.getDescription());
 		uploadFeatureDto.setPrerequisites(projectFeature.getPrerequisites());
