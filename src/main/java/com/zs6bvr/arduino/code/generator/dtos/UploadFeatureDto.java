@@ -28,11 +28,10 @@ public class UploadFeatureDto {
 
 
 
-
 	public UploadFeatureDto(String projectGUID, String computerLanguage, String microController, String mcuPinsUsed,
 			String contributorsName, String contributorsBlogPage, String contributorsYoutubePage, String featureName,
-			String description, String prerequisites, String featureClassImports, String featureAssignment,
-			String featurecode, String featureStatus, String projectType) {
+			String description, String category, String prerequisites, String featureClassImports,
+			String featureAssignment, String featurecode, String featureStatus, String projectType) {
 		super();
 		this.projectGUID = projectGUID;
 		this.computerLanguage = computerLanguage;
@@ -43,6 +42,7 @@ public class UploadFeatureDto {
 		this.contributorsYoutubePage = contributorsYoutubePage;
 		this.featureName = featureName;
 		this.description = description;
+		this.category = category;
 		this.prerequisites = prerequisites;
 		this.featureClassImports = featureClassImports;
 		this.featureAssignment = featureAssignment;
@@ -55,8 +55,14 @@ public class UploadFeatureDto {
 
 
 
+
+
+
+
+
 	public UploadFeatureDto(ProjectFeature projectFeature) {
 		if(projectFeature!=null) {
+			category=projectFeature.getCategory(); 
 			projectGUID = projectFeature.getProjectGUID();
 			computerLanguage = projectFeature.getComputerLanguage();
 			microController = projectFeature.getMicroController();
@@ -75,6 +81,20 @@ public class UploadFeatureDto {
 		}
 	}
 
+
+
+
+
+	public String getCategory() {
+		return category;
+	}
+
+
+
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
 
 
 
@@ -318,17 +338,21 @@ public class UploadFeatureDto {
 
 
 
-
 	@Override
 	public String toString() {
 		return "UploadFeatureDto [projectGUID=" + projectGUID + ", computerLanguage=" + computerLanguage
 				+ ", microController=" + microController + ", mcuPinsUsed=" + mcuPinsUsed + ", contributorsName="
 				+ contributorsName + ", contributorsBlogPage=" + contributorsBlogPage + ", contributorsYoutubePage="
 				+ contributorsYoutubePage + ", featureName=" + featureName + ", description=" + description
-				+ ", prerequisites=" + prerequisites + ", featureClassImports=" + featureClassImports
-				+ ", featureAssignment=" + featureAssignment + ", featurecode=" + featurecode + ", featureStatus="
-				+ featureStatus + ", projectType=" + projectType + "]";
+				+ ", category=" + category + ", prerequisites=" + prerequisites + ", featureClassImports="
+				+ featureClassImports + ", featureAssignment=" + featureAssignment + ", featurecode=" + featurecode
+				+ ", featureStatus=" + featureStatus + ", projectType=" + projectType + "]";
 	}
+
+
+
+
+
 
 
 

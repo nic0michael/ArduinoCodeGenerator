@@ -61,7 +61,7 @@ public class ProjectFeature {
 	@Column(name="description", nullable = false, updatable = true, length=2048)
 	private String description;
 
-	@Column(name="description", nullable = false, updatable = true)	
+	@Column(name="category", nullable = false, updatable = true)	
 	private String category;
 	
 	@Column(name="prerequisites", nullable = false, updatable = true, length=2048)
@@ -98,7 +98,7 @@ public class ProjectFeature {
 	public ProjectFeature(String projectGUID, String featureName, String featureStatus, String featureClassImports,
 			String featureAssignment, String featurecode, String description, String prerequisites,
 			String computerLanguage, String microController, String mcuPinsUsed, String contributorsName,
-			String contributorsBlogPage, String contributorsYoutubePage,String projectType) {
+			String contributorsBlogPage, String contributorsYoutubePage,String projectType,String category) {
 		super();
 		this.projectGUID = projectGUID;
 		this.featureName = featureName;
@@ -115,6 +115,7 @@ public class ProjectFeature {
 		this.contributorsBlogPage = contributorsBlogPage;
 		this.contributorsYoutubePage = contributorsYoutubePage;
 		this.projectType=projectType;
+		this.category=category;
 
 		dateCreated=new Date();
 		projectGUID= UUID.randomUUID().toString(); 
@@ -122,6 +123,18 @@ public class ProjectFeature {
 
 
 
+
+
+
+	public String getCategory() {
+		return category;
+	}
+
+
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
 
 
 
@@ -349,11 +362,15 @@ public class ProjectFeature {
 				+ ", projectGUID=" + projectGUID + ", featureName=" + featureName + ", featureStatus=" + featureStatus
 				+ ", projectType=" + projectType + ", featureClassImports=" + featureClassImports
 				+ ", featureAssignment=" + featureAssignment + ", featurecode=" + featurecode + ", description="
-				+ description + ", prerequisites=" + prerequisites + ", computerLanguage=" + computerLanguage
-				+ ", microController=" + microController + ", mcuPinsUsed=" + mcuPinsUsed + ", contributorsName="
-				+ contributorsName + ", contributorsBlogPage=" + contributorsBlogPage + ", contributorsYoutubePage="
-				+ contributorsYoutubePage + "]";
+				+ description + ", category=" + category + ", prerequisites=" + prerequisites + ", computerLanguage="
+				+ computerLanguage + ", microController=" + microController + ", mcuPinsUsed=" + mcuPinsUsed
+				+ ", contributorsName=" + contributorsName + ", contributorsBlogPage=" + contributorsBlogPage
+				+ ", contributorsYoutubePage=" + contributorsYoutubePage + "]";
 	}
+
+
+
+
 
 
 

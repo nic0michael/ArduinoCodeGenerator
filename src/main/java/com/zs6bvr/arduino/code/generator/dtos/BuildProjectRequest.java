@@ -25,6 +25,14 @@ public class BuildProjectRequest {
 	private String fifthModule;
 	private String guid;
 	private String projectType;
+	
+	
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
 	public String getProjectName() {
 		return projectName;
 	}
@@ -130,13 +138,15 @@ public class BuildProjectRequest {
 	@Override
 	public String toString() {
 		return "BuildProjectRequest [projectName=" + projectName + ", description=" + description + ", featureName="
-				+ featureName + ", prerequisites=" + prerequisites + ", featureDecleration=" + featureDecleration
-				+ ", computerLanguage=" + computerLanguage + ", microController=" + microController
+				+ featureName + ", category=" + category + ", prerequisites=" + prerequisites + ", featureDecleration="
+				+ featureDecleration + ", computerLanguage=" + computerLanguage + ", microController=" + microController
 				+ ", contributorsName=" + contributorsName + ", contributorsBlogPage=" + contributorsBlogPage
 				+ ", contributorsYoutubePage=" + contributorsYoutubePage + ", firstModule=" + firstModule
 				+ ", secondModule=" + secondModule + ", ThirdModule=" + ThirdModule + ", forthModule=" + forthModule
 				+ ", fifthModule=" + fifthModule + ", guid=" + guid + ", projectType=" + projectType + "]";
 	}
+
+
 	
 	
 	

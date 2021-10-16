@@ -18,6 +18,18 @@ public class BuildProjectResponse {
 	private String projectType;
 	
 
+	public String getCategory() {
+		return category;
+	}
+
+
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+
+
 	public String getProjectType() {
 		return projectType;
 	}
@@ -98,9 +110,12 @@ public class BuildProjectResponse {
 	public String toString() {
 		return "BuildProjectResponse [responseStatusCode=" + responseStatusCode + ", responseStatusMessage="
 				+ responseStatusMessage + ", projectName=" + projectName + ", description=" + description
-				+ ", features=" + features + ", generatedCode=" + generatedCode + ", jsonProjectExport="
-				+ jsonProjectExport + ", projectType=" + projectType + "]";
+				+ ", category=" + category + ", features=" + features + ", generatedCode=" + generatedCode
+				+ ", jsonProjectExport=" + jsonProjectExport + ", projectType=" + projectType + "]";
 	}
+
+
+
 
 
 

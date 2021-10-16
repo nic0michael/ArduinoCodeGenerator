@@ -40,9 +40,11 @@ public class UploadFeatureRequest {
 
 	public UploadFeatureRequest() {}
 
+
+
 	public UploadFeatureRequest(String projectGUID, String computerLanguage, String microController, String mcuPinsUsed,
 			String contributorsName, String contributorsBlogPage, String contributorsYoutubePage, String featureStatus,
-			String featureName, String description, String prerequisites, String featureClassImports,
+			String featureName, String description, String category, String prerequisites, String featureClassImports,
 			String featureAssignment, String featurecode, String projectType) {
 		super();
 		this.projectGUID = projectGUID;
@@ -55,12 +57,27 @@ public class UploadFeatureRequest {
 		this.featureStatus = featureStatus;
 		this.featureName = featureName;
 		this.description = description;
+		this.category = category;
 		this.prerequisites = prerequisites;
 		this.featureClassImports = featureClassImports;
 		this.featureAssignment = featureAssignment;
 		this.featurecode = featurecode;
 		this.projectType = projectType;
 	}
+
+
+
+	public String getCategory() {
+		return category;
+	}
+
+
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+
 
 	public String getProjectGUID() {
 		return projectGUID;
@@ -182,16 +199,19 @@ public class UploadFeatureRequest {
 		this.projectType = projectType;
 	}
 
+
+
 	@Override
 	public String toString() {
 		return "UploadFeatureRequest [projectGUID=" + projectGUID + ", computerLanguage=" + computerLanguage
 				+ ", microController=" + microController + ", mcuPinsUsed=" + mcuPinsUsed + ", contributorsName="
 				+ contributorsName + ", contributorsBlogPage=" + contributorsBlogPage + ", contributorsYoutubePage="
 				+ contributorsYoutubePage + ", featureStatus=" + featureStatus + ", featureName=" + featureName
-				+ ", description=" + description + ", prerequisites=" + prerequisites + ", featureClassImports="
-				+ featureClassImports + ", featureAssignment=" + featureAssignment + ", featurecode=" + featurecode
-				+ ", projectType=" + projectType + "]";
+				+ ", description=" + description + ", category=" + category + ", prerequisites=" + prerequisites
+				+ ", featureClassImports=" + featureClassImports + ", featureAssignment=" + featureAssignment
+				+ ", featurecode=" + featurecode + ", projectType=" + projectType + "]";
 	}
+
 
 
 	
