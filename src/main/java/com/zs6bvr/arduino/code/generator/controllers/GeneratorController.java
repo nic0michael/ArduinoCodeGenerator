@@ -1,5 +1,6 @@
 package com.zs6bvr.arduino.code.generator.controllers;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -82,11 +83,26 @@ public class GeneratorController {
 		return processor.getDescriptionsOfAllFeatures();
 	}
 
+	
+	@GetMapping(value = "/categories", 
+			produces = {MediaType.APPLICATION_JSON_VALUE })
+	public List<String> getCategories() {
+		log.info("GeneratorController | getDescriptionsOfAllFeatures | called");
+		return processor.getCategories();
+	}
+
 	@GetMapping(value = "/features", 
 			produces = { MediaType.APPLICATION_JSON_VALUE })
 	public UploadFeatureResponse getAllFeatures() {
 		log.info("GeneratorController | getAllFeatures | called");
 		return processor.getAllFeatures();
+	}
+
+	@GetMapping(value = "/allfeatures/{category}", 
+			produces = { MediaType.APPLICATION_JSON_VALUE })
+	public UploadFeatureResponse getFeature(@PathVariable( "category" ) String category) {
+		log.info("GeneratorController | getFeature | called");
+		return processor.getFeatures(category);
 	}
 
 	@GetMapping(value = "/features/{id}", 

@@ -157,6 +157,43 @@ public class DatabaseAdaptorImpl implements DatabaseAdaptor{
 		
 		return response;
 	}
+	
+
+	@Override
+	public UploadFeatureResponse getFeatures(String category) throws FailedToReadFromDatabaseException {
+
+		UploadFeatureResponse response=new UploadFeatureResponse();	
+		List<ProjectFeature> projectFeatures = null;
+		
+		try {
+			projectFeatures = repository.findByCategory(category);
+
+			String expectedResponseStatusCode = ResponseStatusCodes.OK.getResponseStatusCode();
+			String expectedResponseStatusMessage = ResponseStatusMessages.OK.getResponseStatusMessage();
+			response.setResponseStatusCode(expectedResponseStatusCode);
+			response.setResponseStatusMessage(expectedResponseStatusMessage);
+			
+			if(projectFeatures!=null) {
+				List<UploadFeatureDto> uploadFeatureDtos=RequestResponseUtils.makeUploadFeatureDtos(projectFeatures) ;
+				if(uploadFeatureDtos!=null) {
+					log.info("DatabaseAdaptorImpl | getAllFeatures | received "+uploadFeatureDtos.size()+"resords from database");
+					response.setUploadFeatureDtos(uploadFeatureDtos);
+				} else {
+					log.info("DatabaseAdaptorImpl | getAllFeatures | uploadFeatureDtos is null");
+				}
+			}
+			
+		} catch(Exception e) {
+			log.error("DatabaseAdaptorImpl | getAllFeatures | failed to retrieve from database",e);
+
+			String expectedResponseStatusCode = ResponseStatusCodes.DATABASE_FAILURE.getResponseStatusCode();
+			String expectedResponseStatusMessage = ResponseStatusMessages.DATABASE_FAILURE.getResponseStatusMessage();
+			response.setResponseStatusCode(expectedResponseStatusCode);
+			response.setResponseStatusMessage(expectedResponseStatusMessage);
+			
+		}
+		return response;
+	}
 
 	@Override
 	public UploadFeatureResponse getFeature(String projectGUID) {
@@ -252,5 +289,7 @@ public class DatabaseAdaptorImpl implements DatabaseAdaptor{
 		
 		return response;
 	}
+
+
 
 }

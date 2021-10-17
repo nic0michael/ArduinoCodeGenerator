@@ -201,4 +201,10 @@ public class MockDatabaseAdaptorImpl implements DatabaseAdaptor{
 		return response;
 	}
 
+	@Override
+	public UploadFeatureResponse getFeatures(String category) throws FailedToReadFromDatabaseException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

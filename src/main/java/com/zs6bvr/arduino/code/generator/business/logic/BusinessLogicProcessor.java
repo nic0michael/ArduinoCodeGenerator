@@ -3,6 +3,7 @@ package com.zs6bvr.arduino.code.generator.business.logic;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -122,6 +123,23 @@ public class BusinessLogicProcessor {
 		}
 		return response;
 	}
+	
+	public List<String> getCategories() {
+		List<String> categories =new ArrayList<String>();
+		UploadFeatureResponse response = getAllFeatures();
+		List<UploadFeatureDto> featureDtos = response.getUploadFeatureDtos();
+		for (UploadFeatureDto featureDto : featureDtos) {
+			if(featureDto!=null) {
+				String category = featureDto.getCategory();
+				if(StringUtils.isNotEmpty(category)) {
+					categories.add(category);
+				}
+			}
+		}
+
+		
+		return categories;
+	}
 
 
 	public UploadFeatureDescritionsResponse getDescriptionsOfAllFeatures() {
@@ -160,6 +178,21 @@ public class BusinessLogicProcessor {
 		return database.getAllFeatures();
 	}
 
+
+	public UploadFeatureResponse getFeatures(String category)  {
+		UploadFeatureResponse response=null;
+		try {
+			response=database.getFeatures(category);
+		} catch (FailedToReadFromDatabaseException e) {
+			response = new UploadFeatureResponse();
+			response.setResponseStatusCode(ResponseStatusCodes.DATABASE_FAILURE.getResponseStatusCode());
+			response.setResponseStatusMessage(ResponseStatusMessages.DATABASE_FAILURE.getResponseStatusMessage());
+			log.error("BusinessLogicProcessor | UploadFeatureResponse | Faided to read from Database", e);			
+			
+		}
+		return response;
+	}
+	
 	public UploadFeatureResponse getFeature(String projectGUID) {
 		return database.getFeature(projectGUID);
 	}
@@ -171,6 +204,8 @@ public class BusinessLogicProcessor {
 	public UploadFeatureResponse updateFeature(Long id, UploadFeatureRequest request) {
 		return database.updateFeature(id, request);
 	}
+
+	
 
 
 
