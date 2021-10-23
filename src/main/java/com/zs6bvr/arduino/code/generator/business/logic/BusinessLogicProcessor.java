@@ -47,7 +47,7 @@ public class BusinessLogicProcessor {
 		this.database=database;
 	}
 
-	public String generateProjectCode(BuildProjectRequest request) {
+	public String generateNewProjectCode(BuildProjectRequest request) {
 		log.debug("BusinessLogicProcessor | generateProjectCode | request : " + request);
 		String generatedProjectCode="No Data Received from database";
 		BuildProjectResponse response = doBuildProjectResponse(request);
@@ -58,6 +58,34 @@ public class BusinessLogicProcessor {
 			} else {
 				generatedProjectCode=response.getResponseStatusMessage();
 			}
+		}
+		return generatedProjectCode;
+	}
+
+
+	public String generateProjectCode(BuildProjectRequest request) {
+		log.debug("BusinessLogicProcessor | generateProjectCode | request : " + request);
+		String generatedProjectCode="No Data Received from database";
+		BuildProjectResponse response=null;
+		try {
+			response = database.getBuiltProject(request);
+			if(response!=null) {
+				response.setBuildProjectRequest(request);
+				response=service.doBuildProject(response);
+			}
+		} catch (FailedToReadFromDatabaseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(response!=null) {
+			log.info("BusinessLogicProcessor | generateProjectCode | response : "+response);
+			if(ResponseStatusCodes.OK.getResponseStatusCode().equalsIgnoreCase(response.getResponseStatusCode())){
+				generatedProjectCode =response.getGeneratedCode();
+			} else {
+				generatedProjectCode=response.getResponseStatusMessage();
+			}
+		} else {
+			generatedProjectCode=ResponseStatusMessages.DATABASE_FAILURE.getResponseStatusMessage();
 		}
 		return generatedProjectCode;
 	}

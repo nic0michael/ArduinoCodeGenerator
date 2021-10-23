@@ -49,6 +49,15 @@ public class GeneratorController {
 	}
 	
 
+
+	@PostMapping(value = "/generatenewcode", 
+			consumes = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
+	public String generateNewProjectCode(@RequestBody BuildProjectRequest request) {
+		log.info("GeneratorController | generateProjectCode | called");
+		return processor.generateNewProjectCode(request);
+	}
+	
+
 	@PostMapping(value = "/export", 
 			produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE }, 
 			consumes = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })

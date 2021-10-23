@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.apache.commons.lang3.StringUtils;
+
 @XmlRootElement(name = "BuildProjectResponse")
 public class BuildProjectResponse {
 
@@ -43,8 +45,12 @@ public class BuildProjectResponse {
 
 
 	public void setBuildProjectRequest(BuildProjectRequest request) {
-		projectName=request.getProjectName();
-		description=request.getDescription();		
+		if(StringUtils.isNotEmpty(request.getProjectName())) {
+			projectName=request.getProjectName();
+		}
+		if(StringUtils.isNotEmpty(request.getDescription())) {
+			description=request.getDescription();		
+		}
 	}
 	
 	

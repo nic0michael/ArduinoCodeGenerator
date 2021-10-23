@@ -1,0 +1,37 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layouts :: header">
+  <title>Arduino Generator Code Dashboard</title>
+</head>
+<body>
+	<nav th:replace="layouts :: navbarGetgenerateNewProject"></nav>
+	<div>
+	   <h1>Generate New Project From Existing Code</h1>
+		Welcome to the Arduino Code Generator
+		
+		<form action="#" th:action="@{/project/generateNewProject}" th:object="${buildProjectRequest}"/> 
+			<input id="projectName" placeholder="Enter Project Name" required type="text" /><br/>
+			<input id="description" placeholder="Enter Project description" required type="text" /><br/>
+
+			<input id="featureName" placeholder="Enter Feature Name" required type="text" /><br/>
+			<input id="prerequisites" placeholder="Enter Prerequisites" required type="text" /><br/>
+			<input id="computerLanguage" placeholder="Enter Computer Language" required type="text" /><br/>
+			<input id="microController" placeholder="Enter Micro Controller" required type="text" /><br/>
+			<input id="contributorsName" placeholder="Enter Contributors Name" required type="text" /><br/>
+			<input id="contributorsGuid" placeholder="Enter Contributors Guid" required type="text" /><br/>
+			<input id="contributorsBlogPage" placeholder="Enter Contributors Blog Page" required type="text" /><br/>
+			<input id="contributorsYoutubePage" placeholder="Enter Project description" required type="text" /><br/>
+			<input id="firstModule" placeholder="Enter First Module GUID" required type="text" /><br/>
+			<input id="secondModule" placeholder="Enter Second Module GUID" required type="text" /><br/>
+			<input id="ThirdModule" placeholder="Enter ThirdModule GUID" required type="text" /><br/>
+			<input id="forthModule" placeholder="Enter ForthModule GUID" required type="text" /><br/>
+			<input id="fifthModule" placeholder="Enter FifthModule GUID" required type="text" /><br/>
+
+
+			<input type="submit" value="Generate Project">
+		</form>
+		
+	</div>
+</body>
+</html>
