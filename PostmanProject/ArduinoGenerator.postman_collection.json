@@ -6,6 +6,23 @@
 	},
 	"item": [
 		{
+			"name": "GET /categories",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/categories",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "GET /descriptions",
 			"request": {
 				"method": "GET",
@@ -56,6 +73,21 @@
 					],
 					"path": [
 						"features"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /allfeatures/{category}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "/allfeatures/{category}",
+					"path": [
+						"allfeatures",
+						"{category}"
 					]
 				}
 			},
@@ -137,7 +169,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\t\t\n\t\"featureName\":\"dummy{{dummyNumber}}_featureName\",\t\n\t\"projectGUID\":\"dummy{{dummyNumber}}_projectGUID\",\n\t\"description\":\"dummy{{dummyNumber}}_description\",\n\t\"featureStatus\":\"dummy{{dummyNumber}}_featureStatus\",\t\n\t\"prerequisites\":\"dummy{{dummyNumber}}_prerequisites\",\t\n\t\"featureDecleration\":\"dummy{{dummyNumber}}_featureDecleration\",\n\t\"featureAssignment\":\"dummy{{dummyNumber}}_featureAssignment\",\n\t\"featurecode\":\"dummy{{dummyNumber}}_featurecode\",\t\n\t\"computerLanguage\":\"dummy{{dummyNumber}}_computerLanguage\",\t\n\t\"microController\":\"dummy{{dummyNumber}}_microController\",\t\n\t\"mcuPinsUsed\":\"dummy{{dummyNumber}}_mcuPinsUsed\",\t\n\t\"contributorsName\":\"dummy{{dummyNumber}}_contributorsName\",\t\n\t\"contributorsBlogPage\":\"dummy{{dummyNumber}}_contributorsBlogPage\",\t\n\t\"contributorsYoutubePage\":\"dummy{{dummyNumber}}_contributorsYoutubePage\"\n}",
+					"raw": "{\t\t\n\t\"featureName\":\"BLINK\",\n\t\"featureStatus\":\"working\",\t\n    \"category\":\"LED controll\",\n\t\"microController\":\"Arduino UNO\",\t\n\t\"description\":\"Turns an LED on for one second, then off for one second, repeatedly.\",\t\t\n    \"projectType\":\"ARDUINO_CPP\",\t\n\t\"computerLanguage\":\"C++\",\n\t\"prerequisites\":\"No prerequisites\",\t\n\t\"featureClassImports\":\"// no imports needed\",\n\t\"mcuPinsUsed\":\"13\",\t\n\t\"featureAssignment\":\"pinMode(LED_BUILTIN, OUTPUT);\",\n\t\"featurecode\":\"/** Arduino's code */ digitalWrite(LED_BUILTIN, HIGH); /** Arduino's code 2 */ delay(1000); digitalWrite(LED_BUILTIN, LOW); /** Arduino's code3 */ \\n delay(1000);\",\n\t\"contributorsName\":\"Colby Newman\",\t\n    \"contributorsGuid\":\"075ec935-dbf8-45d4-ba69-3e878ab680bd\",\n\t\"contributorsBlogPage\":\"https://www.arduino.cc/en/Main/Products\",\t\n\t\"contributorsYoutubePage\":\"No Youtube page\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -157,13 +189,13 @@
 			"response": []
 		},
 		{
-			"name": "POST /generate",
+			"name": "POST /generatenewcode",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\"projectName\":\"dummy_projectName\",\n\"description\":\"dummy_description\",\n\"featureName\":\"featureName\",\t\n\"prerequisites\":\"prerequisites\",\n\"featureDecleration\":\"featureDecleration\",\n\"computerLanguage\":\"computerLanguage\",\t\n\"microController\":\"microController\",\t\n\"contributorsName\":\"contributorsName\",\t\n\"contributorsBlogPage\":\"{contributorsBlogPage\",\t\n\"contributorsYoutubePage\":\"contributorsYoutubePage\",\n\"firstModule\":\"dummy_firstModule\",\n\"secondModule\":\"dummy_secondModule\",\n\"ThirdModule\":\"dummy_ThirdModule\",\n\"forthModule\":\"dummy_forthModule\",\n\"fifthModule\":\"dummy_fifthModule\",\n\"guid\":\"dummy_guid\"\n}",
+					"raw": "{\n\"projectName\":\"dummy_projectName\",\n\"description\":\"dummy_description\",\n\"featureName\":\"featureName\",\t\n\"prerequisites\":\"prerequisites\",\n\"computerLanguage\":\"computerLanguage\",\t\n\"microController\":\"microController\",\t\n\"contributorsName\":\"contributorsName\",\t\n\"contributorsBlogPage\":\"{contributorsBlogPage\",\t\n\"contributorsYoutubePage\":\"contributorsYoutubePage\",\n\"firstModule\":\"{{projectGUID}}\",\n\"secondModule\":\"\",\n\"ThirdModule\":\"\",\n\"forthModule\":\"\",\n\"fifthModule\":\"\",\n\"guid\":\"dummy_guid\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -171,12 +203,38 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseURL}}/generate",
+					"raw": "{{baseURL}}/generatenewcode",
 					"host": [
 						"{{baseURL}}"
 					],
 					"path": [
-						"generate"
+						"generatenewcode"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post /generatecode",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"firstModule\":\"{{projectGUID}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/generatecode",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"generatecode"
 					]
 				}
 			},
@@ -200,7 +258,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\t\t\n\t\"featureName\":\"{{dummyMessage}}_featureName\",\n\t\"description\":\"{{dummyMessage}}_description\",\n\t\"featureStatus\":\"{{dummyMessage}}_featureStatus\",\t\n\t\"prerequisites\":\"{{dummyMessage}}_prerequisites\",\t\n\t\"featureDecleration\":\"{{dummyMessage}}_featureDecleration\",\n\t\"featureAssignment\":\"{{dummyMessage}}_featureAssignment\",\n\t\"featurecode\":\"{{dummyMessage}}_featurecode\",\t\n\t\"computerLanguage\":\"{{dummyMessage}}_computerLanguage\",\t\n\t\"microController\":\"{{dummyMessage}}_microController\",\t\n\t\"mcuPinsUsed\":\"{{dummyMessage}}_mcuPinsUsed\",\t\n\t\"contributorsName\":\"{{dummyMessage}}_contributorsName\",\t\n\t\"contributorsBlogPage\":\"{{dummyMessage}}_contributorsBlogPage\",\t\n\t\"contributorsYoutubePage\":\"{{dummyMessage}}_contributorsYoutubePage\"\n}",
+					"raw": "{\n\t\"featureName\":\"BLINK\",\n\t\"featureStatus\":\"{{dummyMessage}}_recordNumber_{{recordNumber}}_featureStatus\",\t\n\t\"microController\":\"Arduino UNO\",\t\n\t\"description\":\"Turns an LED on for one second, then off for one second, repeatedly.\",\t\t\n    \"projectType\":\"ARDUINO_CPP\",\t\n\t\"computerLanguage\":\"C++\",\n\t\"prerequisites\":\"None\",\t\n\t\"featureClassImports\":\"// not needed\",\n\t\"mcuPinsUsed\":\"13\",\t\n\t\"featureAssignment\":\"pinMode(LED_BUILTIN, OUTPUT);\",\n\t\"featurecode\":\" digitalWrite(LED_BUILTIN, HIGH); delay(1000); digitalWrite(LED_BUILTIN, LOW);  delay(1000);\",\n\t\"contributorsName\":\"Colby Newman\",\t\n    \"contributorsGuid\":\"075ec935-dbf8-45d4-ba69-3e878ab680bd\",\n\t\"contributorsBlogPage\":\"https://www.arduino.cc/en/Main/Products\",\t\n\t\"contributorsYoutubePage\":\"Not available\"\t\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -215,6 +273,60 @@
 					"path": [
 						"update",
 						"{{recordNumber}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/export",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"projectName\":\"dummy_projectName\",\n\"description\":\"dummy_description\",\n\"featureName\":\"featureName\",\t\n\"prerequisites\":\"prerequisites\",\n\"featureDecleration\":\"featureDecleration\",\n\"computerLanguage\":\"computerLanguage\",\t\n\"microController\":\"microController\",\t\n\"contributorsName\":\"contributorsName\",\t\n\"contributorsBlogPage\":\"{contributorsBlogPage\",\t\n\"contributorsYoutubePage\":\"contributorsYoutubePage\",\n\"firstModule\":\"{{projectGUID}}\",\n\"secondModule\":\"dummy_secondModule\",\n\"ThirdModule\":\"\",\n\"forthModule\":\"\",\n\"fifthModule\":\"\",\n\"guid\":\"dummy_guid\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/export",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"export"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /generateuserguid",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/generateuserguid",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"generateuserguid"
 					]
 				}
 			},
@@ -252,15 +364,19 @@
 		},
 		{
 			"key": "dummyNumber",
-			"value": "0"
+			"value": "1"
 		},
 		{
 			"key": "dummyMessage",
-			"value": "changed0"
+			"value": "modified"
 		},
 		{
 			"key": "projectGUID",
-			"value": "3300c181-7135-4801-ae8b-c3710a3570d6"
+			"value": "55147948-9442-4c1c-ba61-7b17505278af"
+		},
+		{
+			"key": "category",
+			"value": "LED controll"
 		}
 	]
 }
