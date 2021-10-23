@@ -15,6 +15,8 @@ public class UploadFeatureRequest {
 	private String mcuPinsUsed;
 	
 	private String contributorsName;
+
+	private String contributorsGuid;
 	
 	private String contributorsBlogPage;
 	
@@ -43,15 +45,17 @@ public class UploadFeatureRequest {
 
 
 	public UploadFeatureRequest(String projectGUID, String computerLanguage, String microController, String mcuPinsUsed,
-			String contributorsName, String contributorsBlogPage, String contributorsYoutubePage, String featureStatus,
-			String featureName, String description, String category, String prerequisites, String featureClassImports,
-			String featureAssignment, String featurecode, String projectType) {
+			String contributorsName, String contributorsGuid, String contributorsBlogPage,
+			String contributorsYoutubePage, String featureStatus, String featureName, String description,
+			String category, String prerequisites, String featureClassImports, String featureAssignment,
+			String featurecode, String projectType) {
 		super();
 		this.projectGUID = projectGUID;
 		this.computerLanguage = computerLanguage;
 		this.microController = microController;
 		this.mcuPinsUsed = mcuPinsUsed;
 		this.contributorsName = contributorsName;
+		this.contributorsGuid = contributorsGuid;
 		this.contributorsBlogPage = contributorsBlogPage;
 		this.contributorsYoutubePage = contributorsYoutubePage;
 		this.featureStatus = featureStatus;
@@ -63,6 +67,22 @@ public class UploadFeatureRequest {
 		this.featureAssignment = featureAssignment;
 		this.featurecode = featurecode;
 		this.projectType = projectType;
+	}
+
+
+
+
+
+
+
+	public String getContributorsGuid() {
+		return contributorsGuid;
+	}
+
+
+
+	public void setContributorsGuid(String contributorsGuid) {
+		this.contributorsGuid = contributorsGuid;
 	}
 
 
@@ -205,11 +225,12 @@ public class UploadFeatureRequest {
 	public String toString() {
 		return "UploadFeatureRequest [projectGUID=" + projectGUID + ", computerLanguage=" + computerLanguage
 				+ ", microController=" + microController + ", mcuPinsUsed=" + mcuPinsUsed + ", contributorsName="
-				+ contributorsName + ", contributorsBlogPage=" + contributorsBlogPage + ", contributorsYoutubePage="
-				+ contributorsYoutubePage + ", featureStatus=" + featureStatus + ", featureName=" + featureName
-				+ ", description=" + description + ", category=" + category + ", prerequisites=" + prerequisites
-				+ ", featureClassImports=" + featureClassImports + ", featureAssignment=" + featureAssignment
-				+ ", featurecode=" + featurecode + ", projectType=" + projectType + "]";
+				+ contributorsName + ", contributorsGuid=" + contributorsGuid + ", contributorsBlogPage="
+				+ contributorsBlogPage + ", contributorsYoutubePage=" + contributorsYoutubePage + ", featureStatus="
+				+ featureStatus + ", featureName=" + featureName + ", description=" + description + ", category="
+				+ category + ", prerequisites=" + prerequisites + ", featureClassImports=" + featureClassImports
+				+ ", featureAssignment=" + featureAssignment + ", featurecode=" + featurecode + ", projectType="
+				+ projectType + "]";
 	}
 
 

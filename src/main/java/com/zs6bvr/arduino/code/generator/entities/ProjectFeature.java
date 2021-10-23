@@ -79,6 +79,10 @@ public class ProjectFeature {
 	
 	@Column(name="contributor", nullable = false, updatable = false, length=128)
 	private String contributorsName;
+
+	
+	@Column(name="contributor_guid", nullable = false, updatable = false, length=128)
+	private String contributorsGuid;
 	
 	@Column(name="contributor_blog", nullable = false, updatable = false, length=128)
 	private String contributorsBlogPage;
@@ -94,36 +98,49 @@ public class ProjectFeature {
 	}
 
 
-
-	public ProjectFeature(String projectGUID, String featureName, String featureStatus, String featureClassImports,
-			String featureAssignment, String featurecode, String description, String prerequisites,
-			String computerLanguage, String microController, String mcuPinsUsed, String contributorsName,
-			String contributorsBlogPage, String contributorsYoutubePage,String projectType,String category) {
+	public ProjectFeature(Date dateCreated, String projectGUID, String featureName, String featureStatus,
+			String projectType, String featureClassImports, String featureAssignment, String featurecode,
+			String description, String category, String prerequisites, String computerLanguage, String microController,
+			String mcuPinsUsed, String contributorsName, String contributorsGuid, String contributorsBlogPage,
+			String contributorsYoutubePage) {
 		super();
+		this.dateCreated = dateCreated;
 		this.projectGUID = projectGUID;
 		this.featureName = featureName;
 		this.featureStatus = featureStatus;
+		this.projectType = projectType;
 		this.featureClassImports = featureClassImports;
 		this.featureAssignment = featureAssignment;
 		this.featurecode = featurecode;
 		this.description = description;
+		this.category = category;
 		this.prerequisites = prerequisites;
 		this.computerLanguage = computerLanguage;
 		this.microController = microController;
 		this.mcuPinsUsed = mcuPinsUsed;
 		this.contributorsName = contributorsName;
+		this.contributorsGuid = contributorsGuid;
 		this.contributorsBlogPage = contributorsBlogPage;
 		this.contributorsYoutubePage = contributorsYoutubePage;
-		this.projectType=projectType;
-		this.category=category;
-
-		dateCreated=new Date();
-		projectGUID= UUID.randomUUID().toString(); 
 	}
 
 
 
 
+
+
+
+
+
+
+	public String getContributorsGuid() {
+		return contributorsGuid;
+	}
+
+
+	public void setContributorsGuid(String contributorsGuid) {
+		this.contributorsGuid = contributorsGuid;
+	}
 
 
 	public String getCategory() {
@@ -355,7 +372,6 @@ public class ProjectFeature {
 	}
 
 
-
 	@Override
 	public String toString() {
 		return "ProjectFeature [projectFeatureId=" + projectFeatureId + ", dateCreated=" + dateCreated
@@ -364,9 +380,11 @@ public class ProjectFeature {
 				+ ", featureAssignment=" + featureAssignment + ", featurecode=" + featurecode + ", description="
 				+ description + ", category=" + category + ", prerequisites=" + prerequisites + ", computerLanguage="
 				+ computerLanguage + ", microController=" + microController + ", mcuPinsUsed=" + mcuPinsUsed
-				+ ", contributorsName=" + contributorsName + ", contributorsBlogPage=" + contributorsBlogPage
-				+ ", contributorsYoutubePage=" + contributorsYoutubePage + "]";
+				+ ", contributorsName=" + contributorsName + ", contributorsGuid=" + contributorsGuid
+				+ ", contributorsBlogPage=" + contributorsBlogPage + ", contributorsYoutubePage="
+				+ contributorsYoutubePage + "]";
 	}
+
 
 
 

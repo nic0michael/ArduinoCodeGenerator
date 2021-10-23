@@ -10,7 +10,8 @@ public class UploadFeatureDto {
 	private String computerLanguage;	
 	private String microController;	
 	private String mcuPinsUsed;	
-	private String contributorsName;	
+	private String contributorsName;
+	private String contributorsGuid;	
 	private String contributorsBlogPage;	
 	private String contributorsYoutubePage;
 	private String featureName;	
@@ -26,18 +27,18 @@ public class UploadFeatureDto {
 	public UploadFeatureDto() {}
 
 
-
-
 	public UploadFeatureDto(String projectGUID, String computerLanguage, String microController, String mcuPinsUsed,
-			String contributorsName, String contributorsBlogPage, String contributorsYoutubePage, String featureName,
-			String description, String category, String prerequisites, String featureClassImports,
-			String featureAssignment, String featurecode, String featureStatus, String projectType) {
+			String contributorsName, String contributorsGuid, String contributorsBlogPage,
+			String contributorsYoutubePage, String featureName, String description, String category,
+			String prerequisites, String featureClassImports, String featureAssignment, String featurecode,
+			String featureStatus, String projectType) {
 		super();
 		this.projectGUID = projectGUID;
 		this.computerLanguage = computerLanguage;
 		this.microController = microController;
 		this.mcuPinsUsed = mcuPinsUsed;
 		this.contributorsName = contributorsName;
+		this.contributorsGuid = contributorsGuid;
 		this.contributorsBlogPage = contributorsBlogPage;
 		this.contributorsYoutubePage = contributorsYoutubePage;
 		this.featureName = featureName;
@@ -56,10 +57,6 @@ public class UploadFeatureDto {
 
 
 
-
-
-
-
 	public UploadFeatureDto(ProjectFeature projectFeature) {
 		if(projectFeature!=null) {
 			category=projectFeature.getCategory(); 
@@ -68,6 +65,7 @@ public class UploadFeatureDto {
 			microController = projectFeature.getMicroController();
 			mcuPinsUsed = projectFeature.getMcuPinsUsed();
 			contributorsName = projectFeature.getContributorsName();
+			contributorsGuid =projectFeature.getContributorsGuid();
 			contributorsBlogPage = projectFeature.getContributorsBlogPage();
 			contributorsYoutubePage = projectFeature.getContributorsYoutubePage();
 			featureName = projectFeature.getFeatureName();
@@ -83,6 +81,16 @@ public class UploadFeatureDto {
 
 
 
+
+
+	public String getContributorsGuid() {
+		return contributorsGuid;
+	}
+
+
+	public void setContributorsGuid(String contributorsGuid) {
+		this.contributorsGuid = contributorsGuid;
+	}
 
 
 	public String getCategory() {
@@ -336,18 +344,18 @@ public class UploadFeatureDto {
 	}
 
 
-
-
 	@Override
 	public String toString() {
 		return "UploadFeatureDto [projectGUID=" + projectGUID + ", computerLanguage=" + computerLanguage
 				+ ", microController=" + microController + ", mcuPinsUsed=" + mcuPinsUsed + ", contributorsName="
-				+ contributorsName + ", contributorsBlogPage=" + contributorsBlogPage + ", contributorsYoutubePage="
-				+ contributorsYoutubePage + ", featureName=" + featureName + ", description=" + description
-				+ ", category=" + category + ", prerequisites=" + prerequisites + ", featureClassImports="
-				+ featureClassImports + ", featureAssignment=" + featureAssignment + ", featurecode=" + featurecode
-				+ ", featureStatus=" + featureStatus + ", projectType=" + projectType + "]";
+				+ contributorsName + ", contributorsGuid=" + contributorsGuid + ", contributorsBlogPage="
+				+ contributorsBlogPage + ", contributorsYoutubePage=" + contributorsYoutubePage + ", featureName="
+				+ featureName + ", description=" + description + ", category=" + category + ", prerequisites="
+				+ prerequisites + ", featureClassImports=" + featureClassImports + ", featureAssignment="
+				+ featureAssignment + ", featurecode=" + featurecode + ", featureStatus=" + featureStatus
+				+ ", projectType=" + projectType + "]";
 	}
+
 
 
 

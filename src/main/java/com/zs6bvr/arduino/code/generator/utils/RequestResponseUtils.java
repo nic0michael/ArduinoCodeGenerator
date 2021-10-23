@@ -124,6 +124,7 @@ public class RequestResponseUtils {
 		projectFeature.setMicroController(request.getMicroController());
 		projectFeature.setMcuPinsUsed(request.getMcuPinsUsed());
 		projectFeature.setContributorsName(request.getContributorsName());
+		projectFeature.setContributorsGuid(request.getContributorsGuid());
 		projectFeature.setContributorsBlogPage(request.getContributorsBlogPage());
 		projectFeature.setContributorsYoutubePage(request.getContributorsYoutubePage());
 		projectFeature.setProjectType(request.getProjectType());
@@ -169,6 +170,7 @@ public class RequestResponseUtils {
 		uploadFeatureDto.setMicroController(projectFeature.getMicroController());
 		uploadFeatureDto.setMcuPinsUsed(projectFeature.getMcuPinsUsed());
 		uploadFeatureDto.setContributorsName(projectFeature.getContributorsName());
+		uploadFeatureDto.setContributorsGuid(projectFeature.getContributorsGuid());
 		uploadFeatureDto.setContributorsBlogPage(projectFeature.getContributorsBlogPage());
 		uploadFeatureDto.setContributorsYoutubePage(projectFeature.getContributorsYoutubePage());
 		uploadFeatureDto.setProjectType(projectFeature.getProjectType());

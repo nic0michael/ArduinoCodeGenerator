@@ -96,6 +96,7 @@ public class GeneratorController {
 	public UploadFeatureResponse getAllFeatures() {
 		log.info("GeneratorController | getAllFeatures | called");
 		return processor.getAllFeatures();
+
 	}
 
 	@GetMapping(value = "/allfeatures/{category}", 

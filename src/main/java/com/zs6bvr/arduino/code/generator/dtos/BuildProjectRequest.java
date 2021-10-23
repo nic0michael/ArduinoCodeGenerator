@@ -15,6 +15,7 @@ public class BuildProjectRequest {
 	private String computerLanguage;	
 	private String microController;	
 	private String contributorsName;
+	private String contributorsGuid;
 	private String contributorsBlogPage;
 	private String contributorsYoutubePage;
 	
@@ -27,6 +28,13 @@ public class BuildProjectRequest {
 	private String projectType;
 	
 	
+	
+	public String getContributorsGuid() {
+		return contributorsGuid;
+	}
+	public void setContributorsGuid(String contributorsGuid) {
+		this.contributorsGuid = contributorsGuid;
+	}
 	public String getCategory() {
 		return category;
 	}
@@ -140,11 +148,14 @@ public class BuildProjectRequest {
 		return "BuildProjectRequest [projectName=" + projectName + ", description=" + description + ", featureName="
 				+ featureName + ", category=" + category + ", prerequisites=" + prerequisites + ", featureDecleration="
 				+ featureDecleration + ", computerLanguage=" + computerLanguage + ", microController=" + microController
-				+ ", contributorsName=" + contributorsName + ", contributorsBlogPage=" + contributorsBlogPage
-				+ ", contributorsYoutubePage=" + contributorsYoutubePage + ", firstModule=" + firstModule
-				+ ", secondModule=" + secondModule + ", ThirdModule=" + ThirdModule + ", forthModule=" + forthModule
-				+ ", fifthModule=" + fifthModule + ", guid=" + guid + ", projectType=" + projectType + "]";
+				+ ", contributorsName=" + contributorsName + ", contributorsGuid=" + contributorsGuid
+				+ ", contributorsBlogPage=" + contributorsBlogPage + ", contributorsYoutubePage="
+				+ contributorsYoutubePage + ", firstModule=" + firstModule + ", secondModule=" + secondModule
+				+ ", ThirdModule=" + ThirdModule + ", forthModule=" + forthModule + ", fifthModule=" + fifthModule
+				+ ", guid=" + guid + ", projectType=" + projectType + "]";
 	}
+
+
 
 
 	
