@@ -10,5 +10,12 @@
 	   <h1>Generate the Arduino IDE Code</h1>
 		Welcome to the Arduino Code Generator
 	</div>
+	<div>	
+		<form>
+			
+			<input disabled="true" id="firstModule" placeholder="Enter Project GUID" required type="text" th:field="${buildProjectResponse.responseStatusMessage}" /><br><br><br>
+			<textarea th:value="${buildProjectResponse.generatedCode}" />
+		</form>
+	</div>
 </body>
 </html>

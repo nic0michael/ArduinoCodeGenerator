@@ -61,6 +61,14 @@ public class BusinessLogicProcessor {
 		}
 		return generatedProjectCode;
 	}
+	
+
+	public BuildProjectResponse generateNewProjectResponse(BuildProjectRequest request) {
+		log.debug("BusinessLogicProcessor | generateProjectCode | request : " + request);
+		BuildProjectResponse response = doBuildProjectResponse(request);
+		log.debug("BusinessLogicProcessor | generateProjectCode | response : " + response);
+		return response;
+	}
 
 
 	public String generateProjectCode(BuildProjectRequest request) {
@@ -90,6 +98,24 @@ public class BusinessLogicProcessor {
 		return generatedProjectCode;
 	}
 	
+	public BuildProjectResponse generateProjectCodeResponse(BuildProjectRequest request) {
+
+		log.debug("BusinessLogicProcessor | generateProjectCodeResponse | request : " + request);
+		BuildProjectResponse response=null;
+		try {
+			response = database.getBuiltProject(request);
+			if(response!=null) {
+				response.setBuildProjectRequest(request);
+				response=service.doBuildProject(response);
+			}
+		} catch (FailedToReadFromDatabaseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		log.debug("BusinessLogicProcessor | generateProjectCodeResponse | response : " + response);
+		
+		return response;
+	}
 
 	public BuildProjectResponse getExportedProject(BuildProjectRequest request) {
 		log.debug("BusinessLogicProcessor | getExportedProject | request : " + request);

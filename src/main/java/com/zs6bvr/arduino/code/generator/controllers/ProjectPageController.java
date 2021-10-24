@@ -16,6 +16,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.zs6bvr.arduino.code.generator.business.logic.BusinessLogicProcessor;
 import com.zs6bvr.arduino.code.generator.dtos.BuildProjectRequest;
+import com.zs6bvr.arduino.code.generator.dtos.BuildProjectResponse;
 
 @Controller
 @RequestMapping("/project")
@@ -83,16 +85,30 @@ public class ProjectPageController {
 
 	@GetMapping("/generate")
 	public String displayGenerateHomePage(Model model) {	
+		BuildProjectRequest buildProjectRequest=new BuildProjectRequest();
 		String pattern = "yyyy-MM-dd HH:mm:ss";
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 		String simpleDate = simpleDateFormat.format(new Date());
 		model.addAttribute("simpleDate", simpleDate);
-		model.addAttribute("timestamp", Instant.now());
-		
+		model.addAttribute("timestamp", Instant.now());		
 		model.addAttribute("projectVersion", projectVersion);
 		model.addAttribute("projectName", projectName);
+		model.addAttribute("buildProjectRequest", buildProjectRequest);
 
 		return "project/generatepage";
+	}
+	
+
+	@PostMapping("/generateProjectAction")
+	public String generateProject(BuildProjectRequest buildProjectRequest,Model model) {
+		log.info("GeneratorController | generateProjectCode | request : "+buildProjectRequest);
+		 BuildProjectResponse buildProjectResponse = processor.generateProjectCodeResponse(buildProjectRequest);
+
+		model.addAttribute("projectVersion", projectVersion);
+		model.addAttribute("projectName", projectName);
+		model.addAttribute("buildProjectResponse", buildProjectResponse);
+
+		return "project/generatePageResult";
 	}
 	
 	@GetMapping("/generateAction")
@@ -168,31 +184,47 @@ public class ProjectPageController {
 	}
 	
 
-	@PostMapping(value = "/generateNewProject", 
-			consumes = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
-	public String generateProject(@RequestBody BuildProjectRequest request) {
-		log.info("GeneratorController | generateProjectCode | called");
-		String generatedCode= processor.generateProjectCode(request);
-
-		return "project/generatePageResult";
-	}
 	
 	@GetMapping("/generateNewProject")
-	public String displayCodeUlrHomePage(Model model) {	
+	public String generateNewProject(Model model) {	
+
+		BuildProjectRequest buildProjectRequest=new BuildProjectRequest();
 		String pattern = "yyyy-MM-dd HH:mm:ss";
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 		String simpleDate = simpleDateFormat.format(new Date());
 		model.addAttribute("simpleDate", simpleDate);
-		model.addAttribute("timestamp", Instant.now());
-		
+		model.addAttribute("timestamp", Instant.now());		
 		model.addAttribute("projectVersion", projectVersion);
 		model.addAttribute("projectName", projectName);
+		model.addAttribute("buildProjectRequest", buildProjectRequest);
 
 		return "project/generateNewProject";
 	}
 	
-	@GetMapping("/generateNewProjectAction")
-	public String codeUlr(Model model) {	
+
+	
+
+	@PostMapping("/generateNewProjectAction")
+	public String generateNewProject(BuildProjectRequest request,Model model) {
+		
+		
+		log.info("ProjectPageController | generateNewProject | POST called");
+		 BuildProjectResponse buildProjectResponse = processor.generateNewProjectResponse(request);
+
+		model.addAttribute("projectVersion", projectVersion);
+		model.addAttribute("projectName", projectName);
+		model.addAttribute("buildProjectResponse", buildProjectResponse);
+
+		return "project/generateNewProjectResult";
+	}
+	
+	@GetMapping(value="/generateNewProjectAction", 
+	consumes = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
+	public String generateNewProjectAction(@RequestBody BuildProjectRequest request,Model model) {	
+
+		
+		log.info("ProjectPageController | generateNewProjectAction | get called");
+		
 		String pattern = "yyyy-MM-dd HH:mm:ss";
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 		String simpleDate = simpleDateFormat.format(new Date());

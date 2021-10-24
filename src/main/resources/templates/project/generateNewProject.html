@@ -10,23 +10,23 @@
 	   <h1>Generate New Project From Existing Code</h1>
 		Welcome to the Arduino Code Generator
 		
-		<form action="#" th:action="@{/project/generateNewProject}" th:object="${buildProjectRequest}"/> 
-			<input id="projectName" placeholder="Enter Project Name" required type="text" /><br/>
-			<input id="description" placeholder="Enter Project description" required type="text" /><br/>
+		<form  th:action="@{/project/generateNewProjectAction}" th:object="${buildProjectRequest}" method="POST">
+			<input id="projectName" placeholder="Enter Project Name" required type="text" th:field="${buildProjectRequest.projectName}"/><br/>
+			<input id="description" placeholder="Enter Project description" required type="text" th:field="${buildProjectRequest.description}"/><br/>
 
-			<input id="featureName" placeholder="Enter Feature Name" required type="text" /><br/>
-			<input id="prerequisites" placeholder="Enter Prerequisites" required type="text" /><br/>
-			<input id="computerLanguage" placeholder="Enter Computer Language" required type="text" /><br/>
-			<input id="microController" placeholder="Enter Micro Controller" required type="text" /><br/>
-			<input id="contributorsName" placeholder="Enter Contributors Name" required type="text" /><br/>
-			<input id="contributorsGuid" placeholder="Enter Contributors Guid" required type="text" /><br/>
-			<input id="contributorsBlogPage" placeholder="Enter Contributors Blog Page" required type="text" /><br/>
-			<input id="contributorsYoutubePage" placeholder="Enter Project description" required type="text" /><br/>
-			<input id="firstModule" placeholder="Enter First Module GUID" required type="text" /><br/>
-			<input id="secondModule" placeholder="Enter Second Module GUID" required type="text" /><br/>
-			<input id="ThirdModule" placeholder="Enter ThirdModule GUID" required type="text" /><br/>
-			<input id="forthModule" placeholder="Enter ForthModule GUID" required type="text" /><br/>
-			<input id="fifthModule" placeholder="Enter FifthModule GUID" required type="text" /><br/>
+			<input id="featureName" placeholder="Enter Feature Name" required type="text" th:field="${buildProjectRequest.featureName}" /><br/>
+			<input id="prerequisites" placeholder="Enter Prerequisites" required type="text" th:field="${buildProjectRequest.prerequisites}"/><br/>
+			<input id="computerLanguage" placeholder="Enter Computer Language" required type="text" th:field="${buildProjectRequest.computerLanguage}"/><br/>
+			<input id="microController" placeholder="Enter Micro Controller" required type="text" th:field="${buildProjectRequest.microController}"/><br/>
+			<input id="contributorsName" placeholder="Enter Contributors Name" required type="text" th:field="${buildProjectRequest.contributorsName}"/><br/>
+			<input id="contributorsGuid" placeholder="Enter Contributors Guid" required type="text" th:field="${buildProjectRequest.contributorsGuid}"/><br/>
+			<input id="contributorsBlogPage" placeholder="Enter Contributors Blog Page" required type="text" th:field="${buildProjectRequest.contributorsBlogPage}"/><br/>
+			<input id="contributorsYoutubePage" placeholder="Enter Project description" required type="text" th:field="${buildProjectRequest.contributorsYoutubePage}"/><br/>
+			<input id="firstModule" placeholder="Enter First Module GUID" required type="text" th:field="${buildProjectRequest.firstModule}"/><br/>
+			<input id="secondModule" placeholder="Enter Second Module GUID" required type="text" th:field="${buildProjectRequest.secondModule}"/><br/>
+			<input id="ThirdModule" placeholder="Enter ThirdModule GUID" required type="text" th:field="${buildProjectRequest.ThirdModule}"/><br/>
+			<input id="forthModule" placeholder="Enter ForthModule GUID" required type="text" th:field="${buildProjectRequest.forthModule}"/><br/>
+			<input id="fifthModule" placeholder="Enter FifthModule GUID" required type="text" th:field="${buildProjectRequest.fifthModule}"/><br/>
 
 
 			<input type="submit" value="Generate Project">

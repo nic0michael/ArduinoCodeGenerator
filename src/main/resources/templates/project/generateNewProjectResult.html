@@ -9,6 +9,10 @@
 	<div>
 		<h1>Generate New Project From Existing Code</h1>
 		Welcome to the Arduino Code Generator
+		<form>
+			<input disabled="true" id="firstModule" placeholder="Enter Project GUID" required type="text" th:field="${buildProjectResponse.responseStatusMessage}" /><br><br><br>
+			<textarea th:value="${buildProjectResponse.generatedCode}" />
+		</form>
 
 
 	</div>

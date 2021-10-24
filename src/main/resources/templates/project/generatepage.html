@@ -10,5 +10,14 @@
 	   <h1>Generate the Arduino IDE Code</h1>
 		Welcome to the Arduino Code Generator
 	</div>
+	<div>
+	
+		<form th:action="@{/project/generateProjectAction}" th:object="${buildProjectRequest}" method="POST">		
+			<input id="firstModule" placeholder="Enter Project GUID" required type="text" th:field="${buildProjectRequest.firstModule}" /><br/>
+
+			<input type="submit" value="Generate Project">
+		</form>
+		
+	</div>
 </body>
 </html>
