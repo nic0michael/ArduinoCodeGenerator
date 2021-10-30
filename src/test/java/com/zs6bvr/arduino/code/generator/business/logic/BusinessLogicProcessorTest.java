@@ -76,14 +76,16 @@ public class BusinessLogicProcessorTest {
 	@DisplayName("Negative Test BusinessLogicProcessorTest3")
 	@Test
 	void negativeTestDoBuildProject() {
-		String expectedResponseStatusMessage = ResponseStatusMessages.MISSING_PROJECT_NAME.getResponseStatusMessage();
+		String expectedResponseStatusMessage = ResponseStatusMessages.SYSTEM_FAILURE.getResponseStatusMessage();
 		RequestValidator validator = new RequestValidator();
 		CodeMakerService service=new CodeMakerServiceImpl();
-		DatabaseAdaptor database =new MockDatabaseAdaptorImpl(TestType.PASSING_TEST);		
+		DatabaseAdaptor database =new MockDatabaseAdaptorImpl(TestType.FAILING_TEST);		
 		BusinessLogicProcessor processor=new BusinessLogicProcessor(validator, service,database);
 		
 		BuildProjectRequest request = RequestResponseUtils.makeBadBuildProjectRequest();
 		String result = processor.generateProjectCode(request);
+		System.out.println("result : "+result);
+		System.out.println("expectedResponseStatusMessage : "+expectedResponseStatusMessage);
 		assertNotNull(result);
 		assertEquals(result, expectedResponseStatusMessage);
 	}

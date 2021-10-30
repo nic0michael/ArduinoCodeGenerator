@@ -8,13 +8,12 @@
 	<nav th:replace="layouts :: navbarGenerate"></nav>
 	<div>
 	   <h1>Generate the Arduino IDE Code</h1>
-		Welcome to the Arduino Code Generator
+		<h3>Welcome to the Arduino Code Generator</h3>
+		<h5>[[${buildProjectResponse.responseStatusMessage}]]</h5><br><br>
 	</div>
 	<div>	
-		<form>
-			
-			<input disabled="true" id="firstModule" placeholder="Enter Project GUID" required type="text" th:field="${buildProjectResponse.responseStatusMessage}" /><br><br><br>
-			<textarea th:value="${buildProjectResponse.generatedCode}" />
+		<form>			
+			&nbsp;&nbsp;<textarea style="width:750px; height: 500px;"  th:inline="text">[[${buildProjectResponse.generatedCode}]]</textarea></div>  
 		</form>
 	</div>
 </body>

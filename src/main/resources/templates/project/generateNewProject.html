@@ -8,7 +8,7 @@
 	<nav th:replace="layouts :: navbarGetgenerateNewProject"></nav>
 	<div>
 	   <h1>Generate New Project From Existing Code</h1>
-		Welcome to the Arduino Code Generator
+		Welcome to the Arduino Project Generator
 		
 		<form  th:action="@{/project/generateNewProjectAction}" th:object="${buildProjectRequest}" method="POST">
 			<input id="projectName" placeholder="Enter Project Name" required type="text" th:field="${buildProjectRequest.projectName}"/><br/>
