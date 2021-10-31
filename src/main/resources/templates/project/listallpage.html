@@ -1,14 +1,37 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="layouts :: header">
-  <title>Arduino Generator Code Dashboard</title>
+	<title>Arduino Generator Code Dashboard</title>
 </head>
+
 <body>
 	<nav th:replace="layouts :: navbarList"></nav>
 	<div>
-	   <h1>List all projects</h1>
-		Welcome to the Arduino Code Generator
+		<h1>List all projects</h1>
+		In order to generate the code of one of these project you need to copy the Project GUID text, and then click on the Generate Code tab.<br><br>
+
+			<table>
+				<thead>
+					<tr>
+						<th> Project Guid </th>
+						<th> &nbsp;&nbsp;Feature name </th>
+						<th> &nbsp;&nbsp;Category</th>
+						<th> &nbsp;&nbsp;Description</th>
+						<th> &nbsp;&nbsp;Author</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="featureDto : ${featureDtos}">
+						<td><b><span th:text="${featureDto.projectGUID}"> Guid </span></b></td>
+						<td>&nbsp;&nbsp;<span th:text="${featureDto.featureName}"> Title </span></td>
+						<td>&nbsp;&nbsp;<span th:text="${featureDto.category}"> Category </span></td>
+						<td>&nbsp;&nbsp;<span th:text="${featureDto.description}"> Description </span></td>
+						<td>&nbsp;&nbsp;<span th:text="${featureDto.contributorsName}"> Author </span></td>
+					</tr>
+				</tbody>
+			</table>
+
 	</div>
 </body>
+
 </html>

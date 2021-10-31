@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -27,6 +28,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.zs6bvr.arduino.code.generator.business.logic.BusinessLogicProcessor;
 import com.zs6bvr.arduino.code.generator.dtos.BuildProjectRequest;
 import com.zs6bvr.arduino.code.generator.dtos.BuildProjectResponse;
+import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureDto;
+import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureResponse;
 
 @Controller
 @RequestMapping("/project")
@@ -48,6 +51,11 @@ public class ProjectPageController {
 
 	@GetMapping("/listall")
 	public String displayListallHomePage(Model model) {	
+		UploadFeatureResponse response = processor.getAllFeatures();
+		List<UploadFeatureDto> featureDtos = response.getUploadFeatureDtos();
+		if(featureDtos==null) {
+			featureDtos=new ArrayList<>();
+		}
 		String pattern = "yyyy-MM-dd HH:mm:ss";
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 		String simpleDate = simpleDateFormat.format(new Date());
@@ -56,6 +64,7 @@ public class ProjectPageController {
 		
 		model.addAttribute("projectVersion", projectVersion);
 		model.addAttribute("projectName", projectName);
+		model.addAttribute("featureDtos", featureDtos);
 
 		return "project/listallpage";
 	}
@@ -241,6 +250,13 @@ public class ProjectPageController {
 	
 	@GetMapping("/searchPage")
 	public String displaySearchHomePage(Model model) {	
+		BuildProjectRequest buildProjectRequest=new BuildProjectRequest();
+		UploadFeatureResponse response = processor.getAllFeatures();
+		List<UploadFeatureDto> featureDtos = response.getUploadFeatureDtos();
+		if(featureDtos==null) {
+			featureDtos=new ArrayList<>();
+		}
+		
 		String pattern = "yyyy-MM-dd HH:mm:ss";
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 		String simpleDate = simpleDateFormat.format(new Date());
@@ -249,6 +265,8 @@ public class ProjectPageController {
 		
 		model.addAttribute("projectVersion", projectVersion);
 		model.addAttribute("projectName", projectName);
+		model.addAttribute("buildProjectRequest", buildProjectRequest);
+		model.addAttribute("featureDtos", featureDtos);
 
 		return "project/searchPage";
 	}

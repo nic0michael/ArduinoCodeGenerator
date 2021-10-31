@@ -1,14 +1,27 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="layouts :: header">
-  <title>Arduino Generator Code Dashboard</title>
+	<title>Arduino Generator Code Dashboard</title>
 </head>
+
 <body>
 	<nav th:replace="layouts :: navbarSearch"></nav>
 	<div>
-	   <h1>Search projects</h1>
+		<h1>Search projects</h1>
 		Welcome to the Arduino Code Generator
+		<form  th:action="@{/project/searchPageAction}" th:object="${buildProjectRequest}" method="GET">
+		
+		<select id="category" name="category">
+			<option value="">Select Category</option>
+			<option th:each="featureDto : ${featureDtos}" th:value="${featureDto.category}"
+				th:text="${featureDto.category}"></option>
+		</select><br>
+		
+		
+			<input type="submit" value="Search Projects">
+		</form>
+
 	</div>
 </body>
+
 </html>
