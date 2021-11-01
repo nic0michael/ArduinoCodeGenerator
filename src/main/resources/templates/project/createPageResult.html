@@ -7,8 +7,85 @@
 <body>
 	<nav th:replace="layouts :: navbarCreate"></nav>
 	<div>
-	   <h1>Create Project</h1>
-		Welcome to the Arduino Code Generator
+	   <h1>Creating the folowing Project</h1>   
+
+		<h5>Result : [[${buildProjectResponse.responseStatusMessage}]]</h5><br><br>
+		
+		
+		
+		<form>
+		<table>
+			<tr>
+				<td>Contributors Name: </td>
+				<td>
+					<input id="contributorsName" placeholder="Contributors Name" required type="text" th:field="${uploadFeatureDto.contributorsName}"/><br/>
+				</td>
+			</tr>
+			<tr>
+				<td>Contributors Guid:</td> 
+				<td>
+					<input id="contributorsGuid" placeholder="Contributors Guid" required type="text" th:field="${uploadFeatureDto.contributorsGuid}"/><br/>
+				</td>
+			</tr>
+			<tr>
+				<td>Contributors Blog Page:</td>
+				<td>
+			 		<input id="contributorsBlogPage" placeholder="Contributors Blog Page" required type="text" th:field="${uploadFeatureDto.contributorsBlogPage}"/><br/>
+				</td>
+			</tr>
+			<tr>
+				<td>Contributors Youtube Page:</td>
+				<td>
+			 		<input id="contributorsYoutubePage" placeholder="Contributors Youtube Page" required type="text" th:field="${uploadFeatureDto.contributorsYoutubePage}"/><br/>
+				</td>
+			</tr>
+			<tr>
+				<td>category:</td>
+				<td>
+			 		<input id="category" placeholder="Category" required type="text" th:field="${uploadFeatureDto.category}"/><br/>
+				</td>
+			</tr>
+			<tr>
+				<td>featureName:</td>
+				<td>
+			 		<input id="featureName" placeholder="Feature Name" required type="text" th:field="${uploadFeatureDto.featureName}" /><br/>
+				</td>
+			</tr>
+			<tr>
+				<td>description:</td>
+				<td>
+			 		<input id="description" placeholder="Project description" required type="text" th:field="${uploadFeatureDto.description}"/><br/>
+				</td>
+			</tr>
+			<tr>
+				<td>prerequisites:</td>
+				<td>
+			 		<input id="prerequisites" placeholder="Prerequisites" required type="text" th:field="${uploadFeatureDto.prerequisites}"/><br/>
+				</td>
+			</tr>
+			<tr>
+				<td>computerLanguage:</td>
+				<td>
+			 		<input id="computerLanguage" placeholder="Computer Language" required type="text" th:field="${uploadFeatureDto.computerLanguage}"/><br/>
+				</td>
+			</tr>
+			<tr>
+				<td>microController:</td>
+					<td><input id="microController" placeholder="Micro Controller" required type="text" th:field="${uploadFeatureDto.microController}"/><br/>
+				</td>
+			</tr>
+			<tr>
+				<td>&nbsp;&nbsp;</td>
+				<td/>
+			</tr>
+			<tr>
+				<td valign="top">feature code:</td>
+				<td>
+					<textarea style="width:750px; height: 500px;"  th:inline="text">[[${uploadFeatureDto.featurecode}]]</textarea><br>
+				</td>
+			</tr>
+		</form>
+		
 	</div>
 </body>
 </html>

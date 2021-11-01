@@ -8,7 +8,12 @@
 	<nav th:replace="layouts :: navbarGetgenerateNewProject"></nav>
 	<div>
 	   <h1>Generate New Project From Existing Code</h1>
-		Welcome to the Arduino Project Generator
+		In order to use this facility you need to find one or more Project GUID texts by Listing all projects<br>
+		or by using Search Projects (searching by category) to find all the Project GUIDs you need.<br>
+		This will then aggregate all to code into one raw project that you need to masage and add your own code to make your new project work<br>
+		Once you have a new project that works you can then contribute this as a new Project.<br>
+		We would recoment to keep all the contributors names as well as yours in the ContributorsName Field as recognition to their original code<br>
+		<br><br>
 		
 		<form  th:action="@{/project/generateNewProjectAction}" th:object="${buildProjectRequest}" method="POST">
 			<input id="projectName" placeholder="Enter Project Name" required type="text" th:field="${buildProjectRequest.projectName}"/><br/>

@@ -135,7 +135,16 @@ public class ProjectPageController {
 	}
 	
 	@GetMapping("/create")
-	public String displayCreateHomePage(Model model) {	
+	public String displayCreateHomePage(Model model) {			
+		UploadFeatureDto uploadFeatureDto=new UploadFeatureDto();
+
+		UploadFeatureResponse response = processor.getAllFeatures();
+		List<UploadFeatureDto> featureDtos = response.getUploadFeatureDtos();
+		if(featureDtos==null) {
+			featureDtos=new ArrayList<>();
+		}
+		
+		
 		String pattern = "yyyy-MM-dd HH:mm:ss";
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 		String simpleDate = simpleDateFormat.format(new Date());
@@ -144,13 +153,16 @@ public class ProjectPageController {
 		
 		model.addAttribute("projectVersion", projectVersion);
 		model.addAttribute("projectName", projectName);
+		model.addAttribute("uploadFeatureDto", uploadFeatureDto);
+		model.addAttribute("featureDtos", featureDtos);
 
 		return "project/createpage";
 	}
 
 	
 	@GetMapping("/createAction")
-	public String create(Model model) {	
+	public String create(UploadFeatureDto uploadFeatureDto,Model model) {
+		BuildProjectResponse buildProjectResponse=new BuildProjectResponse();
 		String pattern = "yyyy-MM-dd HH:mm:ss";
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 		String simpleDate = simpleDateFormat.format(new Date());
@@ -159,12 +171,21 @@ public class ProjectPageController {
 		
 		model.addAttribute("projectVersion", projectVersion);
 		model.addAttribute("projectName", projectName);
+		model.addAttribute("buildProjectResponse", buildProjectResponse);
+		model.addAttribute("uploadFeatureDto", uploadFeatureDto);
 
 		return "project/createPageResult";
 	}
 	
 	@GetMapping("/update")
-	public String displayUpdateHomePage(Model model) {	
+	public String displayUpdateHomePage(Model model) {			
+		UploadFeatureDto uploadFeatureDto=new UploadFeatureDto();
+
+		UploadFeatureResponse response = processor.getAllFeatures();
+		List<UploadFeatureDto> featureDtos = response.getUploadFeatureDtos();
+		if(featureDtos==null) {
+			featureDtos=new ArrayList<>();
+		}
 		String pattern = "yyyy-MM-dd HH:mm:ss";
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 		String simpleDate = simpleDateFormat.format(new Date());
@@ -173,13 +194,16 @@ public class ProjectPageController {
 		
 		model.addAttribute("projectVersion", projectVersion);
 		model.addAttribute("projectName", projectName);
+		model.addAttribute("uploadFeatureDto", uploadFeatureDto);
+		model.addAttribute("featureDtos", featureDtos);
 
 		return "project/updatepage";
 	}
 
 	
 	@GetMapping("/updateAction")
-	public String update(Model model) {	
+	public String update(UploadFeatureDto uploadFeatureDto,Model model) {
+		BuildProjectResponse buildProjectResponse=new BuildProjectResponse();
 		String pattern = "yyyy-MM-dd HH:mm:ss";
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 		String simpleDate = simpleDateFormat.format(new Date());
@@ -188,6 +212,8 @@ public class ProjectPageController {
 		
 		model.addAttribute("projectVersion", projectVersion);
 		model.addAttribute("projectName", projectName);
+		model.addAttribute("buildProjectResponse", buildProjectResponse);
+		model.addAttribute("uploadFeatureDto", uploadFeatureDto);
 
 		return "project/updatePageResult";
 	}

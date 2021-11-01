@@ -7,8 +7,31 @@
 <body>
 	<nav th:replace="layouts :: navbarCreate"></nav>
 	<div>
-	   <h1>Create Project</h1>
-		Welcome to the Arduino Code Generator
+	   <h1>Capture a new Project</h1>
+		
+		<form  th:action="@{/project/createAction}" th:object="${uploadFeatureDto}" method="GET">
+			<input id="contributorsName" placeholder="Enter Contributors Name" required type="text" th:field="${uploadFeatureDto.contributorsName}"/><br/>
+			<input id="contributorsGuid" placeholder="Enter Contributors Guid" required type="text" th:field="${uploadFeatureDto.contributorsGuid}"/><br/>
+			<input id="contributorsBlogPage" placeholder="Enter Contributors Blog Page" required type="text" th:field="${uploadFeatureDto.contributorsBlogPage}"/><br/>
+			<input id="contributorsYoutubePage" placeholder="Enter Project description" required type="text" th:field="${uploadFeatureDto.contributorsYoutubePage}"/><br/>
+			
+			<select id="category" name="category" th:field="${uploadFeatureDto.category}"  >
+				<option value="">Select Category</option>
+				<option th:each="featureDto : ${featureDtos}" th:value="${featureDto.category}"
+					th:text="${featureDto.category}"></option>
+			</select><br>
+
+			<input id="featureName" placeholder="Enter Feature Name" required type="text" th:field="${uploadFeatureDto.featureName}" /><br/>
+			<input id="description" placeholder="Enter Project description" required type="text" th:field="${uploadFeatureDto.description}"/><br/>
+			<input id="prerequisites" placeholder="Enter Prerequisites" required type="text" th:field="${uploadFeatureDto.prerequisites}"/><br/>
+			<input id="computerLanguage" placeholder="Enter Computer Language" required type="text" th:field="${uploadFeatureDto.computerLanguage}"/><br/>
+			<input id="microController" placeholder="Enter Micro Controller" required type="text" th:field="${uploadFeatureDto.microController}"/><br/>
+
+			&nbsp;&nbsp;<textarea style="width:750px; height: 500px;" th:field="${uploadFeatureDto.featurecode}"  th:inline="text">[[${uploadFeatureDto.featurecode}]]</textarea><br>
+
+
+			<input type="submit" value="Generate Project">
+		</form>
 	</div>
 </body>
 </html>
