@@ -13,8 +13,8 @@
 		
 		<select id="category" name="category">
 			<option value="">Select Category</option>
-			<option th:each="featureDto : ${featureDtos}" th:value="${featureDto.category}"
-				th:text="${featureDto.category}"></option>
+			<option th:each="theCategory : ${categories}" th:value="${theCategory}"
+				th:text="${theCategory}"></option>
 		</select><br>
 		
 		

@@ -1,5 +1,7 @@
 package com.zs6bvr.arduino.code.generator.service;
 
+import java.util.List;
+
 import com.zs6bvr.arduino.code.generator.dtos.BuildProjectRequest;
 import com.zs6bvr.arduino.code.generator.dtos.BuildProjectResponse;
 import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureRequest;
@@ -18,5 +20,8 @@ public interface DatabaseAdaptor {
 	UploadFeatureResponse getFeature(String projectGUID);
 	UploadFeatureResponse getFeature(Long id);
 	UploadFeatureResponse updateFeature(Long id, UploadFeatureRequest request);
+	List<String> getAllCategories();
+	ProjectFeature saveProjectFeature(ProjectFeature projectFeature);
+	ProjectFeature findByProjectGuid(String projectGUID);
 
 }

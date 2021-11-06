@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -154,7 +155,7 @@ public class RequestResponseUtils {
 	}
 
 
-	private static UploadFeatureDto makeUploadFeatureDto(ProjectFeature projectFeature) {
+	public static UploadFeatureDto makeUploadFeatureDto(ProjectFeature projectFeature) {
 		UploadFeatureDto uploadFeatureDto=new UploadFeatureDto();
 
 		uploadFeatureDto.setCategory(projectFeature.getCategory());
@@ -207,6 +208,35 @@ public class RequestResponseUtils {
 		}
 		
 		return uploadFeatureDtos;
+	}
+
+	public static ProjectFeature makeProjectFeature(UploadFeatureDto uploadFeatureDto) {
+		String OTHER_CATEGORY="otherCategory";
+		ProjectFeature feature =new ProjectFeature();		
+	
+		feature.setFeatureName(  uploadFeatureDto.getFeatureName());
+		feature.setFeatureStatus(  uploadFeatureDto.getFeatureStatus());
+		feature.setProjectType(  uploadFeatureDto.getProjectType());
+		feature.setFeatureClassImports(  uploadFeatureDto.getFeatureClassImports());
+		feature.setFeatureAssignment(  uploadFeatureDto.getFeatureAssignment());
+		feature.setFeaturecode(  uploadFeatureDto.getFeaturecode());
+		feature.setDescription(  uploadFeatureDto.getDescription());
+	
+		if(OTHER_CATEGORY.equalsIgnoreCase(uploadFeatureDto.getCategory()) && StringUtils.isNotEmpty(uploadFeatureDto.getOtherCategory())) {
+			feature.setCategory( uploadFeatureDto.getOtherCategory());
+		} else {
+			feature.setCategory(  uploadFeatureDto.getCategory());
+		}
+		feature.setPrerequisites(  uploadFeatureDto.getPrerequisites());
+		feature.setComputerLanguage(  uploadFeatureDto.getComputerLanguage());
+		feature.setMicroController(  uploadFeatureDto.getMicroController());
+		feature.setMcuPinsUsed(  uploadFeatureDto.getMcuPinsUsed());
+		feature.setContributorsName(  uploadFeatureDto.getContributorsName());
+		feature.setContributorsGuid(  uploadFeatureDto.getContributorsGuid());
+		feature.setContributorsBlogPage(  uploadFeatureDto.getContributorsBlogPage());
+		feature.setContributorsYoutubePage(  uploadFeatureDto.getContributorsYoutubePage());		
+
+		return feature;
 	}
 
 

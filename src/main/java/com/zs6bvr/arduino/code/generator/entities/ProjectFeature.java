@@ -128,6 +128,11 @@ public class ProjectFeature {
 
 
 
+	public void setInitialValues() {
+		dateCreated=new Date();
+		projectGUID= UUID.randomUUID().toString(); 		
+	}
+
 
 
 

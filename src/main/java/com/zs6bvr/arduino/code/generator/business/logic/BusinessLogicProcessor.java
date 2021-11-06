@@ -17,12 +17,14 @@ import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureDescritionsResponse;
 import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureDto;
 import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureRequest;
 import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureResponse;
+import com.zs6bvr.arduino.code.generator.entities.ProjectFeature;
 import com.zs6bvr.arduino.code.generator.enums.ResponseStatusCodes;
 import com.zs6bvr.arduino.code.generator.enums.ResponseStatusMessages;
 import com.zs6bvr.arduino.code.generator.exceptions.FailedToReadFromDatabaseException;
 import com.zs6bvr.arduino.code.generator.exceptions.FailedToWriteToatabaseException;
 import com.zs6bvr.arduino.code.generator.service.CodeMakerService;
 import com.zs6bvr.arduino.code.generator.service.DatabaseAdaptor;
+import com.zs6bvr.arduino.code.generator.utils.RequestResponseUtils;
 import com.zs6bvr.arduino.code.generator.validators.RequestValidator;
 
 @Component
@@ -233,6 +235,11 @@ public class BusinessLogicProcessor {
 	}
 
 
+	public List<String> getAllCategories() {
+		return database.getAllCategories();
+	}
+
+
 	public UploadFeatureResponse getFeatures(String category)  {
 		UploadFeatureResponse response=null;
 		try {
@@ -257,6 +264,36 @@ public class BusinessLogicProcessor {
 
 	public UploadFeatureResponse updateFeature(Long id, UploadFeatureRequest request) {
 		return database.updateFeature(id, request);
+	}
+
+	public UploadFeatureResponse getAllFeaturesByCategory(String category) {
+		UploadFeatureResponse response = null;
+		try {
+			response = database.getFeatures(category);
+		} catch (FailedToReadFromDatabaseException e) {
+			log.error("BusinessLogicProcessor | getAllFeaturesByCategory failed to retrieve from database",e);  
+		}
+		return response;
+	}
+
+	public ProjectFeature createFeature(UploadFeatureDto uploadFeatureDto) {
+		ProjectFeature projectFeature=null;
+		if(uploadFeatureDto!=null) {
+			projectFeature=RequestResponseUtils.makeProjectFeature(uploadFeatureDto);
+			projectFeature =database.saveProjectFeature(projectFeature);
+		}
+		return projectFeature;
+	}
+
+
+	public ProjectFeature updateFeature(UploadFeatureDto uploadFeatureDto) {
+		ProjectFeature projectFeature=null;
+		 String projectGUID = uploadFeatureDto.getProjectGUID();
+		if(StringUtils.isNotEmpty(projectGUID)) {
+			projectFeature=database.findByProjectGuid(projectGUID);
+			projectFeature =database.saveProjectFeature(projectFeature);
+		}
+		return projectFeature;
 	}
 
 	

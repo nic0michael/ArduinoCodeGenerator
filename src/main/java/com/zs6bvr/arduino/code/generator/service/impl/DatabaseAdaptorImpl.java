@@ -155,6 +155,12 @@ public class DatabaseAdaptorImpl implements DatabaseAdaptor {
 
 		return response;
 	}
+	
+
+	@Override
+	public List<String> getAllCategories() {
+		return repository.getAllCategories();
+	}
 
 	@Override
 	public UploadFeatureResponse getAllFeatures() {
@@ -322,6 +328,16 @@ public class DatabaseAdaptorImpl implements DatabaseAdaptor {
 		}
 
 		return response;
+	}
+
+	@Override
+	public ProjectFeature saveProjectFeature(ProjectFeature projectFeature) {
+		return repository.save(projectFeature);
+	}
+
+	@Override
+	public ProjectFeature findByProjectGuid(String projectGUID) {
+		return repository.findByProjectGUID( projectGUID);
 	}
 
 }

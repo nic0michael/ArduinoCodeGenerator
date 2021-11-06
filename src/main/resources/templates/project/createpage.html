@@ -15,10 +15,36 @@
 			<input id="contributorsBlogPage" placeholder="Enter Contributors Blog Page" required type="text" th:field="${uploadFeatureDto.contributorsBlogPage}"/><br/>
 			<input id="contributorsYoutubePage" placeholder="Enter Project description" required type="text" th:field="${uploadFeatureDto.contributorsYoutubePage}"/><br/>
 			
-			<select id="category" name="category" th:field="${uploadFeatureDto.category}"  >
-				<option value="">Select Category</option>
-				<option th:each="featureDto : ${featureDtos}" th:value="${featureDto.category}"
-					th:text="${featureDto.category}"></option>
+
+			
+			<select id="projectType" name="projectType" th:field="${uploadFeatureDto.projectType}"  >	
+			  <option value="">Select Project Type</option>							
+			  <option value="arduinoUno">Arduino Uno</option>
+			  <option value="arduinoNano">Arduino Nano</option>
+			  <option value="otherArduino">Other Arduino</option>
+			</select><br>
+			
+			
+					
+		<select id="category" name="category" th:field="${uploadFeatureDto.category}"  >
+			<option value="">Select Category</option>
+			<option th:each="theCategory : ${categories}" th:value="${theCategory}"
+				th:text="${theCategory}"></option>
+					
+			  <option value="otherCategory">Other Category</option>
+		</select><br>
+			
+			
+
+			
+			<input id="otherCategory" placeholder="Enter Other Category" required type="text" th:field="${uploadFeatureDto.otherCategory}"/><br/>
+			
+			<select id="featureStatus" name="featureStatus" th:field="${uploadFeatureDto.featureStatus}"  >
+			  <option value="">Select Status</option>				
+			  <option value="newProject">Status : New Project</option>
+			  <option value="updatedProject">Status : Updated Project</option>
+			  <option value="inProgress">Status : In progress</option>
+			  <option value="unsuportedProject">Status : unsuported Project</option>
 			</select><br>
 
 			<input id="featureName" placeholder="Enter Feature Name" required type="text" th:field="${uploadFeatureDto.featureName}" /><br/>
@@ -26,7 +52,15 @@
 			<input id="prerequisites" placeholder="Enter Prerequisites" required type="text" th:field="${uploadFeatureDto.prerequisites}"/><br/>
 			<input id="computerLanguage" placeholder="Enter Computer Language" required type="text" th:field="${uploadFeatureDto.computerLanguage}"/><br/>
 			<input id="microController" placeholder="Enter Micro Controller" required type="text" th:field="${uploadFeatureDto.microController}"/><br/>
+			MCU Pins Used:<br>
+			&nbsp;&nbsp;<textarea style="width:750px; height: 50px;" th:field="${uploadFeatureDto.mcuPinsUsed}"  th:inline="text">[[${uploadFeatureDto.featurecode}]]</textarea><br>
 
+			Class Imports:<br>
+			&nbsp;&nbsp;<textarea style="width:750px; height: 50px;" th:field="${uploadFeatureDto.featureClassImports}"  th:inline="text">[[${uploadFeatureDto.featurecode}]]</textarea><br>
+
+			Assignments:<br>
+			&nbsp;&nbsp;<textarea style="width:750px; height: 50px;" th:field="${uploadFeatureDto.featureAssignment}"  th:inline="text">[[${uploadFeatureDto.featurecode}]]</textarea><br>
+			Main Code block:<br>
 			&nbsp;&nbsp;<textarea style="width:750px; height: 500px;" th:field="${uploadFeatureDto.featurecode}"  th:inline="text">[[${uploadFeatureDto.featurecode}]]</textarea><br>
 
 

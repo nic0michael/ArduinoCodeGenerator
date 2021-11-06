@@ -1,5 +1,7 @@
 package com.zs6bvr.arduino.code.generator.service.impl;
 
+import java.util.List;
+
 import com.zs6bvr.arduino.code.generator.dtos.BuildProjectRequest;
 import com.zs6bvr.arduino.code.generator.dtos.BuildProjectResponse;
 import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureRequest;
@@ -203,6 +205,24 @@ public class MockDatabaseAdaptorImpl implements DatabaseAdaptor{
 
 	@Override
 	public UploadFeatureResponse getFeatures(String category) throws FailedToReadFromDatabaseException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<String> getAllCategories() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ProjectFeature saveProjectFeature(ProjectFeature projectFeature) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ProjectFeature findByProjectGuid(String projectGUID) {
 		// TODO Auto-generated method stub
 		return null;
 	}

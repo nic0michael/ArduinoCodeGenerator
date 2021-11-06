@@ -17,6 +17,7 @@ public class UploadFeatureDto {
 	private String featureName;	
 	private String description;		
 	private String category;
+	private String otherCategory;
 	private String prerequisites;	
 	private String featureClassImports;
 	private String featureAssignment;
@@ -26,12 +27,11 @@ public class UploadFeatureDto {
 
 	public UploadFeatureDto() {}
 
-
 	public UploadFeatureDto(String projectGUID, String computerLanguage, String microController, String mcuPinsUsed,
 			String contributorsName, String contributorsGuid, String contributorsBlogPage,
 			String contributorsYoutubePage, String featureName, String description, String category,
-			String prerequisites, String featureClassImports, String featureAssignment, String featurecode,
-			String featureStatus, String projectType) {
+			String otherCategory, String prerequisites, String featureClassImports, String featureAssignment,
+			String featurecode, String featureStatus, String projectType) {
 		super();
 		this.projectGUID = projectGUID;
 		this.computerLanguage = computerLanguage;
@@ -44,6 +44,7 @@ public class UploadFeatureDto {
 		this.featureName = featureName;
 		this.description = description;
 		this.category = category;
+		this.otherCategory = otherCategory;
 		this.prerequisites = prerequisites;
 		this.featureClassImports = featureClassImports;
 		this.featureAssignment = featureAssignment;
@@ -51,6 +52,9 @@ public class UploadFeatureDto {
 		this.featureStatus = featureStatus;
 		this.projectType = projectType;
 	}
+
+
+
 
 
 
@@ -82,6 +86,14 @@ public class UploadFeatureDto {
 
 
 
+
+	public String getOtherCategory() {
+		return otherCategory;
+	}
+
+	public void setOtherCategory(String otherCategory) {
+		this.otherCategory = otherCategory;
+	}
 
 	public String getContributorsGuid() {
 		return contributorsGuid;

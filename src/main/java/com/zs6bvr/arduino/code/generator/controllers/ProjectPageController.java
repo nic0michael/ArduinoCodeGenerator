@@ -1,5 +1,6 @@
 package com.zs6bvr.arduino.code.generator.controllers;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,6 +31,8 @@ import com.zs6bvr.arduino.code.generator.dtos.BuildProjectRequest;
 import com.zs6bvr.arduino.code.generator.dtos.BuildProjectResponse;
 import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureDto;
 import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureResponse;
+import com.zs6bvr.arduino.code.generator.entities.ProjectFeature;
+import com.zs6bvr.arduino.code.generator.utils.RequestResponseUtils;
 
 @Controller
 @RequestMapping("/project")
@@ -111,6 +114,14 @@ public class ProjectPageController {
 	@PostMapping("/generateProjectAction")
 	public String generateProject(BuildProjectRequest buildProjectRequest,Model model) {
 		log.info("GeneratorController | generateProjectCode | request : "+buildProjectRequest);
+		String firstModule=buildProjectRequest.getFirstModule();
+		if(StringUtils.isNotEmpty(firstModule)) {
+			firstModule=firstModule.stripLeading();
+			firstModule=firstModule.stripTrailing();
+			if(StringUtils.isNotEmpty(firstModule)) {
+				buildProjectRequest.setFirstModule(firstModule);
+			}
+		}
 		 BuildProjectResponse buildProjectResponse = processor.generateProjectCodeResponse(buildProjectRequest);
 
 		model.addAttribute("projectVersion", projectVersion);
@@ -138,6 +149,7 @@ public class ProjectPageController {
 	public String displayCreateHomePage(Model model) {			
 		UploadFeatureDto uploadFeatureDto=new UploadFeatureDto();
 
+		List<String> categories = processor.getAllCategories();
 		UploadFeatureResponse response = processor.getAllFeatures();
 		List<UploadFeatureDto> featureDtos = response.getUploadFeatureDtos();
 		if(featureDtos==null) {
@@ -155,6 +167,7 @@ public class ProjectPageController {
 		model.addAttribute("projectName", projectName);
 		model.addAttribute("uploadFeatureDto", uploadFeatureDto);
 		model.addAttribute("featureDtos", featureDtos);
+		model.addAttribute("categories", categories);
 
 		return "project/createpage";
 	}
@@ -162,6 +175,8 @@ public class ProjectPageController {
 	
 	@GetMapping("/createAction")
 	public String create(UploadFeatureDto uploadFeatureDto,Model model) {
+		ProjectFeature feature = processor.createFeature(uploadFeatureDto);
+		uploadFeatureDto=RequestResponseUtils.makeUploadFeatureDto(feature);
 		BuildProjectResponse buildProjectResponse=new BuildProjectResponse();
 		String pattern = "yyyy-MM-dd HH:mm:ss";
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
@@ -178,7 +193,8 @@ public class ProjectPageController {
 	}
 	
 	@GetMapping("/update")
-	public String displayUpdateHomePage(Model model) {			
+	public String displayUpdateHomePage(Model model) {
+		List<String> categories = processor.getAllCategories();
 		UploadFeatureDto uploadFeatureDto=new UploadFeatureDto();
 
 		UploadFeatureResponse response = processor.getAllFeatures();
@@ -196,6 +212,7 @@ public class ProjectPageController {
 		model.addAttribute("projectName", projectName);
 		model.addAttribute("uploadFeatureDto", uploadFeatureDto);
 		model.addAttribute("featureDtos", featureDtos);
+		model.addAttribute("categories", categories);
 
 		return "project/updatepage";
 	}
@@ -277,7 +294,8 @@ public class ProjectPageController {
 	@GetMapping("/searchPage")
 	public String displaySearchHomePage(Model model) {	
 		BuildProjectRequest buildProjectRequest=new BuildProjectRequest();
-		UploadFeatureResponse response = processor.getAllFeatures();
+		List<String> categories = processor.getAllCategories();
+		UploadFeatureResponse response = new UploadFeatureResponse();
 		List<UploadFeatureDto> featureDtos = response.getUploadFeatureDtos();
 		if(featureDtos==null) {
 			featureDtos=new ArrayList<>();
@@ -293,12 +311,24 @@ public class ProjectPageController {
 		model.addAttribute("projectName", projectName);
 		model.addAttribute("buildProjectRequest", buildProjectRequest);
 		model.addAttribute("featureDtos", featureDtos);
+		model.addAttribute("categories", categories);
 
 		return "project/searchPage";
 	}
 	
 	@GetMapping("/searchPageAction")
-	public String search(Model model) {	
+	public String search(BuildProjectRequest buildProjectRequest,Model model) {	
+		String category=null;
+		if(buildProjectRequest!=null) {
+			category=buildProjectRequest.getCategory().trim();
+			category=category.stripLeading();
+			category=category.stripTrailing();
+		}
+		UploadFeatureResponse response = processor.getAllFeaturesByCategory(category);
+		List<UploadFeatureDto> featureDtos = response.getUploadFeatureDtos();
+		if(featureDtos==null) {
+			featureDtos=new ArrayList<>();
+		}
 		String pattern = "yyyy-MM-dd HH:mm:ss";
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 		String simpleDate = simpleDateFormat.format(new Date());
@@ -307,6 +337,7 @@ public class ProjectPageController {
 		
 		model.addAttribute("projectVersion", projectVersion);
 		model.addAttribute("projectName", projectName);
+		model.addAttribute("featureDtos", featureDtos);
 
 		return "project/searchPageResult";
 	}
