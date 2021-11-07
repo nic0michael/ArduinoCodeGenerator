@@ -40,11 +40,11 @@
 			<input id="otherCategory" placeholder="Enter Other Category" required type="text" th:field="${uploadFeatureDto.otherCategory}"/><br/>
 			
 			<select id="featureStatus" name="featureStatus" th:field="${uploadFeatureDto.featureStatus}"  >
-			  <option value="">Select Status</option>				
-			  <option value="newProject">Status : New Project</option>
-			  <option value="updatedProject">Status : Updated Project</option>
-			  <option value="inProgress">Status : In progress</option>
-			  <option value="unsuportedProject">Status : unsuported Project</option>
+			  <option value="">Select Status</option>
+			  <option value="newProject">New Project</option>
+			  <option value="updatedProject">Updated Project</option>
+			  <option value="inProgress">In progress</option>
+			  <option value="unsuportedProject">unsuported old Project</option>
 			</select><br>
 
 			<input id="featureName" placeholder="Enter Feature Name" required type="text" th:field="${uploadFeatureDto.featureName}" /><br/>

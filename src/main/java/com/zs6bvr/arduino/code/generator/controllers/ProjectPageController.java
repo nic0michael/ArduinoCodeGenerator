@@ -41,6 +41,7 @@ public class ProjectPageController {
 	private static final Logger log = LoggerFactory.getLogger(FileUploadController.class);
 
 	private final String PERSIST_PROJECT_DATA="PERSIST_PROJECT_DATA";
+	private final String OTHER_CATEGORY="otherCategory";
 
 	@Value("${project.version}")
 	private String projectVersion;
@@ -193,9 +194,38 @@ public class ProjectPageController {
 	}
 	
 	@GetMapping("/update")
-	public String displayUpdateHomePage(Model model) {
-		List<String> categories = processor.getAllCategories();
+	public String displayUpdateHomePage(Model model) {	
 		UploadFeatureDto uploadFeatureDto=new UploadFeatureDto();
+		String pattern = "yyyy-MM-dd HH:mm:ss";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+		String simpleDate = simpleDateFormat.format(new Date());
+		model.addAttribute("simpleDate", simpleDate);
+		model.addAttribute("timestamp", Instant.now());
+		
+		model.addAttribute("projectVersion", projectVersion);
+		model.addAttribute("projectName", projectName);
+		model.addAttribute("uploadFeatureDto", uploadFeatureDto);
+
+		return "project/updatepage";
+	}
+	
+
+	
+	@GetMapping("/updateForm")
+	public String displayUpdateFormPage(UploadFeatureDto uploadFeatureDto,Model model) {
+		List<String> categories = processor.getAllCategories();
+		String projectGUID=null;
+		ProjectFeature projectFeature = null;
+		if(uploadFeatureDto!=null && StringUtils.isNotEmpty(uploadFeatureDto.getProjectGUID())) {
+			projectGUID=uploadFeatureDto.getProjectGUID();
+			projectGUID=projectGUID.stripLeading();
+			projectGUID=projectGUID.stripTrailing();
+			projectFeature = processor.findByProjectGuid(projectGUID);
+		}
+		
+		if(projectFeature==null) {
+			projectFeature=new ProjectFeature();
+		}
 
 		UploadFeatureResponse response = processor.getAllFeatures();
 		List<UploadFeatureDto> featureDtos = response.getUploadFeatureDtos();
@@ -213,13 +243,19 @@ public class ProjectPageController {
 		model.addAttribute("uploadFeatureDto", uploadFeatureDto);
 		model.addAttribute("featureDtos", featureDtos);
 		model.addAttribute("categories", categories);
+		model.addAttribute("projectFeature", projectFeature);
 
-		return "project/updatepage";
+		return "project/updateForm";
 	}
 
 	
 	@GetMapping("/updateAction")
 	public String update(UploadFeatureDto uploadFeatureDto,Model model) {
+		if(uploadFeatureDto!=null && OTHER_CATEGORY.equalsIgnoreCase(uploadFeatureDto.getCategory())) {
+			uploadFeatureDto.setCategory(uploadFeatureDto.getOtherCategory());
+		}
+
+		ProjectFeature projectFeature = processor.updateFeature(uploadFeatureDto);
 		BuildProjectResponse buildProjectResponse=new BuildProjectResponse();
 		String pattern = "yyyy-MM-dd HH:mm:ss";
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
@@ -231,6 +267,7 @@ public class ProjectPageController {
 		model.addAttribute("projectName", projectName);
 		model.addAttribute("buildProjectResponse", buildProjectResponse);
 		model.addAttribute("uploadFeatureDto", uploadFeatureDto);
+		model.addAttribute("projectFeature", projectFeature);
 
 		return "project/updatePageResult";
 	}

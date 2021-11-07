@@ -211,9 +211,13 @@ public class RequestResponseUtils {
 	}
 
 	public static ProjectFeature makeProjectFeature(UploadFeatureDto uploadFeatureDto) {
+		ProjectFeature feature =new ProjectFeature();
+		return setProjectFeature(feature, uploadFeatureDto);
+	}
+
+	public static ProjectFeature setProjectFeature(ProjectFeature feature, UploadFeatureDto uploadFeatureDto) {
 		String OTHER_CATEGORY="otherCategory";
-		ProjectFeature feature =new ProjectFeature();		
-	
+
 		feature.setFeatureName(  uploadFeatureDto.getFeatureName());
 		feature.setFeatureStatus(  uploadFeatureDto.getFeatureStatus());
 		feature.setProjectType(  uploadFeatureDto.getProjectType());

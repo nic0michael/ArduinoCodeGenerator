@@ -290,13 +290,18 @@ public class BusinessLogicProcessor {
 		ProjectFeature projectFeature=null;
 		 String projectGUID = uploadFeatureDto.getProjectGUID();
 		if(StringUtils.isNotEmpty(projectGUID)) {
-			projectFeature=database.findByProjectGuid(projectGUID);
+			projectFeature=findByProjectGuid(projectGUID);
+			projectFeature=RequestResponseUtils.setProjectFeature(projectFeature,uploadFeatureDto);
 			projectFeature =database.saveProjectFeature(projectFeature);
 		}
 		return projectFeature;
 	}
 
-	
+	public ProjectFeature findByProjectGuid(String projectGUID) {
+		ProjectFeature projectFeature=null;
+		projectFeature=database.findByProjectGuid(projectGUID);
+		return projectFeature;		
+	}
 
 
 
