@@ -10,10 +10,10 @@
 	   <h1>Capture a new Project</h1>
 		
 		<form  th:action="@{/project/createAction}" th:object="${uploadFeatureDto}" method="GET">
-			<input id="contributorsName" placeholder="Enter Contributors Name" required type="text" th:field="${uploadFeatureDto.contributorsName}"/><br/>
-			<input id="contributorsGuid" placeholder="Enter Contributors Guid" required type="text" th:field="${uploadFeatureDto.contributorsGuid}"/><br/>
-			<input id="contributorsBlogPage" placeholder="Enter Contributors Blog Page" required type="text" th:field="${uploadFeatureDto.contributorsBlogPage}"/><br/>
-			<input id="contributorsYoutubePage" placeholder="Enter Project description" required type="text" th:field="${uploadFeatureDto.contributorsYoutubePage}"/><br/>
+			<input id="contributorsName" placeholder="Contributors Name" required type="text" th:field="${uploadFeatureDto.contributorsName}"/><br/>
+			<input id="contributorsGuid" placeholder="Contributors Guid" required type="text" th:field="${uploadFeatureDto.contributorsGuid}"/><br/>
+			<input id="contributorsBlogPage" placeholder="Contributors Blog Page" required type="text" th:field="${uploadFeatureDto.contributorsBlogPage}"/><br/>
+			<input id="contributorsYoutubePage" placeholder="Contributors YoutubePage" required type="text" th:field="${uploadFeatureDto.contributorsYoutubePage}"/><br/>
 			
 
 			

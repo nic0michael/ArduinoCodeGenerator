@@ -193,6 +193,58 @@ public class ProjectPageController {
 		return "project/createPageResult";
 	}
 	
+	
+
+	
+	@GetMapping("/createcontributor")
+	public String displayCreateContributorHomePage(Model model) {			
+		UploadFeatureDto uploadFeatureDto=new UploadFeatureDto();
+
+		List<String> categories = processor.getAllCategories();
+		UploadFeatureResponse response = processor.getAllFeatures();
+		List<UploadFeatureDto> featureDtos = response.getUploadFeatureDtos();
+		if(featureDtos==null) {
+			featureDtos=new ArrayList<>();
+		}
+		
+		
+		String pattern = "yyyy-MM-dd HH:mm:ss";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+		String simpleDate = simpleDateFormat.format(new Date());
+		model.addAttribute("simpleDate", simpleDate);
+		model.addAttribute("timestamp", Instant.now());
+		
+		model.addAttribute("projectVersion", projectVersion);
+		model.addAttribute("projectName", projectName);
+		model.addAttribute("uploadFeatureDto", uploadFeatureDto);
+		model.addAttribute("featureDtos", featureDtos);
+		model.addAttribute("categories", categories);
+
+		return "project/createcontributorpage";
+	}
+
+	
+	@GetMapping("/createContributorAction")
+	public String createContributor(UploadFeatureDto uploadFeatureDto,Model model) {
+		String guid=java.util.UUID.randomUUID().toString();
+		uploadFeatureDto.setContributorsGuid(guid);
+//		ProjectFeature feature = processor.createFeature(uploadFeatureDto);
+//		uploadFeatureDto=RequestResponseUtils.makeUploadFeatureDto(feature);
+		BuildProjectResponse buildProjectResponse=new BuildProjectResponse();
+		String pattern = "yyyy-MM-dd HH:mm:ss";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+		String simpleDate = simpleDateFormat.format(new Date());
+		model.addAttribute("simpleDate", simpleDate);
+		model.addAttribute("timestamp", Instant.now());
+		
+		model.addAttribute("projectVersion", projectVersion);
+		model.addAttribute("projectName", projectName);
+		model.addAttribute("buildProjectResponse", buildProjectResponse);
+		model.addAttribute("uploadFeatureDto", uploadFeatureDto);
+
+		return "project/createcontributorResult";
+	}
+	
 	@GetMapping("/update")
 	public String displayUpdateHomePage(Model model) {	
 		UploadFeatureDto uploadFeatureDto=new UploadFeatureDto();
