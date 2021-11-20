@@ -12,14 +12,18 @@ import org.springframework.stereotype.Service;
 
 import com.zs6bvr.arduino.code.generator.dtos.BuildProjectRequest;
 import com.zs6bvr.arduino.code.generator.dtos.BuildProjectResponse;
+import com.zs6bvr.arduino.code.generator.dtos.CreateContributorDTO;
+import com.zs6bvr.arduino.code.generator.dtos.CreateContributorResponse;
 import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureDto;
 import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureRequest;
 import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureResponse;
+import com.zs6bvr.arduino.code.generator.entities.Contributor;
 import com.zs6bvr.arduino.code.generator.entities.ProjectFeature;
 import com.zs6bvr.arduino.code.generator.enums.ResponseStatusCodes;
 import com.zs6bvr.arduino.code.generator.enums.ResponseStatusMessages;
 import com.zs6bvr.arduino.code.generator.exceptions.FailedToReadFromDatabaseException;
 import com.zs6bvr.arduino.code.generator.exceptions.FailedToWriteToatabaseException;
+import com.zs6bvr.arduino.code.generator.repositories.ContributorRepository;
 import com.zs6bvr.arduino.code.generator.repositories.FeatureRepository;
 import com.zs6bvr.arduino.code.generator.service.DatabaseAdaptor;
 import com.zs6bvr.arduino.code.generator.utils.RequestResponseUtils;
@@ -29,14 +33,17 @@ public class DatabaseAdaptorImpl implements DatabaseAdaptor {
 	private static final Logger log = LoggerFactory.getLogger(DatabaseAdaptorImpl.class);
 
 	@Autowired
-	FeatureRepository repository;
+	FeatureRepository featureRepository;
+	
+	@Autowired
+	ContributorRepository contributorRepository;
 
 	@Override
 	public ProjectFeature findByProjectFeatureId(Long projectFeatureId) throws FailedToReadFromDatabaseException {
 		ProjectFeature projectFeature = null;
 
 		try {
-			projectFeature = repository.findByProjectFeatureId(projectFeatureId);
+			projectFeature = featureRepository.findByProjectFeatureId(projectFeatureId);
 			log.info("DatabaseAdaptorImpl | findByProjectFeatureId | called the database");
 
 		} catch (Exception e) {
@@ -58,7 +65,7 @@ public class DatabaseAdaptorImpl implements DatabaseAdaptor {
 
 		try {
 			projectFeature = RequestResponseUtils.makeProjectFeature(request);
-			resultantFeature = repository.saveAndFlush(projectFeature);
+			resultantFeature = featureRepository.saveAndFlush(projectFeature);
 			log.info("DatabaseAdaptorImpl | insertFeatureRecord | called the database");
 
 			if (resultantFeature != null) {
@@ -78,7 +85,7 @@ public class DatabaseAdaptorImpl implements DatabaseAdaptor {
 		log.info("DatabaseAdaptorImpl | getBuiltProject | request : " + request);
 		BuildProjectResponse response = new BuildProjectResponse();
 		List<UploadFeatureDto> projectFeatures = new ArrayList<>();
-		List<ProjectFeature> foundFeatures = repository.findAll();
+		List<ProjectFeature> foundFeatures = featureRepository.findAll();
 		String foundGuid = null;
 		StringBuilder searchGuids = new StringBuilder();
 
@@ -159,7 +166,7 @@ public class DatabaseAdaptorImpl implements DatabaseAdaptor {
 
 	@Override
 	public List<String> getAllCategories() {
-		return repository.getAllCategories();
+		return featureRepository.getAllCategories();
 	}
 
 	@Override
@@ -168,7 +175,7 @@ public class DatabaseAdaptorImpl implements DatabaseAdaptor {
 		List<ProjectFeature> projectFeatures = null;
 
 		try {
-			projectFeatures = repository.findAll();
+			projectFeatures = featureRepository.findAll();
 
 			String expectedResponseStatusCode = ResponseStatusCodes.OK.getResponseStatusCode();
 			String expectedResponseStatusMessage = ResponseStatusMessages.OK.getResponseStatusMessage();
@@ -204,7 +211,7 @@ public class DatabaseAdaptorImpl implements DatabaseAdaptor {
 		List<ProjectFeature> projectFeatures = null;
 
 		try {
-			projectFeatures = repository.findByCategory(category);
+			projectFeatures = featureRepository.findByCategory(category);
 
 			String expectedResponseStatusCode = ResponseStatusCodes.OK.getResponseStatusCode();
 			String expectedResponseStatusMessage = ResponseStatusMessages.OK.getResponseStatusMessage();
@@ -240,7 +247,7 @@ public class DatabaseAdaptorImpl implements DatabaseAdaptor {
 		List<ProjectFeature> projectFeatures = new ArrayList<ProjectFeature>();
 
 		try {
-			ProjectFeature projectFeature = repository.findByProjectGUID(projectGUID);
+			ProjectFeature projectFeature = featureRepository.findByProjectGUID(projectGUID);
 			projectFeatures.add(projectFeature);
 			List<UploadFeatureDto> uploadFeatureDtos = RequestResponseUtils.makeUploadFeatureDtos(projectFeatures);
 			response.setUploadFeatureDtos(uploadFeatureDtos);
@@ -267,7 +274,7 @@ public class DatabaseAdaptorImpl implements DatabaseAdaptor {
 		List<ProjectFeature> projectFeatures = new ArrayList<ProjectFeature>();
 
 		try {
-			ProjectFeature projectFeature = repository.findByProjectFeatureId(Id);
+			ProjectFeature projectFeature = featureRepository.findByProjectFeatureId(Id);
 			projectFeatures.add(projectFeature);
 			List<UploadFeatureDto> uploadFeatureDtos = RequestResponseUtils.makeUploadFeatureDtos(projectFeatures);
 			response.setUploadFeatureDtos(uploadFeatureDtos);
@@ -302,12 +309,12 @@ public class DatabaseAdaptorImpl implements DatabaseAdaptor {
 				return response;
 			}
 			log.info("DatabaseAdaptorImpl | updateFeature | finding feature id : " + id);
-			ProjectFeature projectFeature = repository.findByProjectFeatureId(id);
+			ProjectFeature projectFeature = featureRepository.findByProjectFeatureId(id);
 			if (projectFeature != null) {
 				log.info("DatabaseAdaptorImpl | updateFeature | found, updating, and saving feature : "
 						+ projectFeature);
 				projectFeature.setUploadFeatureRequest(request);
-				repository.save(projectFeature);
+				featureRepository.save(projectFeature);
 				response = RequestResponseUtils.makeSucceededToPersistResponse(projectFeature);
 			} else {
 
@@ -332,12 +339,26 @@ public class DatabaseAdaptorImpl implements DatabaseAdaptor {
 
 	@Override
 	public ProjectFeature saveProjectFeature(ProjectFeature projectFeature) {
-		return repository.save(projectFeature);
+		return featureRepository.save(projectFeature);
 	}
 
 	@Override
 	public ProjectFeature findByProjectGuid(String projectGUID) {
-		return repository.findByProjectGUID( projectGUID);
+		return featureRepository.findByProjectGUID( projectGUID);
+	}
+
+	@Override
+	public CreateContributorResponse createContributor(CreateContributorDTO createContributorDTO) {
+		CreateContributorResponse response=null;
+		Contributor contributor=RequestResponseUtils.createContributor(createContributorDTO);
+		try {
+		Contributor createdContributor = contributorRepository.save(contributor);
+			response=RequestResponseUtils.makeSucessResponse(createdContributor);
+		}catch(Exception e) {
+			response=RequestResponseUtils.makeFailedResponse();
+		}
+		
+		return response;
 	}
 
 }

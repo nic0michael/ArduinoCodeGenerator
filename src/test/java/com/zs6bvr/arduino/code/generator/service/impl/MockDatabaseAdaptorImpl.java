@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.zs6bvr.arduino.code.generator.dtos.BuildProjectRequest;
 import com.zs6bvr.arduino.code.generator.dtos.BuildProjectResponse;
+import com.zs6bvr.arduino.code.generator.dtos.CreateContributorDTO;
+import com.zs6bvr.arduino.code.generator.dtos.CreateContributorResponse;
 import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureRequest;
 import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureResponse;
 import com.zs6bvr.arduino.code.generator.entities.ProjectFeature;
@@ -223,6 +225,12 @@ public class MockDatabaseAdaptorImpl implements DatabaseAdaptor{
 
 	@Override
 	public ProjectFeature findByProjectGuid(String projectGUID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CreateContributorResponse createContributor(CreateContributorDTO uploadFeatureDto) {
 		// TODO Auto-generated method stub
 		return null;
 	}

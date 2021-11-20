@@ -29,8 +29,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.zs6bvr.arduino.code.generator.business.logic.BusinessLogicProcessor;
 import com.zs6bvr.arduino.code.generator.dtos.BuildProjectRequest;
 import com.zs6bvr.arduino.code.generator.dtos.BuildProjectResponse;
+import com.zs6bvr.arduino.code.generator.dtos.CreateContributorDTO;
+import com.zs6bvr.arduino.code.generator.dtos.CreateContributorResponse;
 import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureDto;
 import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureResponse;
+import com.zs6bvr.arduino.code.generator.entities.Contributor;
 import com.zs6bvr.arduino.code.generator.entities.ProjectFeature;
 import com.zs6bvr.arduino.code.generator.utils.RequestResponseUtils;
 
@@ -225,11 +228,8 @@ public class ProjectPageController {
 
 	
 	@GetMapping("/createContributorAction")
-	public String createContributor(UploadFeatureDto uploadFeatureDto,Model model) {
-		String guid=java.util.UUID.randomUUID().toString();
-		uploadFeatureDto.setContributorsGuid(guid);
-//		ProjectFeature feature = processor.createFeature(uploadFeatureDto);
-//		uploadFeatureDto=RequestResponseUtils.makeUploadFeatureDto(feature);
+	public String createContributor(CreateContributorDTO contributorDTO,Model model) {
+		CreateContributorResponse response = processor.createContributor(contributorDTO);
 		BuildProjectResponse buildProjectResponse=new BuildProjectResponse();
 		String pattern = "yyyy-MM-dd HH:mm:ss";
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
@@ -240,7 +240,7 @@ public class ProjectPageController {
 		model.addAttribute("projectVersion", projectVersion);
 		model.addAttribute("projectName", projectName);
 		model.addAttribute("buildProjectResponse", buildProjectResponse);
-		model.addAttribute("uploadFeatureDto", uploadFeatureDto);
+		model.addAttribute("response", response);
 
 		return "project/createcontributorResult";
 	}

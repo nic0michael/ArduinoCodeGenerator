@@ -2,6 +2,7 @@ package com.zs6bvr.arduino.code.generator.business.logic;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -12,11 +13,14 @@ import org.springframework.stereotype.Component;
 import com.zs6bvr.arduino.code.generator.controllers.GeneratorController;
 import com.zs6bvr.arduino.code.generator.dtos.BuildProjectRequest;
 import com.zs6bvr.arduino.code.generator.dtos.BuildProjectResponse;
+import com.zs6bvr.arduino.code.generator.dtos.CreateContributorDTO;
+import com.zs6bvr.arduino.code.generator.dtos.CreateContributorResponse;
 import com.zs6bvr.arduino.code.generator.dtos.FeatureDescriptionDTO;
 import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureDescritionsResponse;
 import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureDto;
 import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureRequest;
 import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureResponse;
+import com.zs6bvr.arduino.code.generator.entities.Contributor;
 import com.zs6bvr.arduino.code.generator.entities.ProjectFeature;
 import com.zs6bvr.arduino.code.generator.enums.ResponseStatusCodes;
 import com.zs6bvr.arduino.code.generator.enums.ResponseStatusMessages;
@@ -301,6 +305,16 @@ public class BusinessLogicProcessor {
 		ProjectFeature projectFeature=null;
 		projectFeature=database.findByProjectGuid(projectGUID);
 		return projectFeature;		
+	}
+
+	public CreateContributorResponse createContributor(CreateContributorDTO contributorDTO) {
+
+		String guid=java.util.UUID.randomUUID().toString();
+		contributorDTO.setContributorsGuid(guid);
+		Date now=new Date();
+		contributorDTO.setDateCreated(now);
+		CreateContributorResponse response=database.createContributor( contributorDTO);
+		return response;
 	}
 
 

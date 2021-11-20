@@ -355,6 +355,47 @@
 		</div>
 	</nav>
 	
+
+	<nav th:fragment="navbarContributor"
+		class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" href="#">ZS6BVR Arduino  Code Generator</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarNav" aria-controls="navbarNav"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span><li class="nav-item active">
+					<a class="nav-link" th:href="@{/project/searchPage}">Search Projects</a>
+				</li>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a class="nav-link" href="/arduino-dashboard/home">Home</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/project/listall}">List All Projects</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/project/searchPage}">Search Projects</a>
+				</li>	
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/project/generate}">Generate Code</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/project/create}">Create Project</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/project/update}">Update Project</a>
+				</li>									
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/project/generateNewProject}">Generate New Project</a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" th:href="@{/project/createcontributor}">Create New Contributor</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	
 	
 	<div th:fragment="piechartscript">
 		<script type="text/javascript">

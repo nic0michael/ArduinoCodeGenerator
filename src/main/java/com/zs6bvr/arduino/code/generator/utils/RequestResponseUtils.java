@@ -12,9 +12,12 @@ import java.util.Date;
 
 import com.zs6bvr.arduino.code.generator.dtos.BuildProjectRequest;
 import com.zs6bvr.arduino.code.generator.dtos.BuildProjectResponse;
+import com.zs6bvr.arduino.code.generator.dtos.CreateContributorDTO;
+import com.zs6bvr.arduino.code.generator.dtos.CreateContributorResponse;
 import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureDto;
 import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureRequest;
 import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureResponse;
+import com.zs6bvr.arduino.code.generator.entities.Contributor;
 import com.zs6bvr.arduino.code.generator.entities.ProjectFeature;
 import com.zs6bvr.arduino.code.generator.enums.ResponseStatusCodes;
 import com.zs6bvr.arduino.code.generator.enums.ResponseStatusMessages;
@@ -241,6 +244,50 @@ public class RequestResponseUtils {
 		feature.setContributorsYoutubePage(  uploadFeatureDto.getContributorsYoutubePage());		
 
 		return feature;
+	}
+
+	public static Contributor createContributor(CreateContributorDTO createContributorDTO) {
+		Contributor contributor=new Contributor();
+		if(createContributorDTO.getDateCreated()!=null) {
+			contributor.setDateCreated(createContributorDTO.getDateCreated());
+		}
+		if(StringUtils.isNotEmpty(createContributorDTO.getContributorsGuid())) {
+			contributor.setContributorsGuid(createContributorDTO.getContributorsGuid());
+		}
+		if(StringUtils.isNotEmpty(createContributorDTO.getContributorsName())) {
+			contributor.setContributorsName(createContributorDTO.getContributorsName());
+		}
+		if(StringUtils.isNotEmpty(createContributorDTO.getContributorsBlogPage())) {
+			contributor.setContributorsBlogPage(createContributorDTO.getContributorsBlogPage());
+		}
+		if(StringUtils.isNotEmpty(createContributorDTO.getContributorsYoutubePage())) {
+			contributor.setContributorsYoutubePage(createContributorDTO.getContributorsYoutubePage());
+		}
+		return contributor;
+	}
+
+	public static CreateContributorResponse makeFailedResponse() {
+		String responseStatusCode = ResponseStatusCodes.DATABASE_FAILURE.getResponseStatusCode();
+		String responseStatusMessage = ResponseStatusMessages.DATABASE_FAILURE.getResponseStatusMessage();
+		CreateContributorResponse response =new CreateContributorResponse();
+		response.setResponseStatusCode(responseStatusCode);
+		response.setResponseStatusMessage(responseStatusMessage);
+				
+		return response;
+	}
+
+	public static CreateContributorResponse makeSucessResponse(Contributor createdContributor) {
+		String responseStatusCode = ResponseStatusCodes.OK.getResponseStatusCode();
+		String responseStatusMessage = ResponseStatusMessages.OK.getResponseStatusMessage();
+		CreateContributorResponse response =new CreateContributorResponse();
+		response.setResponseStatusCode(responseStatusCode);
+		response.setResponseStatusMessage(responseStatusMessage);
+		response.setContributorsName(createdContributor.getContributorsName());
+		response.setContributorsGuid(createdContributor.getContributorsGuid());
+		response.setContributorsBlogPage(createdContributor.getContributorsBlogPage());
+		response.setContributorsYoutubePage(createdContributor.getContributorsYoutubePage());
+				
+		return response;
 	}
 
 

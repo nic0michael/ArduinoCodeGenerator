@@ -1,51 +1,27 @@
-package com.zs6bvr.arduino.code.generator.entities;
+package com.zs6bvr.arduino.code.generator.dtos;
 
-
-import java.sql.Timestamp;
 import java.util.Date;
-import java.util.UUID;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.*;
 
-
-
-import org.hibernate.annotations.BatchSize;
 import org.springframework.data.annotation.CreatedDate;
 
-import com.zs6bvr.arduino.code.generator.dtos.UploadFeatureRequest;
-
-
-@Entity
-public class Contributor {
-
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class CreateContributorResponse {
+	String responseStatusCode;
+	String responseStatusMessage;
+	
 	private Long contributorsId;
-	
-	@Column(name="date_created", nullable = true, updatable = true)
-	@Temporal(TemporalType.TIMESTAMP)
-	@CreatedDate
+
 	private Date dateCreated;
-	
-	@Column(name="contributor_guid", nullable = false, updatable = false, length=128)
+
 	private String contributorsGuid;
 
-	@Column(name="contributor", nullable = false, updatable = false, length=128)
 	private String contributorsName;
-	
-	@Column(name="contributor_blog", nullable = false, updatable = false, length=128)
+
 	private String contributorsBlogPage;
 	
-	@Column(name="contributor_youtube", nullable = false, updatable = false, length=128)
 	private String contributorsYoutubePage;
 	
 	
@@ -56,6 +32,30 @@ public class Contributor {
 
 	public void setContributorsYoutubePage(String contributorsYoutubePage) {
 		this.contributorsYoutubePage = contributorsYoutubePage;
+	}
+
+	public String getResponseStatusCode() {
+		return responseStatusCode;
+	}
+
+	public void setResponseStatusCode(String responseStatusCode) {
+		this.responseStatusCode = responseStatusCode;
+	}
+
+	public String getResponseStatusMessage() {
+		return responseStatusMessage;
+	}
+
+	public void setResponseStatusMessage(String responseStatusMessage) {
+		this.responseStatusMessage = responseStatusMessage;
+	}
+
+	public Long getContributorsId() {
+		return contributorsId;
+	}
+
+	public void setContributorsId(Long contributorsId) {
+		this.contributorsId = contributorsId;
 	}
 
 	public Date getDateCreated() {
@@ -92,13 +92,14 @@ public class Contributor {
 
 	@Override
 	public String toString() {
-		return "Contributor [contributorsId=" + contributorsId + ", dateCreated=" + dateCreated + ", contributorsGuid="
-				+ contributorsGuid + ", contributorsName=" + contributorsName + ", contributorsBlogPage="
-				+ contributorsBlogPage + ", contributorsYoutubePage=" + contributorsYoutubePage + "]";
+		return "CreateContributorResponse [responseStatusCode=" + responseStatusCode + ", responseStatusMessage="
+				+ responseStatusMessage + ", contributorsId=" + contributorsId + ", dateCreated=" + dateCreated
+				+ ", contributorsGuid=" + contributorsGuid + ", contributorsName=" + contributorsName
+				+ ", contributorsBlogPage=" + contributorsBlogPage + ", contributorsYoutubePage="
+				+ contributorsYoutubePage + "]";
 	}
 
 
 
-	
-	
+
 }

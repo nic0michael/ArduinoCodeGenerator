@@ -5,11 +5,11 @@
   <title>Arduino Generator Code Dashboard</title>
 </head>
 <body>
-	<nav th:replace="layouts :: navbarCreate"></nav>
+	<nav th:replace="layouts :: navbarContributor"></nav>
 	<div>
 	   <h1>Creating the folowing Contributor</h1>   
 
-		<h5>Result : [[${buildProjectResponse.responseStatusMessage}]]</h5><br><br>
+		<h5>Result : [[${response.responseStatusMessage}]]</h5><br><br>
 		
 		
 		
@@ -18,25 +18,25 @@
 			<tr>
 				<td>Contributors Name: </td>
 				<td>
-					<input id="contributorsName" placeholder="Contributors Name" required type="text" th:field="${uploadFeatureDto.contributorsName}"/><br/>
+					<input id="contributorsName" placeholder="Contributors Name" required type="text" th:field="${response.contributorsName}"/><br/>
 				</td>
 			</tr>
 			<tr>
 				<td>Contributors Guid:</td> 
 				<td>
-					<input id="contributorsGuid" placeholder="Contributors Guid" required type="text" th:field="${uploadFeatureDto.contributorsGuid}"/><br/>
+					<input id="contributorsGuid" placeholder="Contributors Guid" required type="text" th:field="${response.contributorsGuid}"/><br/>
 				</td>
 			</tr>
 			<tr>
 				<td>Contributors Blog Page:</td>
 				<td>
-			 		<input id="contributorsBlogPage" placeholder="Contributors Blog Page" required type="text" th:field="${uploadFeatureDto.contributorsBlogPage}"/><br/>
+			 		<input id="contributorsBlogPage" placeholder="Contributors Blog Page" required type="text" th:field="${response.contributorsBlogPage}"/><br/>
 				</td>
 			</tr>
 			<tr>
 				<td>Contributors Youtube Page:</td>
 				<td>
-			 		<input id="contributorsYoutubePage" placeholder="Contributors Youtube Page" required type="text" th:field="${uploadFeatureDto.contributorsYoutubePage}"/><br/>
+			 		<input id="contributorsYoutubePage" placeholder="Contributors Youtube Page" required type="text" th:field="${response.contributorsYoutubePage}"/><br/>
 				</td>
 			</tr>
 			
