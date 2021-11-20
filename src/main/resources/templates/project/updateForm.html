@@ -42,16 +42,17 @@
 			
 			<select id="featureStatus" name="featureStatus" th:field="${uploadFeatureDto.featureStatus}"  >
 			  <option value="projectFeature.featureStatus" th:text="${projectFeature.featureStatus}"></option>
-			  <option value="">Select Status</option>				
+			  <option value="">Select Status</option>			
+			  <option value="">Sample Project</option>			
 			  <option value="newProject">New Project</option>
 			  <option value="updatedProject">Updated Project</option>
 			  <option value="inProgress">In progress</option>
-			  <option value="unsuportedProject">unsuported old Project</option>
+			  <option value="">unsuported old Project</option>
 			</select><br>
 
 			<input id="featureName" placeholder="Enter Feature Name" required type="text" th:field="${projectFeature.featureName}" /><br/>
 			<input id="description" placeholder="Enter Project description" required type="text" th:field="${projectFeature.description}"/><br/>
-			<input id="prerequisites" placeholder="Enter Prerequisites" required type="text" th:field="${projectFeature.prerequisites}"/><br/>
+			<input id="prerequisites" placeholder="Enter Prerequisites" th:field="${projectFeature.prerequisites}"/><br/>
 
 			<select id="computerLanguage" name="computerLanguage" th:field="${projectFeature.computerLanguage}"  >	
 			  <option value="">Select Computer Language</option>							

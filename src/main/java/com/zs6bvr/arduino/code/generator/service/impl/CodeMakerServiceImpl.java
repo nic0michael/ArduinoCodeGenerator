@@ -98,7 +98,6 @@ public class CodeMakerServiceImpl implements CodeMakerService{
 					exportContributorsBlogPages.append("\n");
 				}
 				
-				
 				if(StringUtils.isNotEmpty(uploadFeatureDto.getContributorsYoutubePage())) {
 					contributor.append(uploadFeatureDto.getContributorsYoutubePage());
 					contributor.append("\n");
@@ -106,6 +105,9 @@ public class CodeMakerServiceImpl implements CodeMakerService{
 					exportContributorsYoutubePages.append(uploadFeatureDto.getContributorsYoutubePage());
 					exportContributorsYoutubePages.append("\n");
 				}
+				
+				contributor.append("\n");
+				contributor.append("PROJECT DETAILS\n");
 				
 				if(StringUtils.isNotEmpty(uploadFeatureDto.getFeatureName())) {
 					contributor.append(uploadFeatureDto.getFeatureName());
@@ -123,10 +125,7 @@ public class CodeMakerServiceImpl implements CodeMakerService{
 					descriptions.append("\n");	
 				}
 				
-				if(StringUtils.isNotEmpty(uploadFeatureDto.getPrerequisites())) {
-					contributor.append(uploadFeatureDto.getPrerequisites());
-					contributor.append("\n");	
-					
+				if(StringUtils.isNotEmpty(uploadFeatureDto.getPrerequisites())) {					
 					prerequisites.append(uploadFeatureDto.getPrerequisites());
 					prerequisites.append("\n");	
 				}
@@ -165,12 +164,14 @@ public class CodeMakerServiceImpl implements CodeMakerService{
 		finalCode.append("*/");
 		finalCode.append("\n\n");
 
-		finalCode.append("/*");
-		finalCode.append("\n");
-		finalCode.append("PREREQUISITES:\n");
-		finalCode.append(prerequisites.toString());
-		finalCode.append("*/");
-		finalCode.append("\n\n");
+		if(StringUtils.isNotEmpty(prerequisites.toString())) {		
+			finalCode.append("/*");
+			finalCode.append("\n");
+			finalCode.append("PREREQUISITES:\n");
+			finalCode.append(prerequisites.toString());
+			finalCode.append("*/");
+			finalCode.append("\n\n");
+		}
 
 		finalCode.append("/*");
 		finalCode.append("\n");
@@ -179,18 +180,22 @@ public class CodeMakerServiceImpl implements CodeMakerService{
 		finalCode.append("*/");
 		finalCode.append("\n\n");		
 
-		finalCode.append("/*");
-		finalCode.append("\n");
-		finalCode.append("FEATURE STATUS:\n");
-		finalCode.append(featureStatus.toString());
-		finalCode.append("*/");
+		if(StringUtils.isNotEmpty(featureStatus)) {
+			finalCode.append("/*");
+			finalCode.append("\n");
+			finalCode.append("FEATURE STATUS:\n");
+			finalCode.append(featureStatus);
+			finalCode.append("*/");
 		finalCode.append("\n\n");
+		}
 		
-		finalCode.append("/* FEATURE DECLERATION */\n");
-		finalCode.append(featureClassImports);
-		finalCode.append("\n\n");
+		if(StringUtils.isNotEmpty(featureClassImports)) {	
+			finalCode.append("/* FEATURE DECLERATION (IMPORTS)*/\n");
+			finalCode.append(featureClassImports);
+			finalCode.append("\n\n");
+		}
 		
-		finalCode.append("/* FEATURE ASSIGNMENT */\n");
+		finalCode.append("/* FEATURE ASSIGNMENT (VARIABLE DECLARATION)*/\n");
 		if(ProjectType.ARDUINO_CPP.name().equalsIgnoreCase(projectType)) {
 			finalCode.append("void setup() {\n");
 		}
@@ -200,7 +205,7 @@ public class CodeMakerServiceImpl implements CodeMakerService{
 			finalCode.append("\n\n");
 		}
 		
-		finalCode.append("/* FEATURE CODE */\n");
+		finalCode.append("/* FEATURE CODE (MAIN BODE OF CODE)*/\n");
 		if(ProjectType.ARDUINO_CPP.name().equalsIgnoreCase(projectType)) {
 			finalCode.append("void loop() {\n");
 		}
