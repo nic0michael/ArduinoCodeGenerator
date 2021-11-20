@@ -22,9 +22,11 @@
 			
 			<select id="projectType" name="projectType" th:field="${projectFeature.projectType}"  >	
 			  <option value="">Select Project Type</option>							
-			  <option value="arduinoUno">Arduino Uno</option>
-			  <option value="arduinoNano">Arduino Nano</option>
-			  <option value="otherArduino">Other Arduino</option>
+			  <option value="ArduinoIDEproject">Arduino IDE project</option>
+			  <option value="VsCodeProject">VS Code project</option>
+			  <option value="PyCharmProject">PyCharm project</option>
+			  <option value="ThonnyProject">Thonny project</option>
+			  <option value="OtherIDEproject">Other IDE project</option>
 			</select><br>
 			
 			
@@ -50,8 +52,43 @@
 			<input id="featureName" placeholder="Enter Feature Name" required type="text" th:field="${projectFeature.featureName}" /><br/>
 			<input id="description" placeholder="Enter Project description" required type="text" th:field="${projectFeature.description}"/><br/>
 			<input id="prerequisites" placeholder="Enter Prerequisites" required type="text" th:field="${projectFeature.prerequisites}"/><br/>
-			<input id="computerLanguage" placeholder="Enter Computer Language" required type="text" th:field="${projectFeature.computerLanguage}"/><br/>
-			<input id="microController" placeholder="Enter Micro Controller" required type="text" th:field="${projectFeature.microController}"/><br/>
+
+			<select id="computerLanguage" name="computerLanguage" th:field="${projectFeature.computerLanguage}"  >	
+			  <option value="">Select Computer Language</option>							
+			  <option value="C++">C++</option>
+			  <option value="Python">Python</option>
+			  <option value="Assembler">Assembler</option>
+			  <option value="Forth">Forth</option>
+			</select><br>
+					
+			<select id="microController" name="microController" th:field="${projectFeature.microController}"  >	
+			  <option value="">Select Micro Controller</option>							
+			  <option value="arduinoUno">Arduino Uno</option>
+			  <option value="arduinoNano">Arduino Nano</option>
+			  <option value="ArduinoMicro">Arduino Micro</option>
+			  <option value="ArduinoMega">Arduino Mega</option>
+			  <option value="ArduinoLeonardo">Arduino Leonardo</option>
+			  <option value="ArduinoDue">Arduino Due</option>
+			  <option value="ArduinoDuemilanove">Arduino Duemilanove</option>
+			  <option value="ArduinoGenuino">Other Arduino Genuino</option>
+			  <option value="ArduinoZero">Arduino Zero</option>
+			  <option value="ArduinoYún">Arduino Yún</option>
+			  <option value="ArduinoPro">Arduino Pro</option>
+			  <option value="ArduinoFio">Arduino Fio</option>
+			  <option value="ArduinoProMini">Arduino Pro Mini(Sparkfun)</option>
+			  <option value="Seeeduino">Seeeduino</option>
+			  <option value="ESP32DEVKIT">ESP32 DEV KIT</option>
+			  <option value="HUZZAH32">HUZZAH32(Adafruit)</option>
+			  <option value="ESP32LOLINOLED">ESP32 LOLIN OLED</option>
+			  <option value="SX1278 ESP32">SX1278 ESP32 (LoRa)</option>
+			  <option value="PiPico">Raspberry Pi Pico</option>
+			  <option value="ESP32BluePill">ESP32 Blue Pill</option>
+			  <option value="ESP32BlackPill">ESP32 Black Pill</option>
+			  <option value="NotListedHere">Not Listed here</option>
+			</select><br>
+			
+			
+			
 			MCU Pins Used:<br>
 			&nbsp;&nbsp;<textarea style="width:750px; height: 50px;" th:field="${projectFeature.mcuPinsUsed}"  th:inline="text">[[${projectFeature.featurecode}]]</textarea><br>
 
@@ -62,6 +99,7 @@
 			&nbsp;&nbsp;<textarea style="width:750px; height: 50px;" th:field="${projectFeature.featureAssignment}"  th:inline="text">[[${projectFeature.featurecode}]]</textarea><br>
 			Main Code block:<br>
 			&nbsp;&nbsp;<textarea style="width:750px; height: 500px;" th:field="${projectFeature.featurecode}"  th:inline="text">[[${projectFeature.featurecode}]]</textarea><br>
+
 
 
 			<input type="submit" value="Update Project">
