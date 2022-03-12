@@ -1,16 +1,16 @@
 # Arduino (IDE) Code Generator
 Nico Michael ZS6BVR is building this project using Software Industry Best practices TDD and Clean code.
 
-One day I felt that it would be nice to have a code generator for Arduino and Raspberry Pi Projects that could generate sample code using a libruary repository in a database.
-This would be deployed in a web server and alow users to select all the hardware components and generate sample code to get a quick start to coding for the project.
+One day I felt that it would be nice to have a code generator for Arduino and Raspberry Pi Projects that could generate sample code using a library repository in a database.
+This would be deployed in a web server and allow users to select all the hardware components and generate sample code to get a quick start to coding for the project.
 
-This is a stand-alone web Service that will generate code for your Arduino and other MCU's projects projects  
+This is a stand-alone web Service that will generate code for your Arduino and other MCU's projects 
 You create a project selecting the hardware you want to attach to your Arduino UNO , Nano or even ESP32.  
-  
+ 
 
-This project has a database where you can upload code snippets and instructions for which libraries need to be added to your Arduino IDE you can add up to 5 different types of boards (like LCD Displays , Servos, Relays , even user defined hardware
+This project has a database where you can upload code snippets and instructions for which libraries need to be added to your Arduino IDE you can add up to 5 different types of boards (like LCDs , Servos, Relays , even user defined hardware
 
-Once you have selected your 5 devices this will generate the code for you to put in your Arduino IDE  
+Once you have selected your 5 devices this will generate the code for you to put in your Arduino IDE 
 This software 
 
 ## 1. Why do we want such an Application 
