@@ -25,6 +25,7 @@ Or as a standalone Java Microservice Application.
 ### 2.1 Instructions to deploy this project on a Tomcat Server:
 https://github.com/nic0michael/ArduinoCodeGenerator/tree/master/DeployProject
   
+### 2.2 Dockerizing this project  
 It will also be **Dockerized** so it can run on a **Portainer docker server** or even a **Raspberry Pi Docker docker** swarm or even a **Docker cluster**
 
 The project will support any **MCU that can be programmed by the Arduino IDE** (this includes ESP32 and Raspberry Pi Pico)  
