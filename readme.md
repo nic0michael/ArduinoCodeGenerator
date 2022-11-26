@@ -20,7 +20,10 @@ It should also become so useful for the seasoned Arduino project maker saving ti
 
 ## 2. How this project will be deployed
 This project is written to build a WAR file this can be deployed on a web server  
-Or as a standalone Java Microservice Application.     
+Or as a standalone Java Microservice Application.   
+
+### 2.1 Instructions to deploy this project on a Tomcat Server:
+https://github.com/nic0michael/ArduinoCodeGenerator/tree/master/DeployProject
   
 It will also be **Dockerized** so it can run on a **Portainer docker server** or even a **Raspberry Pi Docker docker** swarm or even a **Docker cluster**
 
