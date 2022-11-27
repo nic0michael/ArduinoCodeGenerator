@@ -22,6 +22,8 @@ Upload the following file : ArduinoCodeGenerator.war
 to the Tomcat server folder :  
 /opt/tomcat/apache-tomcat-9.0.69/webapps/ 
 
+Read this article in my Blog: \
+
 ## Access server from web  
 Open your browser to :
 http://localhost:8080/code-generator  
