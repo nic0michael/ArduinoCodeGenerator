@@ -12,7 +12,7 @@ create database arduino_generator;
 
 I have published an article in my Blog  
   
-  http://rino.kozow.com/dvp/posts/install-tomcat-on-centos/
+http://rino.kozow.com/dvp/posts/install-tomcat-on-centos/
   
 
 ### 2.1 Deploy Arduino Code Generator on server
@@ -23,6 +23,7 @@ to the Tomcat server folder :
 /opt/tomcat/apache-tomcat-9.0.69/webapps/ 
 
 Read this article in my Blog: \
+http://rino.kozow.com/dvp/posts/deploying-war-files-on-tomcat/
 
 ## Access server from web  
 Open your browser to :
