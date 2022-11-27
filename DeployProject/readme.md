@@ -8,6 +8,10 @@ Open Database in terminal run this command
 ```
 create database arduino_generator;
 ```
+For instructions how to do this on a CentOS server\
+http://rino.kozow.com/dvp/posts/deploying-war-files-on-tomcat/
+
+
 ## 2. Install Tomcat on server
 
 I have published an article in my Blog  
