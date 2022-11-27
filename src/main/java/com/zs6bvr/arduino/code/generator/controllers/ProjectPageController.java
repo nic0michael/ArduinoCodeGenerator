@@ -45,6 +45,7 @@ public class ProjectPageController {
 
 	private final String PERSIST_PROJECT_DATA="PERSIST_PROJECT_DATA";
 	private final String OTHER_CATEGORY="otherCategory";
+	private final String NEW_PROJECT="New Project";
 
 	@Value("${project.version}")
 	private String projectVersion;
@@ -150,16 +151,18 @@ public class ProjectPageController {
 	}
 	
 	@GetMapping("/create")
-	public String displayCreateHomePage(Model model) {			
+	public String displayCreateHomePage(Model model) {		
+
+		ProjectFeature projectFeature=new ProjectFeature();
+		projectFeature.setFeatureStatus(NEW_PROJECT);
 		UploadFeatureDto uploadFeatureDto=new UploadFeatureDto();
 
 		List<String> categories = processor.getAllCategories();
 		UploadFeatureResponse response = processor.getAllFeatures();
 		List<UploadFeatureDto> featureDtos = response.getUploadFeatureDtos();
-		if(featureDtos==null) {
+		if(featureDtos==null||featureDtos.size()<1) {
 			featureDtos=new ArrayList<>();
 		}
-		
 		
 		String pattern = "yyyy-MM-dd HH:mm:ss";
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
@@ -172,6 +175,7 @@ public class ProjectPageController {
 		model.addAttribute("uploadFeatureDto", uploadFeatureDto);
 		model.addAttribute("featureDtos", featureDtos);
 		model.addAttribute("categories", categories);
+		model.addAttribute("projectFeature",projectFeature);
 
 		return "project/createpage";
 	}

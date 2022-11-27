@@ -357,6 +357,25 @@ public class ProjectFeature {
 	}
 
 
+public void makeNewData() {	
+	if(projectGUID             == null){                   projectGUID = "dummy_projectGUID";               }         
+	if(computerLanguage        == null){              computerLanguage = "dummy_computerLanguage";          }    
+	if(microController         == null){               microController = "dummy_microController";           }     
+	if(mcuPinsUsed             == null){                   mcuPinsUsed = "dummy_mcuPinsUsed";               }         
+	if(contributorsName        == null){              contributorsName = "dummy_contributorsName";          }    
+	if(contributorsGuid        == null){              contributorsGuid = "dummy_contributorsGuid";          }    
+	if(contributorsBlogPage    == null){          contributorsBlogPage = "dummy_contributorsBlogPage";      }
+	if(contributorsYoutubePage == null){       contributorsYoutubePage = "dummy_contributorsYoutubePage";   }
+	if(featureName             == null){                   featureName = "dummy_featureName";               }         
+	if(description             == null){                   description = "dummy_description";               }         
+	if(category                == null){                      category = "dummy_category";                  }     
+	if(prerequisites           == null){                 prerequisites = "dummy_prerequisites";             }       
+	if(featureClassImports     == null){           featureClassImports = "dummy_featureClassImports";       } 
+	if(featureAssignment       == null){             featureAssignment = "dummy_featureAssignment";         }   
+	if(featurecode             == null){                   featurecode = "dummy_featurecode";               }         
+	if(featureStatus           == null){                 featureStatus = "in_progress";             }       
+	if(projectType             == null){                 projectType   = "dummy_projectType";               }
+}
 
 	public void setUploadFeatureRequest(UploadFeatureRequest request) {
 
